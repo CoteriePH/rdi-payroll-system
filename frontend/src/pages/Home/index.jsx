@@ -3,7 +3,7 @@ import Sidebar from "components/Sidebar";
 import { MainCan, MainRight, WrapperRight } from "./styles";
 import Link from "components/Link";
 
-const MainWrapper = ({ children }) => {
+const HomePage = ({ children }) => {
   return (
     <>
       <MainCan>
@@ -24,4 +24,4 @@ const MainWrapper = ({ children }) => {
   );
 };
 
-export default MainWrapper;
+export default HomePage;

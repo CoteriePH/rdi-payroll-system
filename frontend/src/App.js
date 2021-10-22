@@ -1,33 +1,43 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import { Switch, Route, Redirect } from "react-router-dom";
+import { Suspense, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { authSelector } from "features/auth/authSlice.js";
 import ProtectedRoutes from "routes/ProtectedRoutes";
-import PublicRoute from "routes/PublicRoute";
-import PrivateRoute from "routes/PrivateRoute";
-
-const LoginPage = lazy(() => import("pages/Login"));
-const NoFoundComponent = lazy(() => import("pages/NoFoundComponent"));
+import LoginPage from "pages/Login";
+import NoFoundComponent from "pages/NoFoundComponent";
 
 toast.configure({ limit: 3 });
 
 function App() {
+  const { isFetching } = useSelector(authSelector);
   const [isAuth, setIsAuth] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      setIsAuth(true);
-    }
-  }, [isAuth]);
+    if (token) setIsAuth(true);
+    else setIsAuth(false);
+  }, [isFetching]);
 
   return (
     <>
       <Suspense fallback={"Loading"}>
         <Switch>
-          <PublicRoute path="/login" isAuth={isAuth}>
+          <Route path="/login">
+            {!isAuth ? <LoginPage></LoginPage> : <Redirect to="/" />}
+          </Route>
+          <Route path="/">
+            {isAuth ? (
+              <ProtectedRoutes></ProtectedRoutes>
+            ) : (
+              <Redirect to="/login" />
+            )}
+          </Route>
+          <Route path="*">
+            <NoFoundComponent />
+          </Route>
+          {/* <PublicRoute path="/login" isAuth={isAuth}>
             <LoginPage />
           </PublicRoute>
           <PrivateRoute path="/" isAuth={isAuth}>
@@ -35,7 +45,7 @@ function App() {
           </PrivateRoute>
           <Route path="*">
             <NoFoundComponent />
-          </Route>
+          </Route> */}
         </Switch>
       </Suspense>
     </>

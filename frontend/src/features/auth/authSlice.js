@@ -24,13 +24,14 @@ export const signinUser = createAsyncThunk(
 export const authSlice = createSlice({
   name: "auth",
   initialState: {
-    username: "",
-    role: "",
+    username: null,
+    role: null,
     params: "",
     isFetching: false,
     isError: false,
     isSuccess: false,
     errorMessage: "",
+    accessToken: null,
   },
 
   reducers: {
@@ -38,7 +39,9 @@ export const authSlice = createSlice({
       state.isSuccess = false;
       state.isFetching = false;
       state.isError = false;
-
+      state.username = null;
+      state.role = null;
+      state.accessToken = null;
       return state;
     },
   },
@@ -49,6 +52,7 @@ export const authSlice = createSlice({
     [signinUser.fulfilled]: (state, { payload }) => {
       state.username = payload.username;
       state.role = payload.role;
+      state.accessToken = payload.accessToken;
       state.isFetching = false;
       state.isSuccess = true;
       toast.success(`Welcome ${payload.username}`);
@@ -58,6 +62,9 @@ export const authSlice = createSlice({
     [signinUser.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
+      state.username = null;
+      state.role = null;
+      state.accessToken = null;
       state.errorMessage = payload.message;
       toast.error(state.errorMessage);
     },

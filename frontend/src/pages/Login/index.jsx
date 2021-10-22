@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   Container,
   Left,
@@ -8,7 +7,6 @@ import {
   Form,
   Powered,
 } from "./styles.js";
-import { useHistory } from "react-router-dom";
 import InputField from "components/Input/index.jsx";
 import Button from "components/Button/index.jsx";
 import { ReactComponent as Logo } from "assets/icons/logo.svg";
@@ -16,38 +14,17 @@ import { ReactComponent as Logo } from "assets/icons/logo.svg";
 import { useForm, FormProvider } from "react-hook-form";
 
 import { useDispatch, useSelector } from "react-redux";
-import {
-  authSelector,
-  signinUser,
-  clearState,
-} from "features/auth/authSlice.js";
+import { authSelector, signinUser } from "features/auth/authSlice.js";
 
 const LoginPage = () => {
   const methods = useForm();
   const dispatch = useDispatch();
-  const history = useHistory();
 
-  const { isFetching, isError, isSuccess } = useSelector(authSelector);
+  const { isFetching } = useSelector(authSelector);
 
   const onSubmit = (data) => {
     dispatch(signinUser(data));
   };
-
-  useEffect(() => {
-    return () => {
-      dispatch(clearState());
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(clearState());
-    }
-    if (isSuccess) {
-      dispatch(clearState());
-      history.replace("/");
-    }
-  }, [isError, isSuccess]);
 
   return (
     <Container>

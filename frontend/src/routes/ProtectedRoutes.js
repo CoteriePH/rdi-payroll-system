@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import { Route, Switch } from "react-router-dom";
 import routes from ".";
-import MainWrapper from "pages/Home";
+import HomePage from "pages/Home";
 
 const ProtectedRoutes = () => (
   <Switch>
-    <MainWrapper>
+    <HomePage>
       <Suspense fallback={"Loading"}>
         {routes.map(({ component: Component, path, exact }) => (
           <Route path={`/${path}`} key={path} exact={exact}>
@@ -13,7 +13,7 @@ const ProtectedRoutes = () => (
           </Route>
         ))}
       </Suspense>
-    </MainWrapper>
+    </HomePage>
   </Switch>
 );
 
