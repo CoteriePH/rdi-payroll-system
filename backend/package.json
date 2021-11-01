@@ -12,6 +12,7 @@
     "seed:undo": "npx sequelize-cli db:seed:undo",
     "seed:undo:all": "npx sequelize-cli db:seed:undo:all",
     "seed": "npx sequelize-cli db:seed",
+    "db:refresh": "npx sequelize-cli db:drop && npx sequelize-cli db:create rdi_payroll_system",
     "migrate:undo": "npx sequelize-cli db:migrate:undo"
   },
   "author": "",

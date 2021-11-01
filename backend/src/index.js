@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // database
 const db = require("./models");
-db.sequelize.sync({ force: true }).then(() => {
+db.sequelize.sync().then(() => {
   //REGISTER ROUTES
   require("./routes/user.routes")(app);
   require("./routes/auth.routes")(app);
