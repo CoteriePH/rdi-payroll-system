@@ -5,7 +5,7 @@ import Link from 'components/Link';
 import { useLocation } from 'react-router';
 import routes from 'routes';
 
-const MainWrapper = ({ children, props }) => {
+const MainWrapper = ({ children }) => {
   const location = useLocation();
   // encoder based sidebar
   const routesMap = new Map();

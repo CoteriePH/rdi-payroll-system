@@ -4,10 +4,13 @@ export const theme = {
   colors: {
     violet: '#4c00aa',
     white: '#ffffff',
+    gray: '#f3f3f3',
     red: '#ec2e2e',
     green: '#37873e',
     lightViolet: '#e1c8ff',
-    darkViolet: '#440099'
+    darkViolet: '#440099',
+    default: '#4c00aa',
+    secondary: '#ffffff'
   },
   fonts: {
     avenirBlack: 'Avenir-Black',

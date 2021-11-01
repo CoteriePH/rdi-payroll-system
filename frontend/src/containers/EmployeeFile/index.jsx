@@ -1,14 +1,19 @@
-import Button from 'components/Button';
+import Menu from 'components/Menu';
+import Settings from 'components/Menu/settings';
 import Table from 'components/Table';
-import { exportAndDownloadEmployeesToCSV, findAllEmployees } from 'features/employee/employeeSlice';
+import { settingsSelector } from 'features/settings/settingsSlice';
 import React from 'react';
+import { useSelector } from 'react-redux';
+import { findAllEmployees } from 'features/employee/employeeSlice';
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useTable } from 'react-table';
-import { TextLink, Container, Flex } from './styles';
+import { Wrapper, TextLink, Container, Flex, TableContainer } from './styles';
+import getTimeDuration from 'helpers/getTimeDuration';
 const EmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
+  const { isOpen } = useSelector(settingsSelector);
 
   useEffect(() => {
     dispatch(findAllEmployees());
@@ -40,8 +45,9 @@ const EmployeeFile = () => {
       },
       {
         Header: 'TIME DURATION',
-        Cell: () => {
-          return <div>??? years</div>;
+        accessor: 'date_hired',
+        Cell: (props) => {
+          return <div>{getTimeDuration(props.value)} years</div>;
         }
       },
       {
@@ -64,26 +70,23 @@ const EmployeeFile = () => {
     return <div>Loading</div>;
   }
   return (
-    <>
+    <Wrapper>
       <Container>
-        <Flex flex={3}>
-          {/* TODO - Component kung alang laman data */}
-          {data.length > 0 ? <Table tableInstance={tableInstance} /> : 'Wow, such empty'}
+        {/* NOTE: Gayahin nalang tong flex sa ibang components */}
+        <Flex flex={8}>
+          <TableContainer>
+            {/* TODO - Component kung alang laman data */}
+
+            {/* NOTE: To use Settings Component set parent div to position relative*/}
+            <Settings />
+            {data.length > 0 ? <Table tableInstance={tableInstance} /> : 'Wow, such empty'}
+          </TableContainer>
         </Flex>
-        <Flex justify="space-between" direction="column" bg="pink" flex={1}>
-          <div>Filter Component</div>
-          {/* TODO - Component Sa Export All */}
-          <Button
-            onClick={() => {
-              dispatch(exportAndDownloadEmployeesToCSV());
-            }}
-            color="darkViolet"
-          >
-            Export
-          </Button>
+        <Flex bg="gray" flex={1}>
+          {isOpen && <Menu />}
         </Flex>
       </Container>
-    </>
+    </Wrapper>
   );
 };
 

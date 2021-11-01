@@ -48,7 +48,7 @@ export const authSlice = createSlice({
       state.role = payload.role;
       state.isFetching = false;
       state.isSuccess = true;
-      toast.success(`Welcome ${payload.username}`);
+      toast?.success(`Welcome ${payload.username}`);
 
       return state;
     },
@@ -56,7 +56,7 @@ export const authSlice = createSlice({
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
-      toast.error(state.errorMessage);
+      toast?.error(state.errorMessage);
     }
   }
 });

@@ -1,12 +1,8 @@
 import styled from 'styled-components';
-
-const color = {
-  default: (props) => props.theme.colors.violet,
-  secondary: (props) => props.theme.colors.white
-};
+import { theme } from 'theme';
 
 export const Container = styled.div`
-  background-color: ${color.secondary};
+  background-color: ${theme.colors.secondary};
   width: 7rem;
   border-radius: 65px;
 `;
@@ -29,7 +25,7 @@ export const Label = styled.label`
     width: 1rem;
     height: 1rem;
     border-radius: 50%;
-    border: 0.13rem solid ${color.default};
+    border: 0.13rem solid ${theme.colors.default};
     transform: translateY(-0.05em);
     display: grid;
     place-items: center;
@@ -43,7 +39,7 @@ export const Label = styled.label`
     content: '';
     width: 0.5rem;
     height: 0.5rem;
-    box-shadow: inset 0.5rem 0.5rem ${color.default};
+    box-shadow: inset 0.5rem 0.5rem ${theme.colors.default};
     border-radius: 50%;
     transition: 0.3s transform ease-in-out;
     transform: scale(0);

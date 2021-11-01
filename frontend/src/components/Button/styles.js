@@ -1,27 +1,13 @@
 import styled from 'styled-components';
+import { theme } from 'theme';
 
-// NOTE: properties are on theme.js
-
-const color = {
-  default: (props) => props.theme.colors.violet,
-  darkViolet: (props) => props.theme.colors.darkViolet,
-  secondary: (props) => props.theme.colors.white,
-  red: (props) => props.theme.colors.red,
-  green: (props) => props.theme.colors.green
-};
+// TODO - variant or colorScheme
 
 export const Container = styled.button`
   cursor: pointer;
   user-select: none;
-  color: ${(props) => (props.color === 'secondary' ? color.default : color.secondary)};
-  background-color: ${(props) =>
-    props.color === 'secondary'
-      ? color.secondary
-      : props.color === 'red'
-      ? color.red
-      : props.color === 'green'
-      ? color.green
-      : color.default};
+  color: ${(props) => (props.color ? theme.colors[props.color] : theme.colors.white)};
+  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : theme.colors.default)};
   border: ${(props) =>
     props.color === 'secondary' ? `2px solid ${props.theme.colors.violet}` : 'none'};
   outline: none;

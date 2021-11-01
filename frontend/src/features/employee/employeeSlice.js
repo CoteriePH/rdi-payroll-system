@@ -30,7 +30,7 @@ export const findAllEmployees = createAsyncThunk(
   }
 );
 
-export const exportAndDownloadEmployeesToCSV = createAsyncThunk(
+export const exportEmployeesToCSV = createAsyncThunk(
   '/employees/export-to-csv',
   async (_, { rejectWithValue }) => {
     try {
@@ -60,7 +60,8 @@ const employeeSlice = createSlice({
     },
     [findAllEmployees.fulfilled]: (state, { payload }) => {
       state.data = payload;
-      (state.isFetching = false), (state.isSuccess = true);
+      state.isFetching = false;
+      state.isSuccess = true;
     },
     [findAllEmployees.rejected]: (state, { payload }) => {
       state.data = [];

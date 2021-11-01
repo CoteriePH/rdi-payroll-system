@@ -32,14 +32,15 @@ db.employee = require("./employee.model.js")(sequelize, Sequelize, DataTypes);
 db.company = require("./company.model.js")(sequelize, Sequelize, DataTypes);
 db.file = require("./file.model.js")(sequelize, Sequelize, DataTypes);
 db.deduction = require("./deduction.model.js")(sequelize, Sequelize, DataTypes);
+db.addtnl_deduction = require("./addtnl_deduction.model")(sequelize, Sequelize, DataTypes);
 db.earning = require("./earning.model.js")(sequelize, Sequelize, DataTypes);
-
 db.department = require("./department.model.js")(
   sequelize,
   Sequelize,
   DataTypes
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
+db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
 
 /**
  * Relationships
@@ -122,6 +123,16 @@ db.earning.belongsTo(db.employee, {
 db.employee.hasOne(db.earning, {
   as: "earning",
   foreignKey: "employee_id",
+});
+
+//OneAndOnlyONE (One deduction  ---> one additional deduction)
+db.addtnl_deduction.belongsTo(db.deduction, {
+  foreignKey: { name: "deduction_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.deduction.hasOne(db.addtnl_deduction, {
+  as: "additional_deduction",
+  foreignKey: "deduction_id",
 });
 
 module.exports = db;

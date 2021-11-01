@@ -28,6 +28,8 @@ db.sequelize.sync({ force: true }).then(() => {
   require("./routes/file.routes")(app);
   require("./routes/earning.routes")(app);
   require("./routes/deduction.routes")(app);
+  require("./routes/request.routes")(app);
+  require("./routes/addtnl_deduction.routes")(app);
   // set port, listen for requests
   const PORT = config.PORT;
   app.listen(PORT, () => {

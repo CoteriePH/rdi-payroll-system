@@ -8,8 +8,12 @@ export const MainRight = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 6;
+  height: 100vh;
+  overflow: hidden;
 `;
 
 export const WrapperRight = styled.div`
-  padding: 1.5em 1em;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
 `;
