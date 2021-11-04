@@ -55,7 +55,7 @@ export const authSlice = createSlice({
     [signinUser.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload;
       toast?.error(state.errorMessage);
     }
   }
