@@ -16,6 +16,7 @@ import Toolbar from 'components/Toolbar';
 import { ROLES } from 'constants/constants';
 import { findAllAttendance } from 'features/attendance/attendanceSlice';
 import { accuracyColorPicker } from 'helpers/colorPicker';
+import dayjs from 'dayjs';
 
 const Attendance = () => {
   const dispatch = useDispatch();
@@ -48,12 +49,25 @@ const Attendance = () => {
         }
       },
       {
+        //TODO TIME CONVERTER HELPER
         Header: 'TIME IN',
-        accessor: 'time_in'
+        accessor: 'time_in',
+        Cell: (props) => {
+          const time = props.value.split(':');
+          return (
+            <div>{dayjs(new Date().setHours(time[0], time[1], time[2])).format('hh:mm:ss A')}</div>
+          );
+        }
       },
       {
         Header: 'TIME OUT',
-        accessor: 'time_out'
+        accessor: 'time_out',
+        Cell: (props) => {
+          const time = props.value.split(':');
+          return (
+            <div>{dayjs(new Date().setHours(time[0], time[1], time[2])).format('hh:mm:ss A')}</div>
+          );
+        }
       },
       {
         Header: 'ACCURACY',
