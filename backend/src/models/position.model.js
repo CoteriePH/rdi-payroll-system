@@ -1,27 +1,27 @@
-const { nanoid } = require("nanoid");
 module.exports = (sequelize, Sequelize, DataTypes) => {
-  const Position = sequelize.define(
-    "position", // Model name
-    {
-      // Attributes
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: nanoid(10),
-        primaryKey: true,
-        allowNull: false,
+    const Position = sequelize.define(
+      "position", // Model name
+      {
+        // Attributes
+        id:{
+            type: DataTypes.UUID,
+            defaultValue: Sequelize.UUIDV4,
+            primaryKey: true,
+            allowNull: false,
+        },
+        name:{
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-    },
-    {
-      timestamps: true,
-      underscrored: true,
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    }
-  );
-
-  return Position;
-};
+      {
+        timestamps: true,
+        underscrored: true,
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      }
+    );
+  
+    return Position;
+  };
+  

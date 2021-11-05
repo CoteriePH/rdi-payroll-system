@@ -1,27 +1,27 @@
-const { nanoid } = require("nanoid");
 module.exports = (sequelize, Sequelize, DataTypes) => {
-  const Department = sequelize.define(
-    "department", // Model name
-    {
-      // Attributes
-      id: {
-        type: DataTypes.UUID,
-        defaultValue: nanoid(10),
-        primaryKey: true,
-        allowNull: false,
+    const Department = sequelize.define(
+      "department", // Model name
+      {
+        // Attributes
+        id:{
+            type: DataTypes.UUID,
+            defaultValue: Sequelize.UUIDV4,
+            primaryKey: true,
+            allowNull: false,
+        },
+        name:{
+            type: DataTypes.STRING(30),
+            allowNull:false,
+        },
+        
       },
-      name: {
-        type: DataTypes.STRING(30),
-        allowNull: false,
-      },
-    },
-    {
-      timestamps: true,
-      underscrored: true,
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    }
-  );
-
-  return Department;
-};
+      {
+        timestamps: true,
+        underscrored: true,
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      }
+    );
+  
+    return Department;
+  };

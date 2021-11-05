@@ -1,4 +1,3 @@
-const { nanoid } = require("nanoid");
 module.exports = (sequelize, Sequelize, DataTypes) => {
   const Attendance = sequelize.define(
     "attendance", // Model name
@@ -6,7 +5,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       // Attributes
       id: {
         type: DataTypes.UUID,
-        defaultValue: nanoid(10),
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },

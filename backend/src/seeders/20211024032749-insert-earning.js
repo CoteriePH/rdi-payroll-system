@@ -1,5 +1,5 @@
 "use strict";
-const { nanoid } = require("nanoid");
+const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcryptjs");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -10,7 +10,7 @@ module.exports = {
     const employeeRows = employees[0];
     return await queryInterface.bulkInsert("earnings", [
       {
-        id: nanoid(10),
+        id: uuidv4(),
         basic_pay: Math.floor(Math.random() * 300),
         overtime_rate: Math.floor(Math.random() * 300),
         night_differential: Math.floor(Math.random() * 300),
@@ -23,7 +23,7 @@ module.exports = {
         employee_id: employeeRows[0].id,
       },
       {
-        id: nanoid(10),
+        id: uuidv4(),
         basic_pay: Math.floor(Math.random() * 300),
         overtime_rate: Math.floor(Math.random() * 300),
         night_differential: Math.floor(Math.random() * 300),
@@ -36,7 +36,7 @@ module.exports = {
         employee_id: employeeRows[1].id,
       },
       {
-        id: nanoid(10),
+        id: uuidv4(),
         basic_pay: Math.floor(Math.random() * 300),
         overtime_rate: Math.floor(Math.random() * 300),
         night_differential: Math.floor(Math.random() * 300),
