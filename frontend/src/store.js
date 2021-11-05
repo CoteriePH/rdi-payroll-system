@@ -5,6 +5,7 @@ import employeeSlice from 'features/employee/employeeSlice';
 import departmentSlice from 'features/department/departmentSlice';
 import positionSlice from 'features/position/positionSlice';
 import companySlice from 'features/company/companySlice';
+import requestSlice from 'features/request/requestSlice';
 
 export default configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export default configureStore({
     employees: employeeSlice,
     departments: departmentSlice,
     positions: positionSlice,
-    companies: companySlice
+    companies: companySlice,
+    requests: requestSlice
   }
 });

@@ -1,10 +1,12 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
+  padding: 2rem;
+  align-items: flex-start;
 `;
 
 export const TextArea = styled.textarea`
@@ -31,7 +33,6 @@ export const GhostArea = styled.div`
 
 export const FlexDrop = styled.div`
   display: flex;
-  width: 70rem;
   padding-right: 2rem;
   margin-bottom: 1.5rem;
 `;
@@ -41,7 +42,7 @@ export const WordTools = styled.div`
   z-index: 1;
   width: 68rem;
   height: 1.5rem;
-  transform: translateY(-3.5rem);
+  transform: translateY(-3.5rem) translateX(0.7rem);
   border: solid black 1px;
   border-radius: 0.5rem;
   padding: 0.5em 1.3rem;

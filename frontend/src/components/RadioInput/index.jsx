@@ -19,7 +19,7 @@ const RadioInput = ({ children, label, name, ...rest }) => {
           <span className="radio__label">{children ? children : label}</span>
         </Label>
       </Container>
-      {errors[name] ? <ErrorText style={{ color: 'red' }}>{errors[name].message}</ErrorText> : null}
+      {errors[name] ? <ErrorText>{errors[name].message}</ErrorText> : null}
     </Wrapper>
   );
 };

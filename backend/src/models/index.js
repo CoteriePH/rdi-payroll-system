@@ -32,7 +32,11 @@ db.employee = require("./employee.model.js")(sequelize, Sequelize, DataTypes);
 db.company = require("./company.model.js")(sequelize, Sequelize, DataTypes);
 db.file = require("./file.model.js")(sequelize, Sequelize, DataTypes);
 db.deduction = require("./deduction.model.js")(sequelize, Sequelize, DataTypes);
-db.addtnl_deduction = require("./addtnl_deduction.model")(sequelize, Sequelize, DataTypes);
+db.addtnl_deduction = require("./addtnl_deduction.model")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
 db.earning = require("./earning.model.js")(sequelize, Sequelize, DataTypes);
 db.department = require("./department.model.js")(
   sequelize,

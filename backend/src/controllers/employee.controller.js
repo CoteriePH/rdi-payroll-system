@@ -14,17 +14,20 @@ exports.exportToCSV = async (req, res) => {
     last_name,
     middle_name,
     first_name, 
+    sex,
+    street,
+    city,
+    province,
+    postal_code,
     c.name AS company,
     p.name AS position, 
     d.name AS department, 
     birth_date, 
-    address, 
     email, 
     contact_no, 
     employee_type, 
     date_hired, 
-    time_shift_from, 
-    time_shift_to
+    time_shift
     FROM employees e 
     LEFT JOIN companies c ON e.company_id = c.id 
     LEFT JOIN positions p ON e.position_id = p.id

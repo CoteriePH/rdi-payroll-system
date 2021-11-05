@@ -1,24 +1,19 @@
 import styled from 'styled-components';
 import { theme } from 'theme';
 
-const color = {
-  default: (props) => props.theme.colors.violet,
-  secondary: (props) => props.theme.colors.white
-};
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
 `;
 export const Container = styled.div`
-  background-color: ${color.secondary};
-  border: 1.5px solid ${(props) => (props.bg ? props.bg : 'silver')};
   width: 100%;
   overflow: hidden;
-  height: 3rem;
+  height: 2rem;
   display: flex;
   align-items: center;
   border-radius: 5px;
+  background-color: ${theme.colors.gray};
 `;
 
 export const Input = styled.input`
@@ -33,18 +28,17 @@ export const Label = styled.label`
   cursor: pointer;
   align-items: center;
   line-height: 1;
-  padding: 0.5rem 0.3rem;
-  font-size: ${theme.fontSizes.sm};
+  font-size: ${theme.fontSizes.xs};
   width: inherit;
   height: 100%;
-  gap: 1rem;
+  gap: 0.5em;
 
   .radio__control {
     display: block;
-    width: 1rem;
-    height: 1rem;
+    width: 0.8rem;
+    height: 0.8rem;
     border-radius: 50%;
-    border: 0.13rem solid ${color.default};
+    border: 0.13rem solid ${theme.colors.default};
     transform: translateY(-0.05em);
     display: grid;
     place-items: center;
@@ -56,9 +50,9 @@ export const Label = styled.label`
 
   ${Input} + .radio__control::before {
     content: '';
-    width: 0.5rem;
-    height: 0.5rem;
-    box-shadow: inset 0.5rem 0.5rem ${color.default};
+    width: 0.4rem;
+    height: 0.4rem;
+    box-shadow: inset 0.5rem 0.5rem ${theme.colors.default};
     border-radius: 50%;
     transition: 0.3s transform ease-in-out;
     transform: scale(0);

@@ -8,14 +8,14 @@ export const ModalStyle = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  width: 75rem;
-  max-width: 75rem;
-  height: 80%;
+  width: 60rem;
+  height: 40rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
   max-height: 60rem;
   overflow: hidden;
+  outline: none;
 `;
 
 export const OverlayStyle = styled.div`
@@ -43,7 +43,7 @@ export const Form = styled.form`
   flex-direction: row;
   justify-content: space-between;
   padding: 1rem 2rem 1rem 2rem;
-  max-height: 85%;
+  max-height: 80%;
 `;
 
 export const LeftContainer = styled.div`
@@ -64,7 +64,7 @@ export const RightContainer = styled.div`
   justify-content: space-between;
   flex-grow: 1/6;
   max-height: 100%;
-  padding: 1rem;
+  padding: 1rem 0 0 2rem;
 `;
 
 export const ButtonsContainer = styled.div`

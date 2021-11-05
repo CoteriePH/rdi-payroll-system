@@ -15,12 +15,10 @@ export const SubWrapper = styled.div`
   position: relative;
   margin-top: 0.3rem;
   overflow: hidden;
-  cursor: pointer;
 `;
 export const Input = styled.input`
   opacity: 0;
   padding: 0.5em 1em;
-  cursor: pointer;
 `;
 export const InpButton = styled.div`
   width: 1.5rem;

@@ -26,16 +26,27 @@ import {
   FlexButton,
   FlexMore
 } from './styles';
+import { useForm } from 'react-hook-form';
+import { useDispatch } from 'react-redux';
+import { addRequest } from 'features/request/requestSlice';
 
 function Request() {
-  return (
-    <Wrapper>
-      <FlexDrop>
-        <Dropdown label="CLASSIFICATION"></Dropdown>
-      </FlexDrop>
+  const { register, handleSubmit, reset } = useForm();
+  const dispatch = useDispatch();
+  const onSubmit = (data) => {
+    //TODO - CLASSIFICATIONS/SUBJECTS
+    data.subject = 'TEST SUBJECT';
+    dispatch(addRequest(data));
+    reset({});
+  };
 
+  return (
+    <Wrapper onSubmit={handleSubmit(onSubmit)}>
+      <FlexDrop>
+        <Dropdown bg="gray" label="CLASSIFICATION"></Dropdown>
+      </FlexDrop>
       <GhostArea>
-        <TextArea />
+        <TextArea {...register('desc', { required: true })} />
       </GhostArea>
       <WordTools>
         <Tools>
@@ -164,8 +175,7 @@ function Request() {
 
       <FlexButton>
         <FlexMore>
-          <Button>SEND FOR APPROVAL</Button>
-          {/* Hard to control */}
+          <Button type="submit">SEND FOR APPROVAL</Button>
         </FlexMore>
       </FlexButton>
     </Wrapper>

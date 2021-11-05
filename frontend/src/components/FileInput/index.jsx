@@ -1,20 +1,24 @@
 import { useFormContext } from 'react-hook-form';
-import { Text } from 'styles/index.js';
+import { ErrorText, Text } from 'styles/index.js';
 import { Wrapper, SubWrapper, Input, InpButton } from './styles.js';
 
+// TODO BUGGED DI MA REGISTER YUNG FILE
 const FileInput = ({ placeholder = '', label, disabled = false, name, ...rest }) => {
-  const { register } = useFormContext();
+  const {
+    register,
+    formState: { errors }
+  } = useFormContext();
+
   return (
     <Wrapper>
-      <Text size="sm">{label}</Text>
+      <Text size="xs">{label}</Text>
       <SubWrapper>
         <Input
+          {...rest}
           placeholder={placeholder}
           type="file"
-          //BUGGY REGISTER
-          // {...register(name)}
+          {...register(name)}
           disabled={disabled}
-          {...rest}
         />
         <InpButton>
           <svg
@@ -28,8 +32,8 @@ const FileInput = ({ placeholder = '', label, disabled = false, name, ...rest })
             />
           </svg>
         </InpButton>
-        {/* di pa ako marunong sa react hooks */}
       </SubWrapper>
+      {errors[name] ? <ErrorText>{errors[name].message}</ErrorText> : null}
     </Wrapper>
   );
 };

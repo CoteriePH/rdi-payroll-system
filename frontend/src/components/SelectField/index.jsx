@@ -31,7 +31,7 @@ const SelectField = ({
           {children}
         </Select>
       </Container>
-      {errors[name] ? <ErrorText style={{ color: 'red' }}>{errors[name].message}</ErrorText> : null}
+      {errors[name] ? <ErrorText>{errors[name].message}</ErrorText> : null}
     </Wrapper>
   );
 };

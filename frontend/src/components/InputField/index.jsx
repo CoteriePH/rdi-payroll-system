@@ -29,9 +29,7 @@ const InputField = ({
           />
         </Container>
         {/* TODO ERROR STYLE */}
-        {errors[name] ? (
-          <ErrorText style={{ color: 'red' }}>{errors[name].message}</ErrorText>
-        ) : null}
+        {errors[name] ? <ErrorText>{errors[name].message}</ErrorText> : null}
       </Wrapper>
     </>
   );

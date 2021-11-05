@@ -32,7 +32,19 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      address: {
+      street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      province: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      postal_code: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -60,14 +72,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       },
       date_hired: {
         type: DataTypes.DATE,
-        allowNull: false,
-      },
-      time_shift_from: {
-        type: DataTypes.TIME,
-        allowNull: false,
-      },
-      time_shift_to: {
-        type: DataTypes.TIME,
         allowNull: false,
       },
       time_shift: {

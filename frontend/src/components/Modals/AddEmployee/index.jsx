@@ -29,6 +29,7 @@ import { useSelector } from 'react-redux';
 import { HeaderText, Text } from 'styles';
 import Button from 'components/Button';
 import FileInput from 'components/FileInput';
+import PhotoInput from 'components/PhotoInput';
 ReactModal.setAppElement('#root');
 
 //TODO MOVE TO UTILS/HELPERS
@@ -62,19 +63,19 @@ const employeeSchema = yup
   .required();
 
 const AddEmployee = ({ isOpen, onClose }) => {
-  const methods = useForm({ resolver: yupResolver(employeeSchema) });
-  const { handleSubmit } = methods;
+  const methods = useForm({
+    resolver: yupResolver(employeeSchema)
+  });
+  const { handleSubmit, reset } = methods;
   const dispatch = useDispatch();
   const companies = useSelector((state) => state.companies.data);
   const departments = useSelector((state) => state.departments.data);
   const positions = useSelector((state) => state.positions.data);
-  // const { isFetching, isSuccess, isError } = useSelector((state) => state.employees);
   const onSubmit = (data) => {
-    //TODO
-    data.address = `${data.street} ${data.city} ${data.province}`;
-    data.time_shift_to = data.time_shift;
-    data.time_shift_from = data.time_shift;
+    //TODO - ADDRESS IN DB??
+    console.log(data);
     dispatch(addEmployee(data));
+    reset({});
     onClose();
   };
   useEffect(() => {
@@ -82,6 +83,14 @@ const AddEmployee = ({ isOpen, onClose }) => {
     dispatch(findAllDepartments());
     dispatch(findAllPositions());
   }, []);
+
+  useEffect(() => {
+    // TODO - REFACTOR
+    //BUGGY CODE
+    if (!isOpen) {
+      reset({ sex: 'MALE', basic_pay: 0.0 });
+    }
+  }, [onClose, reset, isOpen]);
 
   return (
     <ReactModal
@@ -114,7 +123,7 @@ const AddEmployee = ({ isOpen, onClose }) => {
                 <InputField name="last_name" label="Last Name" />
                 <InputField name="first_name" label="First Name" />
                 <InputField name="middle_name" label="Middle Name" />
-                <Text size="sm">SEX</Text>
+                <Text size="xs">SEX</Text>
                 <RadioGroup>
                   <RadioInput value="MALE" name="sex" label="MALE" />
                   <RadioInput value="FEMALE" name="sex" label="FEMALE" />
@@ -130,7 +139,7 @@ const AddEmployee = ({ isOpen, onClose }) => {
                 <InputField type="tel" name="contact_no" label="Contact Number" />
               </SubSection>
             </Section>
-            <HeaderText>EMPLOYMENT STATUS</HeaderText>
+            <HeaderText size="lg">EMPLOYMENT STATUS</HeaderText>
             <Section>
               <SubSection>
                 <SelectField label="Employment Type" name="employment_type" id="employment_type">
@@ -165,12 +174,14 @@ const AddEmployee = ({ isOpen, onClose }) => {
 
                 <InputField type="date" name="date_hired" label="Date Hired" />
                 <SelectField label="Time Shift" name="time_shift" id="time_shift">
-                  <option value="1">TIME 1 </option>
-                  <option value="2">TIME 2 </option>
+                  <option value="MORNING">Morning</option>
+                  <option value="MID_MORNING">Mid Morning </option>
+                  <option value="NOON">Noon</option>
+                  <option value="AFTERNOON">Afternoon</option>
                 </SelectField>
               </SubSection>
             </Section>
-            <HeaderText>LEGAL DOCUMENTS</HeaderText>
+            <HeaderText size="lg">LEGAL DOCUMENTS</HeaderText>
             <Section>
               <FilesContainer>
                 <FileInput name="nbi_clearance" label="NBI CLEARANCE" placeholder="NBI CLEARANCE" />
@@ -183,8 +194,8 @@ const AddEmployee = ({ isOpen, onClose }) => {
           {/* RIGHT DIV */}
           <RightContainer>
             <div>
-              <Text>TODO ADD PHOTO</Text>
-              {/* <FileInput name="photo" label="Add Photo" placeholder="Add Photo" /> */}
+              {/* <Text>TODO ADD PHOTO</Text> */}
+              <PhotoInput name="photo" label="Add Photo" placeholder="Add Photo" />
             </div>
             <ButtonsContainer>
               <Button>Import</Button>
