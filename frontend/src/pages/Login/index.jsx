@@ -14,7 +14,6 @@ const LoginPage = () => {
   const methods = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
-
   const { isError, isSuccess } = useSelector(authSelector);
 
   const onSubmit = (data) => {
@@ -25,7 +24,6 @@ const LoginPage = () => {
     return () => {
       dispatch(clearState());
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,7 +35,6 @@ const LoginPage = () => {
       dispatch(clearState());
       history.replace('/');
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
 
