@@ -19,6 +19,7 @@ toast.configure({ limit: 3 });
 
 function App() {
   const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(verifyAuth());
@@ -29,8 +30,6 @@ function App() {
       <Suspense fallback={<Loader primary />}>
         <Switch>
           {/* MAY BUG ATA SA PUBLIC ROUTES */}
-          {/* TODO - DAPAT DI NA SIYA MAGREREDIRECT SA LOGIN KUNG NAKALOGGED IN NA SIYA */}
-          {/* ANG NANGYAYARI KASI LOGIN->REDIRECT("/")->REFRESH->REDIRECT("/login")->CHECK AUTH->REDIRECT(history) */}
           <PublicRoute path="/login">
             <LoginPage />
           </PublicRoute>

@@ -51,6 +51,11 @@ db.department = require("./department.model.js")(
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
 db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
+db.cash_advance = require("./cash_advance.model")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
 
 /**
  * Relationships
@@ -154,4 +159,13 @@ db.deduction.hasOne(db.addtnl_deduction, {
   foreignKey: "deduction_id",
 });
 
+//OneToMany (One employee  ---> Many cash advance)
+db.cash_advance.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.employee.hasMany(db.cash_advance, {
+  as: "cash_advances",
+  foreignKey: "employee_id",
+});
 module.exports = db;

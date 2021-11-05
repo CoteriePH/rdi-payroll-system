@@ -1,41 +1,46 @@
-const { nanoid } = require("nanoid");
 module.exports = (sequelize, Sequelize, DataTypes) => {
-  const Deduction = sequelize.define(
-    "deduction", // Model name
+  const CashAdvance = sequelize.define(
+    "cash_advance", // Model name
     {
       // Attributes
       id: {
         type: DataTypes.UUID,
-        defaultValue: nanoid(10),
+        defaultValue: Sequelize.UUIDV4,
         primaryKey: true,
         allowNull: false,
       },
-      sss_contribution: {
+      amount_borrowed: {
         type: DataTypes.DECIMAL(19, 4),
         allowNull: false,
       },
-      pagibig_funds: {
+      salary_deduction: {
         type: DataTypes.DECIMAL(19, 4),
         allowNull: false,
       },
-      pagibig_loans: {
-        type: DataTypes.DECIMAL(19, 4),
+      no_of_payments: {
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
-      philhealth_loans: {
-        type: DataTypes.DECIMAL(19, 4),
+      date_from: {
+        type: DataTypes.DATE,
         allowNull: false,
       },
-      cash_advance: {
-        type: DataTypes.DECIMAL(19, 4),
+      date_to: {
+        type: DataTypes.DATE,
         allowNull: false,
       },
-      others: {
-        type: DataTypes.DECIMAL(19, 4),
+      status: {
+        type: DataTypes.ENUM({
+          values: ["PROCESSED", "UNPROCESSED"],
+        }),
+        defaultValue: "UNPROCESSED",
         allowNull: false,
       },
-      total: {
-        type: DataTypes.DECIMAL(19, 4),
+      ca_status: {
+        type: DataTypes.ENUM({
+          values: ["PAID", "INCOMPLETE", "DELAYED"],
+        }),
+        defaultValue: "INCOMPLETE",
         allowNull: false,
       },
     },
@@ -47,5 +52,5 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
     }
   );
 
-  return Deduction;
+  return CashAdvance;
 };

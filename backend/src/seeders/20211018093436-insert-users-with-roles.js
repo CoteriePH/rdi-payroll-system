@@ -1,5 +1,5 @@
 "use strict";
-const { v4: uuidv4 } = require("uuid");
+const { nanoid } = require("nanoid");
 const bcrypt = require("bcryptjs");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
@@ -7,7 +7,7 @@ module.exports = {
       "users",
       [
         {
-          id: uuidv4(),
+          id: nanoid(10),
           username: "encoder",
           password: bcrypt.hashSync("encoder", 8),
           role: "ENCODER",
@@ -15,7 +15,7 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuidv4(),
+          id: nanoid(10),
           username: "auditor",
           password: bcrypt.hashSync("auditor", 8),
           role: "AUDITOR",
@@ -23,7 +23,7 @@ module.exports = {
           updated_at: new Date(),
         },
         {
-          id: uuidv4(),
+          id: nanoid(10),
           username: "admin",
           role: "ADMIN",
           password: bcrypt.hashSync("admin", 8),

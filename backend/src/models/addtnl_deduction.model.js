@@ -1,3 +1,4 @@
+const { nanoid } = require("nanoid");
 module.exports = (sequelize, Sequelize, DataTypes) => {
   const AddtnlDeduction = sequelize.define(
     "addtnl_deduction", // Model name
@@ -5,7 +6,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       // Attributes
       id: {
         type: DataTypes.UUID,
-        defaultValue: Sequelize.UUIDV4,
+        defaultValue: nanoid(10),
         primaryKey: true,
         allowNull: false,
       },

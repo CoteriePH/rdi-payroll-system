@@ -1,29 +1,29 @@
 "use strict";
-const { v4: uuidv4 } = require("uuid");
+const { nanoid } = require("nanoid");
 const bcrypt = require("bcryptjs");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     return await queryInterface.bulkInsert("companies", [
       {
-        id: uuidv4(),
+        id: nanoid(10),
         name: "Company 1",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: uuidv4(),
+        id: nanoid(10),
         name: "Company 2",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: uuidv4(),
+        id: nanoid(10),
         name: "Company 3",
         created_at: new Date(),
         updated_at: new Date(),
       },
       {
-        id: uuidv4(),
+        id: nanoid(10),
         name: "Company 4",
         created_at: new Date(),
         updated_at: new Date(),
