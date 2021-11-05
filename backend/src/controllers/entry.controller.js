@@ -1,18 +1,19 @@
 const res = require("express/lib/response");
 const db = require("../models");
+const { Op, sequelize, Sequelize } = require("../models");
 const Entry = db.entry;
 
 exports.create = async (req, res) => {
   try {
     //INIT
-    let attendance_details = req.body;
+    let entry_details = req.body;
 
     //MODIFY FIELDS
-    attendance_details.time_in = Date.now();
-    attendance_details.time_out = null;
-    attendance_details.running_time = null;
-    attendance_details.entries = 1;
-    attendance_details.date = Date.now();
+    entry_details.time_in = Date.now();
+    entry_details.time_out = null;
+    entry_details.running_time = null;
+    entry_details.entries = 1;
+    entry_details.date = Date.now();
 
     //save
     const new_entry = await Entry.create(entry_details);
@@ -33,12 +34,21 @@ exports.findOne = async (req, res) => {
 };
 
 
-
 exports.update = async (req, res) => {
   try {
+    let entry_details = req.body;
+
+    entry_details.time_out = Date.now();
+    entry_details.running_time = null;
+    entry_details.entries = 2;
+
     await Entry.update(req.body, {
       where: {
-        id: req.params.id,
+        [Op.and]: [
+            {employee_id: req.body.employee_id},
+            {time_out: null},
+            {date: Date.now()}
+        ]
       },
     });
     return res.status(200).send("Entry updated successfully");

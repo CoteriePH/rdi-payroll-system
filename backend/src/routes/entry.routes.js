@@ -14,5 +14,5 @@ module.exports = function (app) {
   app.get("/entries/:id", controller.findOne);
   app.get("/entries", controller.findAll);
   app.delete("/entries/:id", controller.delete);
-  app.patch("/entries/:id", controller.update);
+  app.patch("/entries/", controller.update);
 };
