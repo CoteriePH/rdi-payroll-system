@@ -17,6 +17,7 @@ import {
   REGISTER
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import attendanceSlice from 'features/attendance/attendanceSlice';
 
 const persistConfig = {
   key: 'root',
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
   departments: departmentSlice,
   positions: positionSlice,
   companies: companySlice,
-  requests: requestSlice
+  requests: requestSlice,
+  attendances: attendanceSlice
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

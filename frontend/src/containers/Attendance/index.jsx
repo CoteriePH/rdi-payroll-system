@@ -14,10 +14,12 @@ import Button from 'components/Button/';
 import getTimeDuration from 'helpers/getTimeDuration';
 import Toolbar from 'components/Toolbar';
 import { ROLES } from 'constants/constants';
+import { findAllAttendance } from 'features/attendance/attendanceSlice';
+import { accuracyColorPicker } from 'helpers/colorPicker';
 
 const Attendance = () => {
   const dispatch = useDispatch();
-  const { data, isFetching } = useSelector((state) => state.employees);
+  const { data, isFetching } = useSelector((state) => state.attendances);
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -30,46 +32,50 @@ const Attendance = () => {
   };
 
   useEffect(() => {
-    dispatch(findAllEmployees());
+    dispatch(findAllAttendance());
   }, []);
 
   const columns = React.useMemo(
     () => [
       {
-        Header: 'COMPANY',
-        accessor: 'company.name' // accessor is the "key" in the data
-      },
-      {
-        Header: 'DEPARTMENT',
-        accessor: 'department.name'
-      },
-      {
-        Header: 'POSITION',
-        accessor: 'position.name'
-      },
-      {
-        Header: 'EMPLOYEE',
+        Header: 'EMPLOYEE NAME',
         Cell: (props) => {
           return (
             <div>
-              {props.row.original.first_name} {props.row.original.middle_name}{' '}
-              {props.row.original.last_name}
+              {props.row.original.employee.first_name} {props.row.original.employee.last_name}
             </div>
           );
         }
       },
       {
-        Header: 'TIME DURATION',
-        accessor: 'date_hired',
+        Header: 'TIME IN',
+        accessor: 'time_in'
+      },
+      {
+        Header: 'TIME OUT',
+        accessor: 'time_out'
+      },
+      {
+        Header: 'ACCURACY',
+        accessor: 'accuracy',
         Cell: (props) => {
-          return <div>{getTimeDuration(props.value)} years</div>;
+          const val = Math.floor(Math.random() * (100 - 0 + 1) + 0);
+          return (
+            <div style={{ color: accuracyColorPicker(val) }}>
+              {props.value ? props.value : val}%
+            </div>
+          );
         }
       },
       {
-        Header: '',
-        accessor: 'id',
-        Cell: () => {
-          return <TextLink>Edit</TextLink>;
+        Header: 'TRT',
+        accessor: 'total_running_time'
+      },
+      {
+        Header: 'NO. OF ENTRIES',
+        accessor: 'entries',
+        Cell: (props) => {
+          return <div>{props.value ? props.value : '0'}</div>;
         }
       }
     ],
