@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from 'theme';
 
 export const OverlayStyle = styled.div`
   z-index: 1000;
@@ -18,7 +19,7 @@ export const ModalStyle = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: ${theme.colors.darkViolet};
   width: 60rem;
   height: 40rem;
   border-radius: 0.5rem;
