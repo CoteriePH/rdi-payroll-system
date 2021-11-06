@@ -152,12 +152,12 @@ db.employee.hasOne(db.earning, {
 
 //OneAndOnlyONE (One earning  ---> one additional earnings)
 db.additionalEarnings.belongsTo(db.earning, {
-  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKey: { name: "earning_id", allowNull: false },
   foreignKeyConstraint: true,
 }); 
 db.earning.hasOne(db.additionalEarnings, {
   as: "additional_earnings",
-  foreignKey: "employee_id",
+  foreignKey: "earning_id",
 });
 
 

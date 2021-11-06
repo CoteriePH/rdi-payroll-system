@@ -29,13 +29,10 @@ db.sequelize.sync().then(() => {
   require("./routes/earning.routes")(app);
   require("./routes/deduction.routes")(app);
   require("./routes/request.routes")(app);
-<<<<<<< HEAD
   require("./routes/additional_earnings")(app);
-=======
   require("./routes/attendance.routes")(app);
   require("./routes/addtnl_deduction.routes")(app);
   require("./routes/cash_advance.routes")(app);
->>>>>>> f753f3db4bd148aa3ab0ecc76b2ebb3213a78cc5
   // set port, listen for requests
   const PORT = config.PORT;
   app.listen(PORT, () => {
