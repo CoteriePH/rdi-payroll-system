@@ -153,7 +153,6 @@ db.employee.hasOne(db.earning, {
   foreignKey: "employee_id",
 });
 
-<<<<<<< HEAD
 //OneAndOnlyONE (One earning  ---> one additional earnings)
 db.additionalEarnings.belongsTo(db.earning, {
   foreignKey: { name: "employee_id", allowNull: false },
@@ -165,7 +164,6 @@ db.earning.hasOne(db.additionalEarnings, {
 });
 
 
-=======
 //OneAndOnlyONE (One deduction  ---> one additional deduction)
 db.addtnl_deduction.belongsTo(db.deduction, {
   foreignKey: { name: "deduction_id", allowNull: false },
@@ -185,5 +183,4 @@ db.employee.hasMany(db.cash_advance, {
   as: "cash_advances",
   foreignKey: "employee_id",
 });
->>>>>>> f753f3db4bd148aa3ab0ecc76b2ebb3213a78cc5
 module.exports = db;
