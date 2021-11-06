@@ -25,7 +25,6 @@ const LoginPage = () => {
     return () => {
       dispatch(clearState());
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -37,7 +36,6 @@ const LoginPage = () => {
       dispatch(clearState());
       history.replace('/');
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
 

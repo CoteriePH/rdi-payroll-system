@@ -150,6 +150,7 @@ exports.findAll = async (req, res) => {
     "deduction",
     "earning",
     "files",
+    "attendances",
   ];
   const employees = await Employee.findAll(options);
   return res.status(200).send(employees);

@@ -6,7 +6,7 @@ const initialState = {
   isError: false,
   isFetching: false,
   isSuccess: false,
-  errorMessage: null
+  errorMessage: ''
 };
 
 export const findAllPositions = createAsyncThunk(

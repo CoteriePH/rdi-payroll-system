@@ -21,17 +21,34 @@ exports.signin = async (req, res) => {
         message: "Invalid Password!",
       });
     }
-    let token = jwt.sign({ id: user.id }, config.auth.secret, {
-      expiresIn: 86400, // 24 hours
-    });
+    let token = jwt.sign(
+      { id: user.id, username: user.username, role: user.role },
+      config.auth.secret,
+      {
+        expiresIn: 86400, // 24 hours
+      }
+    );
     res.status(200).send({
       id: user.id,
       username: user.username,
-      email: user.email,
       role: user.role,
       accessToken: token,
     });
   } catch (error) {
     res.status(500).send({ message: error.message });
+  }
+};
+
+exports.verifyToken = async (req, res) => {
+  const token = req.headers["auth"];
+  let jwtPayload;
+  try {
+    jwtPayload = jwt.verify(token, config.auth.secret);
+    res.locals.user = jwtPayload;
+    res.status(200).send(res.locals.user);
+  } catch (error) {
+    res.status(401).send("Unauthorized");
+    res.locals.user = null;
+    return;
   }
 };

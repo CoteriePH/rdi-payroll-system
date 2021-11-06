@@ -7,6 +7,9 @@ export const Nav = styled.div`
   width: 21em;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const CompanyLogo = styled.div`

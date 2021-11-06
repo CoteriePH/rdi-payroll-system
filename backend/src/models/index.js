@@ -38,6 +38,12 @@ db.addtnl_deduction = require("./addtnl_deduction.model")(
   DataTypes
 );
 db.earning = require("./earning.model.js")(sequelize, Sequelize, DataTypes);
+db.attendance = require("./attendance.model.js")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
+
 db.department = require("./department.model.js")(
   sequelize,
   Sequelize,
@@ -45,6 +51,11 @@ db.department = require("./department.model.js")(
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
 db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
+db.cash_advance = require("./cash_advance.model")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
 
 /**
  * Relationships
@@ -98,6 +109,15 @@ db.department.hasMany(db.position, {
   foreignKey: "department_id",
 });
 
+//OneToMany - (One Employee ----> MANY attendnace)
+db.attendance.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+});
+db.employee.hasMany(db.attendance, {
+  as: "attendances",
+  foreignKey: "employee_id",
+});
+
 //TODO - prone to error (add (after create) listener on employee model)
 //OneAndOnlyONE (One Employee  ---> One File)
 db.file.belongsTo(db.employee, {
@@ -139,4 +159,13 @@ db.deduction.hasOne(db.addtnl_deduction, {
   foreignKey: "deduction_id",
 });
 
+//OneToMany (One employee  ---> Many cash advance)
+db.cash_advance.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.employee.hasMany(db.cash_advance, {
+  as: "cash_advances",
+  foreignKey: "employee_id",
+});
 module.exports = db;
