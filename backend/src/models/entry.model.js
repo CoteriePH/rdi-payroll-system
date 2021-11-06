@@ -1,6 +1,3 @@
-const { nanoid } = require("nanoid");
-
-
 module.exports = (sequelize, Sequelize, DataTypes) => {
     const Entry = sequelize.define(
       "entry", // Model name
@@ -8,7 +5,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         // Attributes
         id: {
           type: DataTypes.UUID,
-          defaultValue: nanoid(10),
+          defaultValue: Sequelize.UUIDV4,
           primaryKey: true,
           allowNull: false,
         },
@@ -29,7 +26,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
           allowNull: true,
         },
         date: {
-          type: DataTypes.DATE,
+          type: DataTypes.DATEONLY,
           allowNull: false,
         },
       },
