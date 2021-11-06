@@ -1,29 +1,35 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
+import useComponentIsVisible from 'context/useComponentIsVisible';
 import { Container, Label, List, Options, Wrapper } from './styles.js';
 import { ReactComponent as DropdownIcon } from 'assets/icons/dropdown.svg';
 
-const Dropdown = ({ label, options = [] }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [labelState, setLabelState] = useState(label);
+const Dropdown = ({ label, isReset, options = [], setValue = () => {}, bg = 'white' }) => {
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentIsVisible(false);
+  const [labelState, setLabelState] = useState(label || options[0]);
+
+  useEffect(() => {
+    if (isReset) {
+      setLabelState(label || options[0]);
+    }
+  }, [isReset]);
 
   return (
-    <Wrapper>
-      <Container onClick={() => setIsOpen(!isOpen)}>
+    <Wrapper ref={ref} onClick={() => setIsComponentVisible((prev) => !prev)}>
+      <Container bg={bg}>
         <Label>{labelState}</Label>
         <DropdownIcon />
       </Container>
-      {isOpen && (
+      {isComponentVisible && (
         <Options>
-          {options.map((li, index) => (
+          {options.map((item) => (
             <List
-              key={index}
+              key={item.id}
               onClick={() => {
-                setIsOpen(false);
-                setLabelState(li);
+                setValue(item.id);
+                setLabelState(item.name);
               }}
             >
-              {li}
+              {item.name}
             </List>
           ))}
         </Options>

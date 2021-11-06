@@ -1,42 +1,38 @@
 import styled from 'styled-components';
+import { theme } from 'theme';
 
-// NOTE: properties are on theme.js
-
-const color = {
-  default: (props) => props.theme.colors.violet,
-  darkViolet: (props) => props.theme.colors.darkViolet,
-  secondary: (props) => props.theme.colors.white,
-  red: (props) => props.theme.colors.red,
-  green: (props) => props.theme.colors.green
-};
+// TODO - variant or colorScheme
 
 export const Container = styled.button`
   cursor: pointer;
   user-select: none;
-  color: ${(props) => (props.color === 'secondary' ? color.default : color.secondary)};
-  background-color: ${(props) =>
-    props.color === 'secondary'
-      ? color.secondary
-      : props.color === 'red'
-      ? color.red
-      : props.color === 'green'
-      ? color.green
-      : color.default};
+  color: ${(props) => (props.color ? theme.colors[props.color] : theme.colors.white)};
+  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : theme.colors.default)};
   border: ${(props) =>
-    props.color === 'secondary' ? `2px solid ${props.theme.colors.violet}` : 'none'};
+    props.border && props.borderColor
+      ? `${props.border ? props.border : '2px'} solid ${theme.colors[props.borderColor]}`
+      : 'none'};
   outline: none;
-  min-width: 15rem;
-  width: 100%;
-  height: 3rem;
-  border-radius: 10px;
+  min-width: ${(props) => (props.minW ? props.minW : '13rem')};
+  width: ${(props) => (props.w ? props.w : '100%')};
+  height: ${(props) => (props.h ? props.h : '2.5rem')};
+  border-radius: 5px;
   text-transform: uppercase;
-  font-family: ${(props) => props.theme.fonts.avenirRoman};
+  font-weight: ${(props) => (props.fontWeight ? props.fontWeight : null)};
+  font-family: ${(props) =>
+    props.fontFamily ? theme.fonts[props.fontFamily] : theme.fonts.avenirRoman};
   display: flex;
   align-items: center;
+  float: left;
   justify-content: center;
-
   &:active {
-    background: #440099;
+    background-color: #440099;
+    color: ${theme.colors.white};
     transition: 0.1s ease-in-out;
+  }
+  &:hover {
+    background-color: #440099;
+    color: ${theme.colors.white};
+    transition: 0.3s ease-in-out;
   }
 `;

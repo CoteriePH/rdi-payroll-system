@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -8,8 +8,8 @@ import ProtectedRoutes from 'routes/ProtectedRoutes';
 import PublicRoute from 'routes/PublicRoute';
 import PrivateRoute from 'routes/PrivateRoute';
 
-import { useSelector } from 'react-redux';
-import { authSelector } from 'features/auth/authSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { verifyAuth } from 'features/auth/authSlice';
 import Loader from 'components/Loader';
 
 const LoginPage = lazy(() => import('pages/Login'));
@@ -18,23 +18,22 @@ const NoFoundComponent = lazy(() => import('pages/NoFoundComponent'));
 toast.configure({ limit: 3 });
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
-  const { isFetching } = useSelector(authSelector);
+  const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.auth);
 
-  const token = localStorage.getItem('token');
   useEffect(() => {
-    if (token) setIsAuth(true);
-    else setIsAuth(false);
-  }, [token, isFetching]);
+    dispatch(verifyAuth());
+  }, []);
 
   return (
     <>
       <Suspense fallback={<Loader primary />}>
         <Switch>
-          <PublicRoute path="/login" isAuth={isAuth}>
+          {/* MAY BUG ATA SA PUBLIC ROUTES */}
+          <PublicRoute path="/login">
             <LoginPage />
           </PublicRoute>
-          <PrivateRoute path="/" isAuth={isAuth}>
+          <PrivateRoute path="/">
             <ProtectedRoutes />
           </PrivateRoute>
           <Route path="*">

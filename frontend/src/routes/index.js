@@ -3,8 +3,12 @@ import { lazy } from 'react';
 const routes = [
   {
     path: '',
-    component: lazy(() => import('containers/Payroll')),
+    component: lazy(() => import('containers/HumanResources')),
     exact: true
+  },
+  {
+    path: 'payroll',
+    component: lazy(() => import('containers/Payroll'))
   },
   {
     path: 'attendance',
@@ -15,12 +19,16 @@ const routes = [
     component: lazy(() => import('containers/EmployeeFile'))
   },
   {
-    path: 'for-approval',
-    component: lazy(() => import('containers/ForApproval'))
+    path: 'memo',
+    component: lazy(() => import('containers/Memo'))
   },
   {
-    path: 'reports',
-    component: lazy(() => import('containers/Reports'))
+    path: 'cash-advance',
+    component: lazy(() => import('containers/CashAdvance'))
+  },
+  {
+    path: 'request',
+    component: lazy(() => import('containers/Request'))
   }
 ];
 

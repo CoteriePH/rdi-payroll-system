@@ -3,22 +3,22 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import store from './store.js';
 import { Provider } from 'react-redux';
-
 import { ThemeProvider } from 'styled-components';
 import { theme } from './theme.js';
 import 'assets/fonts/fonts.css';
 import { BrowserRouter } from 'react-router-dom';
-
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from 'store';
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Provider store={store}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <PersistGate loading={null} persistor={persistor}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </PersistGate>
       </Provider>
     </ThemeProvider>
   </React.StrictMode>,

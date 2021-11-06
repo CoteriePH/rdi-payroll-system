@@ -17,6 +17,13 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
+      sex: {
+        type: DataTypes.ENUM({
+          values: ["MALE", "FEMALE"],
+        }),
+        defaultValue: "MALE",
+        allowNull: false,
+      },
       middle_name: {
         type: DataTypes.STRING,
         allowNull: false,
@@ -25,7 +32,19 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      address: {
+      street: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      city: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      province: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      postal_code: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -55,12 +74,11 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
-      time_shift_from: {
-        type: DataTypes.TIME,
-        allowNull: false,
-      },
-      time_shift_to: {
-        type: DataTypes.TIME,
+      time_shift: {
+        type: DataTypes.ENUM({
+          values: ["MORNING", "MID_MORNING", "NOON", "AFTERNOON"], //TODO - ADD MORE TYPES
+        }),
+        defaultValue: "MORNING",
         allowNull: false,
       },
     },

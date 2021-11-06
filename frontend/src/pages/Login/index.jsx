@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { Container, Left, Right, LoginContainer, Header, Form, Powered } from './styles.js';
 import InputField from 'components/Input/index.jsx';
 import Button from 'components/Button/index.jsx';
@@ -12,6 +13,7 @@ import { authSelector, signinUser, clearState } from 'features/auth/authSlice.js
 const LoginPage = () => {
   const methods = useForm();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { isError, isSuccess } = useSelector(authSelector);
 
@@ -23,7 +25,6 @@ const LoginPage = () => {
     return () => {
       dispatch(clearState());
     };
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -33,8 +34,8 @@ const LoginPage = () => {
     }
     if (isSuccess) {
       dispatch(clearState());
+      history.replace('/');
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
 
@@ -53,7 +54,7 @@ const LoginPage = () => {
             <Form onSubmit={methods.handleSubmit(onSubmit)}>
               <Header>Login</Header>
               <InputField uname name="username" required />
-              <InputField pwd name="password" required />
+              <InputField pwd name="password" type="password" required />
               <Button type="submit">Log in</Button>
             </Form>
           </FormProvider>

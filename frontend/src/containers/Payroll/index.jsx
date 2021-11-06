@@ -10,10 +10,15 @@ import { useDispatch } from 'react-redux';
 import { useTable } from 'react-table';
 import { Wrapper, TextLink, Container, Flex, TableContainer } from './styles';
 import getTimeDuration from 'helpers/getTimeDuration';
+import Toolbar from 'components/Toolbar';
+import Button from 'components/Button';
+import { VStack } from 'styles';
+import { ROLES } from 'constants/constants';
 const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
+  const authRole = useSelector((state) => state.auth.role);
 
   useEffect(() => {
     dispatch(findAllEmployees());
@@ -74,7 +79,7 @@ const Payroll = () => {
       <Container>
         {/* NOTE: Gayahin nalang tong flex sa ibang components */}
         {/* TODO - Add nalang ng global styles na pwede gamitin kahit san like Flex */}
-        <Flex flex={isOpen ? 2 : 8}>
+        <Flex justify="space-between" direction="column" flex={8}>
           <TableContainer>
             {/* TODO - Component kung alang laman data */}
 
@@ -82,9 +87,26 @@ const Payroll = () => {
             <Settings />
             {data.length > 0 ? <Table tableInstance={tableInstance} /> : 'Wow, such empty'}
           </TableContainer>
+          <Toolbar leftChildren={<></>}></Toolbar>
         </Flex>
         <Flex bg="gray" flex={1}>
-          {isOpen && <Menu />}
+          {isOpen && (
+            <Menu>
+              {authRole === ROLES.ENCODER ? (
+                <>
+                  <Button minW="10rem" h="2rem" fontWeight="bold" fontFamily="avenirRoman">
+                    RECORD DEDUCTION
+                  </Button>
+                  <Button minW="10rem" h="2rem" fontWeight="bold" fontFamily="avenirRoman">
+                    RECORD EARNINGS
+                  </Button>
+                  <Button minW="13rem" h="2rem" fontWeight="bold" fontFamily="avenirRoman">
+                    REQUEST FOR APPROVAL
+                  </Button>
+                </>
+              ) : null}
+            </Menu>
+          )}
         </Flex>
       </Container>
     </Wrapper>

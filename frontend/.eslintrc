@@ -8,7 +8,7 @@
     "react/react-in-jsx-scope": 0,
     "no-var": "warn",
     "no-undef-init": "off",
-    "no-undef": "error",
+    "no-undef": "off",
     "no-undefined": "off",
     "no-underscore-dangle": "warn",
     "no-use-before-define": "error",

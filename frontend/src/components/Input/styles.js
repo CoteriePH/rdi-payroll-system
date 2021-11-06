@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-
-const colors = {
-  default: (props) => props.theme.colors.violet,
-  white: (props) => props.theme.colors.white,
-  lightViolet: (props) => props.theme.colors.lightViolet
-};
+import { theme } from 'theme';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -17,11 +12,13 @@ export const Container = styled.div`
   align-items: center;
   min-width: 15rem;
   width: 100%;
-  height: 3rem;
-  box-shadow: 0pt 0pt 0pt 1.5pt ${(props) => (props.disabled ? colors.default : 'silver')};
-  /* border: 1.5px solid ${(props) => (props.disabled ? colors.default : 'silver')}; */
+  /* border: 1.5px solid ${(props) => (props.disabled ? theme.colors.default : 'silver')}; */
+  height: ${(props) => (props.menu ? '2.5rem' : '3rem')};
+  box-shadow: 0pt 0pt 0pt 1.5pt
+    ${(props) =>
+      props.disabled ? theme.colors.default : props.menu ? theme.colors.white : 'silver'};
   border-radius: 10px;
-  background: ${(props) => (props.disabled ? colors.lightViolet : colors.white)};
+  background: ${(props) => (props.disabled ? theme.colors.lightViolet : theme.colors.white)};
   span {
     display: flex;
     align-items: center;
@@ -34,20 +31,19 @@ export const Container = styled.div`
   }
 
   &:focus-within {
-    /* border: 2px solid ${(props) => props.theme.colors.violet}; */
-    box-shadow: 0pt 0pt 0pt 2pt ${(props) => props.theme.colors.violet};
+    box-shadow: 0pt 0pt 0pt 2pt ${(props) => (props.menu ? 'white' : props.theme.colors.violet)};
   }
 `;
 
 export const Input = styled.input`
   width: 100%;
-  padding: 0 1rem 0 0;
+  padding: ${(props) => (props.menu ? '0 1em' : '0 1em 0 0')};
   height: 2rem;
   border: none;
   outline: none;
   font-size: ${(props) => props.theme.fontSizes.md};
   font-family: ${(props) => props.theme.fontSizes.avenirRoman};
-  background: ${(props) => (props.disabled ? colors.lightViolet : colors.white)};
+  background: ${(props) => (props.disabled ? theme.colors.lightViolet : theme.colors.white)};
 `;
 
 export const Label = styled.label`

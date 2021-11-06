@@ -1,23 +1,20 @@
 import styled from 'styled-components';
-
-const colors = {
-  white: (props) => props.theme.colors.white,
-  lightViolet: (props) => props.theme.colors.lightViolet
-};
+import { theme } from 'theme';
 
 export const Wrapper = styled.div`
   cursor: pointer;
   position: relative;
-  width: 15rem;
+  width: 100%;
+  min-width: 15rem;
 `;
 
 export const Container = styled.div`
-  background: ${colors.white};
-  padding: 1rem;
-  border-radius: 20px;
+  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : theme.colors.white)};
+  padding: 0.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  border-radius: 5px;
 `;
 
 export const Label = styled.div`
@@ -29,10 +26,15 @@ export const Label = styled.div`
 export const Options = styled.div`
   position: absolute;
   width: inherit;
-  background: ${colors.white};
-  border-radius: 20px;
+
+  background: ${theme.colors.white};
+  max-height: 12rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 10px;
   padding: 0.5rem 0;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
+  z-index: 10;
 `;
 
 export const List = styled.li`
@@ -43,6 +45,6 @@ export const List = styled.li`
   font-family: ${(props) => props.theme.fonts.avenirRoman};
 
   &:hover {
-    background: ${colors.lightViolet};
+    background: ${theme.colors.lightViolet};
   }
 `;

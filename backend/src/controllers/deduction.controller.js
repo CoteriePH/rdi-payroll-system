@@ -11,7 +11,7 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
-  const deduction = await Deduction.findAll();
+  const deduction = await Deduction.findAll({include:["additional_deduction"]});
   return res.status(200).send(deduction);
 };
 

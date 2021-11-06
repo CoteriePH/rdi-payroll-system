@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { theme } from 'theme';
 
 export const TextLink = styled.a`
   color: ${(props) => props.theme.colors.lightViolet};
@@ -23,9 +24,9 @@ export const Flex = styled.div`
   justify-content: ${(props) => (props.justify ? props.justify : null)};
   flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
   flex-grow: ${(props) => (props.flex ? props.flex : 1)};
-  background-color: ${(props) => (props.bg === 'gray' ? props.theme.colors.gray : null)};
+  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : null)};
   transition: 0.3s ease-in-out;
-
+  overflow: ${(props) => (props.overflow ? props.overflow : null)};
   & .child {
     transition-delay: 1s;
   }
@@ -33,6 +34,6 @@ export const Flex = styled.div`
 
 export const TableContainer = styled.div`
   position: relative;
-  width: 100%;
+  width: inherit;
   padding: 2em;
 `;

@@ -84,10 +84,31 @@ git checkout pr-branch-name
 
 ## Packages
 
+**State Management**
+
 Redux: https://redux.js.org/tutorials/quick-start
 <br/>
-Styled Components: https://styled-components.com/
+Redux Toolkit: https://redux-toolkit.js.org/tutorials/quick-start
 <br/>
+
+**Form** 
+
 React Hook Form: https://react-hook-form.com/
 <br/>
+Yup Validation: https://github.com/jquense/yup
+<br/>
+
+**UI**
+
+Styled Components: https://styled-components.com/
+<br/>
 React Table: https://react-table.tanstack.com/
+<br/>
+React Modal: https://github.com/reactjs/react-modal
+<br/>
+React Toastify: https://github.com/fkhadra/react-toastify
+<br/>
+
+**HTTP**
+
+Axios: https://axios-http.com/docs/intro
