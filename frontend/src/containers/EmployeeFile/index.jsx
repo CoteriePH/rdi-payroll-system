@@ -9,11 +9,12 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useTable } from 'react-table';
 import { Wrapper, TextLink, Container, Flex, TableContainer } from './styles';
-import AddEmployee from 'components/Modals/AddEmployee';
 import Button from 'components/Button/';
 import getTimeDuration from 'helpers/getTimeDuration';
 import Toolbar from 'components/Toolbar';
 import { ROLES } from 'constants/constants';
+import EditEmployee from 'components/Modals/EditEmployee';
+import AddEmployee from 'components/Modals/AddEmployee';
 
 const EmployeeFile = () => {
   const dispatch = useDispatch();
@@ -112,7 +113,7 @@ const EmployeeFile = () => {
                   fontWeight="bold"
                   fontFamily="avenirRoman"
                 >
-                  Add Record
+                  Edit Record
                 </Button>
               ) : null
             }
@@ -135,7 +136,8 @@ const EmployeeFile = () => {
           {isOpen && <Menu />}
         </Flex>
       </Container>
-      <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      {/* <AddEmployee isOpen={isModalOpen} onClose={onModalClose} /> */}
+      <EditEmployee isOpen={isModalOpen} onClose={onModalClose} />
     </Wrapper>
   );
 };
