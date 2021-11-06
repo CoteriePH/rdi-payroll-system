@@ -51,15 +51,12 @@ db.department = require("./department.model.js")(
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
 db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
-<<<<<<< HEAD
 db.additionalEarnings = require("./additional_earnings.model.js")(sequelize, Sequelize, DataTypes);
-=======
 db.cash_advance = require("./cash_advance.model")(
   sequelize,
   Sequelize,
   DataTypes
 );
->>>>>>> f753f3db4bd148aa3ab0ecc76b2ebb3213a78cc5
 
 /**
  * Relationships
