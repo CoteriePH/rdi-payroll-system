@@ -18,7 +18,6 @@ const EditEmployee = ({ isOpen, onClose }) => {
       onRequestClose={onClose}
     >
       {/* Body */}
-      <div>Hello initial div</div>
     </ReactModal>
   );
 };

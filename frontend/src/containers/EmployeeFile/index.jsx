@@ -22,6 +22,14 @@ const EmployeeFile = () => {
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  const onEditModalOpen = () => {
+    setIsEditModalOpen(true);
+  };
+  const onEditModalClose = () => {
+    setIsEditModalOpen(false);
+  };
 
   const onModalOpen = () => {
     setIsModalOpen(true);
@@ -106,15 +114,26 @@ const EmployeeFile = () => {
           <Toolbar
             leftChildren={
               authRole === ROLES.ENCODER ? (
-                <Button
-                  onClick={onModalOpen}
-                  minW="10rem"
-                  h="2rem"
-                  fontWeight="bold"
-                  fontFamily="avenirRoman"
-                >
-                  Edit Record
-                </Button>
+                <>
+                  <Button
+                    onClick={onModalOpen}
+                    minW="10rem"
+                    h="2rem"
+                    fontWeight="bold"
+                    fontFamily="avenirRoman"
+                  >
+                    Add Record
+                  </Button>
+                  <Button
+                    onClick={onEditModalOpen}
+                    minW="10rem"
+                    h="2rem"
+                    fontWeight="bold"
+                    fontFamily="avenirRoman"
+                  >
+                    Edit Record
+                  </Button>
+                </>
               ) : null
             }
           >
@@ -136,8 +155,8 @@ const EmployeeFile = () => {
           {isOpen && <Menu />}
         </Flex>
       </Container>
-      {/* <AddEmployee isOpen={isModalOpen} onClose={onModalClose} /> */}
-      <EditEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      <EditEmployee isOpen={isEditModalOpen} onClose={onEditModalClose} />
     </Wrapper>
   );
 };
