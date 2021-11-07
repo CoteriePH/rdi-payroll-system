@@ -39,6 +39,13 @@ const Attendance = () => {
   const columns = React.useMemo(
     () => [
       {
+        Header: 'DATE',
+        accessor: 'date',
+        Cell: (props) => {
+          return <div>{dayjs(props.value).format('YYYY-MM-DD')}</div>;
+        }
+      },
+      {
         Header: 'EMPLOYEE NAME',
         Cell: (props) => {
           return (
