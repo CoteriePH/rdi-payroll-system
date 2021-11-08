@@ -2,7 +2,7 @@ import Menu from "@/components/Menu";
 import Settings from "@/components/Menu/settings";
 import Table from "@/components/Table";
 import { settingsSelector } from "@/features/settings/settingsSlice";
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { findAllEmployees } from "@/features/employee/employeeSlice";
 import { useEffect } from "react";
@@ -13,11 +13,30 @@ import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
 import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
+import RecordEmployeeDeduction from "@/components/Modals/RecordEmployeeDeduction";
+import RecordEmployeeEarnings from "@/components/Modals/RecordEmployeeEarnings";
 const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
+  const [isRecordEarningsOpen, setIsRecordEarningsOpen] = useState(false);
+  const [isRecordDeductionsOpen, setIsRecordDeductionsOpen] = useState(false);
+
+  const onRecordEarningsOpen = () => {
+    setIsRecordEarningsOpen(true);
+  };
+
+  const onRecordEarningsClose = () => {
+    setIsRecordEarningsOpen(false);
+  };
+  const onRecordDeductionsClose = () => {
+    setIsRecordDeductionsOpen(false);
+  };
+
+  const onRecordDeductionsOpen = () => {
+    setIsRecordDeductionsOpen(true);
+  };
 
   useEffect(() => {
     dispatch(findAllEmployees());
@@ -102,6 +121,7 @@ const Payroll = () => {
                     h="2rem"
                     fontWeight="bold"
                     fontFamily="avenirRoman"
+                    onClick={onRecordDeductionsOpen}
                   >
                     RECORD DEDUCTION
                   </Button>
@@ -110,6 +130,7 @@ const Payroll = () => {
                     h="2rem"
                     fontWeight="bold"
                     fontFamily="avenirRoman"
+                    onClick={onRecordEarningsOpen}
                   >
                     RECORD EARNINGS
                   </Button>
@@ -127,6 +148,14 @@ const Payroll = () => {
           )}
         </Flex>
       </Container>
+      <RecordEmployeeDeduction
+        isOpen={isRecordDeductionsOpen}
+        onClose={onRecordDeductionsClose}
+      />
+      <RecordEmployeeEarnings
+        isOpen={isRecordEarningsOpen}
+        onClose={onRecordEarningsClose}
+      />
     </Wrapper>
   );
 };

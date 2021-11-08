@@ -6,7 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { HeaderText } from "@/styles";
 ReactModal.setAppElement("#root");
 
-const RecordEmployeeDeduction = ({ isOpen, onClose }) => {
+const RecordEmployeeEarnings = ({ isOpen, onClose }) => {
   const methods = useForm({
     resolver: yupResolver(),
   });
@@ -27,12 +27,12 @@ const RecordEmployeeDeduction = ({ isOpen, onClose }) => {
         <OverlayStyle {...props}>{contentElement}</OverlayStyle>
       )}
       isOpen={isOpen}
-      contentLabel="Record Employee Deduction"
+      contentLabel="Record Employee Earnings"
       onRequestClose={onClose}
     >
       {/* HEADER */}
       <Header>
-        <HeaderText>RECORD EMPLOYEE DEDUCTION</HeaderText>
+        <HeaderText>RECORD EMPLOYEE EARNINGS</HeaderText>
         <div></div>
       </Header>
       <FormProvider {...methods}>
@@ -46,4 +46,4 @@ const RecordEmployeeDeduction = ({ isOpen, onClose }) => {
   );
 };
 
-export default RecordEmployeeDeduction;
+export default RecordEmployeeEarnings;
