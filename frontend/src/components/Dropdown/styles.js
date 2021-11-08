@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
   cursor: pointer;
@@ -9,7 +9,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Container = styled.div`
-  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : theme.colors.white)};
+  background-color: ${(props) =>
+    props.bg ? theme.colors[props.bg] : theme.colors.white};
   padding: 0.75rem;
   display: flex;
   justify-content: space-between;

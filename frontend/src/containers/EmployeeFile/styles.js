@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const TextLink = styled.a`
   color: ${(props) => props.theme.colors.lightViolet};
@@ -22,7 +22,7 @@ export const Flex = styled.div`
   display: flex;
   align-items: ${(props) => (props.align ? props.align : null)};
   justify-content: ${(props) => (props.justify ? props.justify : null)};
-  flex-direction: ${(props) => (props.direction ? props.direction : 'row')};
+  flex-direction: ${(props) => (props.direction ? props.direction : "row")};
   flex-grow: ${(props) => (props.flex ? props.flex : 1)};
   background-color: ${(props) => (props.bg ? theme.colors[props.bg] : null)};
   transition: 0.3s ease-in-out;

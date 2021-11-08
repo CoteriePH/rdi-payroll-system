@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ export const Label = styled.label`
   }
 
   ${Input} + .radio__control::before {
-    content: '';
+    content: "";
     width: 0.4rem;
     height: 0.4rem;
     box-shadow: inset 0.5rem 0.5rem ${theme.colors.default};

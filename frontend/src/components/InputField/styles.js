@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -26,7 +26,8 @@ export const Container = styled.div`
   }
 
   // &:focus-within {
-  //   box-shadow: 0pt 0pt 0pt 2pt ${(props) => (props.menu ? 'white' : props.theme.colors.violet)};
+  //   box-shadow: 0pt 0pt 0pt 2pt ${(props) =>
+    props.menu ? "white" : props.theme.colors.violet};
   // }
 `;
 

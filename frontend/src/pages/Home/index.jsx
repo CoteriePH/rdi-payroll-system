@@ -1,12 +1,18 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from 'features/auth/authSlice';
-import Header from 'components/Header';
-import Sidebar from 'components/Sidebar';
-import { MainCan, MainRight, WrapperRight, LinkWrapper, ButtonContainer } from './styles';
-import Link from 'components/Link';
-import { useLocation } from 'react-router-dom';
-import Button from 'components/Button';
-import { ROLES } from 'constants/constants';
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "@/features/auth/authSlice";
+import Header from "@/components/Header";
+import Sidebar from "@/components/Sidebar";
+import {
+  MainCan,
+  MainRight,
+  WrapperRight,
+  LinkWrapper,
+  ButtonContainer,
+} from "./styles";
+import Link from "@/components/Link";
+import { useLocation } from "react-router-dom";
+import Button from "@/components/Button";
+import { ROLES } from "@/constants/constants";
 
 const MainWrapper = ({ children }) => {
   const location = useLocation();
@@ -15,15 +21,15 @@ const MainWrapper = ({ children }) => {
 
   // encoder based sidebar
   const routesMap = new Map();
-  routesMap.set('/', 'HUMAN RESOURCES');
-  routesMap.set('/payroll', 'PAYROLL');
-  routesMap.set('/attendance', 'ATTENDANCE');
-  routesMap.set('/employee-file', 'EMPLOYEE FILE');
-  routesMap.set('/memo', 'MEMO');
-  routesMap.set('/cash-advance', 'CASH ADVANCE');
-  routesMap.set('/request', 'REQUESTS');
-  routesMap.set('/for-approval', 'FOR APPROVAL');
-  routesMap.set('/reports', 'REPORTS');
+  routesMap.set("/", "HUMAN RESOURCES");
+  routesMap.set("/payroll", "PAYROLL");
+  routesMap.set("/attendance", "ATTENDANCE");
+  routesMap.set("/employee-file", "EMPLOYEE FILE");
+  routesMap.set("/memo", "MEMO");
+  routesMap.set("/cash-advance", "CASH ADVANCE");
+  routesMap.set("/request", "REQUESTS");
+  routesMap.set("/for-approval", "FOR APPROVAL");
+  routesMap.set("/reports", "REPORTS");
 
   const headerName = routesMap.get(location.pathname);
 
@@ -58,7 +64,12 @@ const MainWrapper = ({ children }) => {
             )}
           </LinkWrapper>
           <ButtonContainer>
-            <Button border="1px" borderColor="gray" w="50%" onClick={handleLogout}>
+            <Button
+              border="1px"
+              borderColor="gray"
+              w="50%"
+              onClick={handleLogout}
+            >
               Logout
             </Button>
           </ButtonContainer>

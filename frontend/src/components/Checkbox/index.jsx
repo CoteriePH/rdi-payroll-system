@@ -1,8 +1,8 @@
-import { Wrapper, Container, Box } from './styles';
-import Check from 'assets/icons/Check';
-import { useFormContext } from 'react-hook-form';
+import { Wrapper, Container, Box } from "./styles";
+import Check from "@/assets/icons/Check";
+import { useFormContext } from "react-hook-form";
 
-const Checkbox = ({ label = 'Morning', name, disabled = false }) => {
+const Checkbox = ({ label = "Morning", name, disabled = false }) => {
   const { register } = useFormContext();
   return (
     <Wrapper disabled={disabled}>

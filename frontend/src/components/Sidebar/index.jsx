@@ -1,6 +1,6 @@
-import React from 'react';
-import CompLog from '../../assets/img/companyLog.png';
-import { Nav, CompanyLogo, DummyLogo } from './styles.js';
+import React from "react";
+import CompLog from "@/assets/img/companyLog.png";
+import { Nav, CompanyLogo, DummyLogo } from "./styles";
 
 function Sidebar({ children }) {
   return (

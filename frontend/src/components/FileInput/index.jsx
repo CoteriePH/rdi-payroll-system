@@ -1,12 +1,18 @@
-import { useFormContext } from 'react-hook-form';
-import { ErrorText, Text } from 'styles/index.js';
-import { Wrapper, SubWrapper, Input, InpButton } from './styles.js';
+import { useFormContext } from "react-hook-form";
+import { ErrorText, Text } from "@/styles";
+import { Wrapper, SubWrapper, Input, InpButton } from "./styles.js";
 
 // TODO BUGGED DI MA REGISTER YUNG FILE
-const FileInput = ({ placeholder = '', label, disabled = false, name, ...rest }) => {
+const FileInput = ({
+  placeholder = "",
+  label,
+  disabled = false,
+  name,
+  ...rest
+}) => {
   const {
     register,
-    formState: { errors }
+    formState: { errors },
   } = useFormContext();
 
   return (

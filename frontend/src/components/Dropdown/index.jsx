@@ -1,10 +1,17 @@
-import { useState, useEffect } from 'react';
-import useComponentIsVisible from 'context/useComponentIsVisible';
-import { Container, Label, List, Options, Wrapper } from './styles.js';
-import { ReactComponent as DropdownIcon } from 'assets/icons/dropdown.svg';
+import { useState, useEffect } from "react";
+import useComponentIsVisible from "@/context/useComponentIsVisible";
+import { Container, Label, List, Options, Wrapper } from "./styles.js";
+import { ReactComponent as DropdownIcon } from "@/assets/icons/dropdown.svg";
 
-const Dropdown = ({ label, isReset, options = [], setValue = () => {}, bg = 'white' }) => {
-  const { ref, isComponentVisible, setIsComponentVisible } = useComponentIsVisible(false);
+const Dropdown = ({
+  label,
+  isReset,
+  options = [],
+  setValue = () => {},
+  bg = "white",
+}) => {
+  const { ref, isComponentVisible, setIsComponentVisible } =
+    useComponentIsVisible(false);
   const [labelState, setLabelState] = useState(label || options[0]);
 
   useEffect(() => {

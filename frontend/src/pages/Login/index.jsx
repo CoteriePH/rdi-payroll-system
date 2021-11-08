@@ -1,14 +1,26 @@
-import { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import { Container, Left, Right, LoginContainer, Header, Form, Powered } from './styles.js';
-import InputField from 'components/Input/index.jsx';
-import Button from 'components/Button/index.jsx';
-import { ReactComponent as Logo } from 'assets/icons/logo.svg';
+import { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import {
+  Container,
+  Left,
+  Right,
+  LoginContainer,
+  Header,
+  Form,
+  Powered,
+} from "./styles.js";
+import InputField from "@/components/Input/index.jsx";
+import Button from "@/components/Button/index.jsx";
+import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
 
-import { useForm, FormProvider } from 'react-hook-form';
+import { useForm, FormProvider } from "react-hook-form";
 
-import { useDispatch, useSelector } from 'react-redux';
-import { authSelector, signinUser, clearState } from 'features/auth/authSlice.js';
+import { useDispatch, useSelector } from "react-redux";
+import {
+  authSelector,
+  signinUser,
+  clearState,
+} from "@/features/auth/authSlice.js";
 
 const LoginPage = () => {
   const methods = useForm();
@@ -34,7 +46,7 @@ const LoginPage = () => {
     }
     if (isSuccess) {
       dispatch(clearState());
-      history.replace('/');
+      history.replace("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
