@@ -1,5 +1,5 @@
-import React from 'react';
-import ReactModal from 'react-modal';
+import React from "react";
+import ReactModal from "react-modal";
 import {
   ButtonsContainer,
   FilesContainer,
@@ -11,60 +11,62 @@ import {
   RadioGroup,
   RightContainer,
   Section,
-  SubSection
-} from './styles';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import InputField from 'components/InputField';
-import { FormProvider, useForm } from 'react-hook-form';
-import RadioInput from 'components/RadioInput';
-import SelectField from 'components/SelectField';
-import { useDispatch } from 'react-redux';
-import { addEmployee } from 'features/employee/employeeSlice';
-import { useEffect } from 'react';
-import { findAllCompanies } from 'features/company/companySlice';
-import { findAllDepartments } from 'features/department/departmentSlice';
-import { findAllPositions } from 'features/position/positionSlice';
-import { useSelector } from 'react-redux';
-import { HeaderText, Text } from 'styles';
-import Button from 'components/Button';
-import FileInput from 'components/FileInput';
-import PhotoInput from 'components/PhotoInput';
-ReactModal.setAppElement('#root');
+  SubSection,
+} from "./styles";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import InputField from "@/components/InputField";
+import { FormProvider, useForm } from "react-hook-form";
+import RadioInput from "@/components/RadioInput";
+import SelectField from "@/components/SelectField";
+import { useDispatch } from "react-redux";
+import { addEmployee } from "@/features/employee/employeeSlice";
+import { useEffect } from "react";
+import { findAllCompanies } from "@/features/company/companySlice";
+import { findAllDepartments } from "@/features/department/departmentSlice";
+import { findAllPositions } from "@/features/position/positionSlice";
+import { useSelector } from "react-redux";
+import { HeaderText, Text } from "@/styles";
+import Button from "@/components/Button";
+import FileInput from "@/components/FileInput";
+import PhotoInput from "@/components/PhotoInput";
+ReactModal.setAppElement("#root");
 
 //TODO MOVE TO UTILS/HELPERS
 const employeeSchema = yup
   .object()
   .shape({
-    employee_number: yup.string().required('Employee number is required.'),
-    last_name: yup.string().required('Last name is required.'),
-    first_name: yup.string().required('First name is required.'),
-    middle_name: yup.string().required('Middle name is required.'),
-    birth_date: yup.string().required('Birth date is required.'),
-    street: yup.string().required('Street is required.'),
-    city: yup.string().required('City is required.'),
-    province: yup.string().required('Province is required.'),
-    postal_code: yup.string().required('Postal code is required.'),
-    sex: yup.string().required('Sex is required.'),
-    email: yup.string().email().required('Email is required.'),
-    contact_no: yup.string().required('Contact number is required.'),
-    employment_type: yup.string().required('Employment type is required.'),
-    company_id: yup.string().required('Company is required.'),
-    department_id: yup.string().required('Department is required.'),
-    position_id: yup.string().required('Position is required.'),
-    basic_pay: yup.number('Basic Pay must be a number.').required('Basic Pay is required.'),
-    date_hired: yup.string().required('Date hired is required.'),
-    time_shift: yup.string().required('Time shift is required.'),
+    employee_number: yup.string().required("Employee number is required."),
+    last_name: yup.string().required("Last name is required."),
+    first_name: yup.string().required("First name is required."),
+    middle_name: yup.string().required("Middle name is required."),
+    birth_date: yup.string().required("Birth date is required."),
+    street: yup.string().required("Street is required."),
+    city: yup.string().required("City is required."),
+    province: yup.string().required("Province is required."),
+    postal_code: yup.string().required("Postal code is required."),
+    sex: yup.string().required("Sex is required."),
+    email: yup.string().email().required("Email is required."),
+    contact_no: yup.string().required("Contact number is required."),
+    employment_type: yup.string().required("Employment type is required."),
+    company_id: yup.string().required("Company is required."),
+    department_id: yup.string().required("Department is required."),
+    position_id: yup.string().required("Position is required."),
+    basic_pay: yup
+      .number("Basic Pay must be a number.")
+      .required("Basic Pay is required."),
+    date_hired: yup.string().required("Date hired is required."),
+    time_shift: yup.string().required("Time shift is required."),
     nbi_clearance: yup.mixed(),
     nso: yup.mixed(),
     sss: yup.mixed(),
-    photo: yup.mixed()
+    photo: yup.mixed(),
   })
   .required();
 
 const AddEmployee = ({ isOpen, onClose }) => {
   const methods = useForm({
-    resolver: yupResolver(employeeSchema)
+    resolver: yupResolver(employeeSchema),
   });
   const { handleSubmit, reset } = methods;
   const dispatch = useDispatch();
@@ -88,7 +90,7 @@ const AddEmployee = ({ isOpen, onClose }) => {
     // TODO - REFACTOR
     //BUGGY CODE
     if (!isOpen) {
-      reset({ sex: 'MALE', basic_pay: 0.0 });
+      reset({ sex: "MALE", basic_pay: 0.0 });
     }
   }, [onClose, reset, isOpen]);
 
@@ -96,7 +98,9 @@ const AddEmployee = ({ isOpen, onClose }) => {
     <ReactModal
       className="_"
       overlayClassName="_"
-      contentElement={(props, children) => <ModalStyle {...props}>{children}</ModalStyle>}
+      contentElement={(props, children) => (
+        <ModalStyle {...props}>{children}</ModalStyle>
+      )}
       overlayElement={(props, contentElement) => (
         <OverlayStyle {...props}>{contentElement}</OverlayStyle>
       )}
@@ -136,13 +140,21 @@ const AddEmployee = ({ isOpen, onClose }) => {
                 <InputField name="province" label="Province" />
                 <InputField name="postal_code" label="Postal Code" />
                 <InputField name="email" label="Email Address" />
-                <InputField type="tel" name="contact_no" label="Contact Number" />
+                <InputField
+                  type="tel"
+                  name="contact_no"
+                  label="Contact Number"
+                />
               </SubSection>
             </Section>
             <HeaderText size="lg">EMPLOYMENT STATUS</HeaderText>
             <Section>
               <SubSection>
-                <SelectField label="Employment Type" name="employment_type" id="employment_type">
+                <SelectField
+                  label="Employment Type"
+                  name="employment_type"
+                  id="employment_type"
+                >
                   <option value="1">ET 1 </option>
                   <option value="2">ET 2 </option>
                 </SelectField>
@@ -154,14 +166,22 @@ const AddEmployee = ({ isOpen, onClose }) => {
                     </option>
                   ))}
                 </SelectField>
-                <SelectField label="Department" name="department_id" id="department_id">
+                <SelectField
+                  label="Department"
+                  name="department_id"
+                  id="department_id"
+                >
                   {departments.map((department) => (
                     <option value={department.id} key={department.id}>
                       {department.name}
                     </option>
                   ))}
                 </SelectField>
-                <SelectField label="Position" name="position_id" id="position_id">
+                <SelectField
+                  label="Position"
+                  name="position_id"
+                  id="position_id"
+                >
                   {positions.map((position) => (
                     <option value={position.id} key={position.id}>
                       {position.name}
@@ -170,10 +190,19 @@ const AddEmployee = ({ isOpen, onClose }) => {
                 </SelectField>
               </SubSection>
               <SubSection>
-                <InputField step="any" type="number" name="basic_pay" label="Basic Pay" />
+                <InputField
+                  step="any"
+                  type="number"
+                  name="basic_pay"
+                  label="Basic Pay"
+                />
 
                 <InputField type="date" name="date_hired" label="Date Hired" />
-                <SelectField label="Time Shift" name="time_shift" id="time_shift">
+                <SelectField
+                  label="Time Shift"
+                  name="time_shift"
+                  id="time_shift"
+                >
                   <option value="MORNING">Morning</option>
                   <option value="MID_MORNING">Mid Morning </option>
                   <option value="NOON">Noon</option>
@@ -184,7 +213,11 @@ const AddEmployee = ({ isOpen, onClose }) => {
             <HeaderText size="lg">LEGAL DOCUMENTS</HeaderText>
             <Section>
               <FilesContainer>
-                <FileInput name="nbi_clearance" label="NBI CLEARANCE" placeholder="NBI CLEARANCE" />
+                <FileInput
+                  name="nbi_clearance"
+                  label="NBI CLEARANCE"
+                  placeholder="NBI CLEARANCE"
+                />
                 <FileInput name="nso" label="NSO" placeholder="NSO" />
                 <FileInput name="sss" label="SSS" placeholder="SSS" />
               </FilesContainer>
@@ -195,7 +228,11 @@ const AddEmployee = ({ isOpen, onClose }) => {
           <RightContainer>
             <div>
               {/* <Text>TODO ADD PHOTO</Text> */}
-              <PhotoInput name="photo" label="Add Photo" placeholder="Add Photo" />
+              <PhotoInput
+                name="photo"
+                label="Add Photo"
+                placeholder="Add Photo"
+              />
             </div>
             <ButtonsContainer>
               <Button>Import</Button>

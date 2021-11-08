@@ -1,10 +1,10 @@
-import { Container, Input, Wrapper, Label } from './styles.js';
-import { useFormContext } from 'react-hook-form';
-import { ErrorText } from 'styles/index.js';
+import { Container, Input, Wrapper, Label } from "./styles.js";
+import { useFormContext } from "react-hook-form";
+import { ErrorText } from "@/styles";
 
 const InputField = ({
-  type = 'text',
-  placeholder = '',
+  type = "text",
+  placeholder = "",
   label,
   disabled = false,
   name,
@@ -12,7 +12,7 @@ const InputField = ({
 }) => {
   const {
     register,
-    formState: { errors }
+    formState: { errors },
   } = useFormContext();
   return (
     <>

@@ -1,49 +1,55 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import API from 'utils/API';
-import { toast } from 'react-toastify';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import API from "@/utils/API";
+import { toast } from "react-toastify";
 
 const initialState = {
   data: [],
   isError: false,
   isFetching: false,
   isSuccess: false,
-  errorMessage: null
+  errorMessage: null,
 };
 
-export const findAllRequests = createAsyncThunk('/requests/all', async (_, { rejectWithValue }) => {
-  try {
-    const res = await API.get(`requests`);
-    if (res.status === 200) {
-      return res.data;
-    } else {
-      throw new Error(res.data);
+export const findAllRequests = createAsyncThunk(
+  "/requests/all",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await API.get(`requests`);
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(res.data);
+      }
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
     }
-  } catch (error) {
-    if (!error.response) {
-      throw error;
-    }
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
-export const addRequest = createAsyncThunk('/requests/add', async (data, { rejectWithValue }) => {
-  try {
-    const res = await API.post(`requests`, data);
-    if (res.status === 200) {
-      return res.data;
-    } else {
-      throw new Error(res.data);
+export const addRequest = createAsyncThunk(
+  "/requests/add",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await API.post(`requests`, data);
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(res.data);
+      }
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
     }
-  } catch (error) {
-    if (!error.response) {
-      throw error;
-    }
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
 const requestSlice = createSlice({
-  name: 'request',
+  name: "request",
   initialState,
 
   extraReducers: {
@@ -76,8 +82,8 @@ const requestSlice = createSlice({
       state.isError = true;
       state.errorMessage = payload;
       toast.error(payload);
-    }
-  }
+    },
+  },
 });
 
 // export const {  } = requestSlice.actions;

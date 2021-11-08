@@ -1,11 +1,11 @@
-import { useState } from 'react';
-import Button from 'components/Button/index.jsx';
-import Checkbox from 'components/Checkbox/index.jsx';
-import Dropdown from 'components/Dropdown/index.jsx';
-import Input from 'components/Input';
-import Radio from 'components/Radio/index.jsx';
-import Toggle from 'components/Toggle/index.jsx';
-import { useForm, FormProvider } from 'react-hook-form';
+import { useState } from "react";
+import Button from "@/components/Button/index.jsx";
+import Checkbox from "@/components/Checkbox/index.jsx";
+import Dropdown from "@/components/Dropdown/index.jsx";
+import Input from "@/components/Input";
+import Radio from "@/components/Radio/index.jsx";
+import Toggle from "@/components/Toggle/index.jsx";
+import { useForm, FormProvider } from "react-hook-form";
 import {
   Wrapper,
   Heading,
@@ -16,15 +16,18 @@ import {
   FormContainer,
   Grid,
   Form,
-  ButtonGroup
-} from './styles.js';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { findAllCompanies } from 'features/company/companySlice.js';
-import { findAllDepartments } from 'features/department/departmentSlice.js';
-import { findAllPositions } from 'features/position/positionSlice.js';
-import { findAllEmployees, findAllFilteredEmployees } from 'features/employee/employeeSlice.js';
-import { VStack } from 'styles/index.js';
+  ButtonGroup,
+} from "./styles.js";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { findAllCompanies } from "@/features/company/companySlice.js";
+import { findAllDepartments } from "@/features/department/departmentSlice.js";
+import { findAllPositions } from "@/features/position/positionSlice.js";
+import {
+  findAllEmployees,
+  findAllFilteredEmployees,
+} from "@/features/employee/employeeSlice.js";
+import { VStack } from "@/styles";
 
 const Menu = ({ children }) => {
   const methods = useForm();
@@ -42,9 +45,9 @@ const Menu = ({ children }) => {
     (state) => state.positions
   );
 
-  const [selectedCompany, setSelectedCompany] = useState('');
-  const [selectedDepartment, setSelectedDepartment] = useState('');
-  const [selectedPosition, setSelectedPosition] = useState('');
+  const [selectedCompany, setSelectedCompany] = useState("");
+  const [selectedDepartment, setSelectedDepartment] = useState("");
+  const [selectedPosition, setSelectedPosition] = useState("");
   const [isReset, setIsReset] = useState(false);
 
   useEffect(() => {
@@ -64,9 +67,9 @@ const Menu = ({ children }) => {
 
   const onReset = () => {
     reset({});
-    setSelectedCompany('');
-    setSelectedDepartment('');
-    setSelectedPosition('');
+    setSelectedCompany("");
+    setSelectedDepartment("");
+    setSelectedPosition("");
     setIsReset(true);
     dispatch(findAllEmployees());
   };
@@ -98,7 +101,11 @@ const Menu = ({ children }) => {
                   setValue={setSelectedCompany}
                   name="company"
                   label="Company"
-                  options={isFetchingCompanies ? [{ id: 0, name: 'Loading Companies' }] : companies}
+                  options={
+                    isFetchingCompanies
+                      ? [{ id: 0, name: "Loading Companies" }]
+                      : companies
+                  }
                 />
                 <Dropdown
                   isReset={isReset}
@@ -106,7 +113,9 @@ const Menu = ({ children }) => {
                   name="department"
                   label="Department"
                   options={
-                    isFetchingDepartments ? [{ id: 0, name: 'Loading Departments' }] : departments
+                    isFetchingDepartments
+                      ? [{ id: 0, name: "Loading Departments" }]
+                      : departments
                   }
                 />
                 <Dropdown
@@ -114,7 +123,11 @@ const Menu = ({ children }) => {
                   setValue={setSelectedPosition}
                   name="position"
                   label="Position"
-                  options={isFetchingPositions ? [{ id: 0, name: 'Loading Positions' }] : positions}
+                  options={
+                    isFetchingPositions
+                      ? [{ id: 0, name: "Loading Positions" }]
+                      : positions
+                  }
                 />
                 {/* <Dropdown name="level" label="Level" options={['a', 'b', 'c', 'd', 'e']} /> */}
               </DropdownWrapper>
@@ -134,18 +147,34 @@ const Menu = ({ children }) => {
                     setCheckboxValue(!checkboxValue);
                     // TODO - REFACTOR
                     if (checkboxValue) {
-                      setValue('MORNING', null);
-                      setValue('NOON', null);
-                      setValue('MID_MORNING', null);
-                      setValue('AFTERNOON', null);
+                      setValue("MORNING", null);
+                      setValue("NOON", null);
+                      setValue("MID_MORNING", null);
+                      setValue("AFTERNOON", null);
                     }
                   }}
                 />
                 <Grid col={2}>
-                  <Checkbox name="MORNING" label="Morning" disabled={!checkboxValue} />
-                  <Checkbox name="NOON" label="Noon" disabled={!checkboxValue} />
-                  <Checkbox name="MID_MORNING" label="Mid-morning" disabled={!checkboxValue} />
-                  <Checkbox name="AFTERNOON" label="Afternoon" disabled={!checkboxValue} />
+                  <Checkbox
+                    name="MORNING"
+                    label="Morning"
+                    disabled={!checkboxValue}
+                  />
+                  <Checkbox
+                    name="NOON"
+                    label="Noon"
+                    disabled={!checkboxValue}
+                  />
+                  <Checkbox
+                    name="MID_MORNING"
+                    label="Mid-morning"
+                    disabled={!checkboxValue}
+                  />
+                  <Checkbox
+                    name="AFTERNOON"
+                    label="Afternoon"
+                    disabled={!checkboxValue}
+                  />
                 </Grid>
               </div>
             </FormContainer>

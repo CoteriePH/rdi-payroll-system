@@ -1,11 +1,11 @@
-import { useFormContext } from 'react-hook-form';
-import { ErrorText } from 'styles/index.js';
-import { Label, Input, Container, Wrapper } from './styles.js';
+import { useFormContext } from "react-hook-form";
+import { ErrorText } from "@/styles";
+import { Label, Input, Container, Wrapper } from "./styles.js";
 
 const RadioInput = ({ children, label, name, ...rest }) => {
   const {
     register,
-    formState: { errors }
+    formState: { errors },
   } = useFormContext();
 
   return (

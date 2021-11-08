@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const ModalStyle = styled.div`
   z-index: 1010;
@@ -82,7 +82,7 @@ export const Section = styled.section`
 
 export const SubSection = styled.div`
   display: flex;
-  flex-direction: ${(props) => (props.direction ? props.direction : 'column')};
+  flex-direction: ${(props) => (props.direction ? props.direction : "column")};
   width: 100%;
   gap: 1rem;
 `;

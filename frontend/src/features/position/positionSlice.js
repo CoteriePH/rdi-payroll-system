@@ -1,16 +1,16 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import API from 'utils/API';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import API from "@/utils/API";
 
 const initialState = {
   data: [],
   isError: false,
   isFetching: false,
   isSuccess: false,
-  errorMessage: ''
+  errorMessage: "",
 };
 
 export const findAllPositions = createAsyncThunk(
-  '/positions/all',
+  "/positions/all",
   async (_, { rejectWithValue }) => {
     try {
       const res = await API.get(`positions`);
@@ -29,7 +29,7 @@ export const findAllPositions = createAsyncThunk(
 );
 
 const positionSlice = createSlice({
-  name: 'position',
+  name: "position",
   initialState,
   reducers: {},
   extraReducers: {
@@ -46,8 +46,8 @@ const positionSlice = createSlice({
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
-    }
-  }
+    },
+  },
 });
 
 // export const {} = positionSlice.actions;

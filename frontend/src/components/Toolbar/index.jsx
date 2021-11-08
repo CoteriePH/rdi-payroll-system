@@ -1,10 +1,10 @@
-import Button from 'components/Button';
-import { ROLES } from 'constants/constants';
-import { exportEmployeesToCSV } from 'features/employee/employeeSlice';
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { Box, Wrapper } from './styles';
+import Button from "@/components/Button";
+import { ROLES } from "@/constants/constants";
+import { exportEmployeesToCSV } from "@/features/employee/employeeSlice";
+import React from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Box, Wrapper } from "./styles";
 
 const Toolbar = ({ children, leftChildren }) => {
   const dispatch = useDispatch();
@@ -13,7 +13,12 @@ const Toolbar = ({ children, leftChildren }) => {
     <Wrapper>
       <Box>
         {authRole === ROLES.AUDITOR ? (
-          <Button minW="10rem" h="2rem" fontWeight="bold" fontFamily="avenirRoman">
+          <Button
+            minW="10rem"
+            h="2rem"
+            fontWeight="bold"
+            fontFamily="avenirRoman"
+          >
             Generate All
           </Button>
         ) : null}

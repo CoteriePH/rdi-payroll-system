@@ -1,19 +1,19 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import API from 'utils/API';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import API from "@/utils/API";
 
 const initialState = {
   data: [],
   isError: false,
   isFetching: false,
   isSuccess: false,
-  errorMessage: ''
+  errorMessage: "",
 };
 
 export const findAllCompanies = createAsyncThunk(
-  '/companies/all',
+  "/companies/all",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await API.get('company');
+      const res = await API.get("company");
       if (res.status === 200) {
         return res.data;
       } else {
@@ -29,7 +29,7 @@ export const findAllCompanies = createAsyncThunk(
 );
 
 const companySlice = createSlice({
-  name: 'company',
+  name: "company",
   initialState,
   reducers: {},
   extraReducers: {
@@ -46,8 +46,8 @@ const companySlice = createSlice({
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
-    }
-  }
+    },
+  },
 });
 
 // export const {} = companySlice.actions;

@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const Box = styled.span`
   position: absolute;
@@ -55,5 +55,5 @@ export const Wrapper = styled.div`
   span {
     user-select: none;
   }
-  color: ${(props) => props.disabled && 'gray'};
+  color: ${(props) => props.disabled && "gray"};
 `;
