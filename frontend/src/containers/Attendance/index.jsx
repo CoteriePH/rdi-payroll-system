@@ -1,22 +1,20 @@
-import Menu from 'components/Menu';
-import Settings from 'components/Menu/settings';
-import Table from 'components/Table';
-import { settingsSelector } from 'features/settings/settingsSlice';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { findAllEmployees } from 'features/employee/employeeSlice';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { useTable } from 'react-table';
-import { Wrapper, TextLink, Container, Flex, TableContainer } from './styles';
-import AddEmployee from 'components/Modals/AddEmployee';
-import Button from 'components/Button/';
-import getTimeDuration from 'helpers/getTimeDuration';
-import Toolbar from 'components/Toolbar';
-import { ROLES } from 'constants/constants';
-import { findAllAttendance } from 'features/attendance/attendanceSlice';
-import { accuracyColorPicker } from 'helpers/colorPicker';
-import dayjs from 'dayjs';
+import Menu from "@/components/Menu";
+import Settings from "@/components/Menu/settings";
+import Table from "@/components/Table";
+import { settingsSelector } from "@/features/settings/settingsSlice";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useTable } from "react-table";
+import { Wrapper, Container, Flex, TableContainer } from "./styles";
+import AddEmployee from "@/components/Modals/AddEmployee";
+import Button from "@/components/Button/";
+import Toolbar from "@/components/Toolbar";
+import { ROLES } from "@/constants/constants";
+import { findAllAttendance } from "@/features/attendance/attendanceSlice";
+import { accuracyColorPicker } from "@/helpers/colorPicker";
+import dayjs from "dayjs";
 
 const Attendance = () => {
   const dispatch = useDispatch();
@@ -39,46 +37,55 @@ const Attendance = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: 'DATE',
-        accessor: 'date',
+        Header: "DATE",
+        accessor: "date",
         Cell: (props) => {
-          return <div>{dayjs(props.value).format('YYYY-MM-DD')}</div>;
-        }
+          return <div>{dayjs(props.value).format("YYYY-MM-DD")}</div>;
+        },
       },
       {
-        Header: 'EMPLOYEE NAME',
+        Header: "EMPLOYEE NAME",
         Cell: (props) => {
           return (
             <div>
-              {props.row.original.employee.first_name} {props.row.original.employee.last_name}
+              {props.row.original.employee.first_name}{" "}
+              {props.row.original.employee.last_name}
             </div>
           );
-        }
+        },
       },
       {
         //TODO TIME CONVERTER HELPER
-        Header: 'TIME IN',
-        accessor: 'time_in',
+        Header: "TIME IN",
+        accessor: "time_in",
         Cell: (props) => {
-          const time = props.value.split(':');
+          const time = props.value.split(":");
           return (
-            <div>{dayjs(new Date().setHours(time[0], time[1], time[2])).format('hh:mm:ss A')}</div>
+            <div>
+              {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
+                "hh:mm:ss A"
+              )}
+            </div>
           );
-        }
+        },
       },
       {
-        Header: 'TIME OUT',
-        accessor: 'time_out',
+        Header: "TIME OUT",
+        accessor: "time_out",
         Cell: (props) => {
-          const time = props.value.split(':');
+          const time = props.value.split(":");
           return (
-            <div>{dayjs(new Date().setHours(time[0], time[1], time[2])).format('hh:mm:ss A')}</div>
+            <div>
+              {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
+                "hh:mm:ss A"
+              )}
+            </div>
           );
-        }
+        },
       },
       {
-        Header: 'ACCURACY',
-        accessor: 'accuracy',
+        Header: "ACCURACY",
+        accessor: "accuracy",
         Cell: (props) => {
           const val = Math.floor(Math.random() * (100 - 0 + 1) + 0);
           return (
@@ -86,19 +93,19 @@ const Attendance = () => {
               {props.value ? props.value : val}%
             </div>
           );
-        }
+        },
       },
       {
-        Header: 'TRT',
-        accessor: 'total_running_time'
+        Header: "TRT",
+        accessor: "total_running_time",
       },
       {
-        Header: 'NO. OF ENTRIES',
-        accessor: 'entries',
+        Header: "NO. OF ENTRIES",
+        accessor: "entries",
         Cell: (props) => {
-          return <div>{props.value ? props.value : '0'}</div>;
-        }
-      }
+          return <div>{props.value ? props.value : "0"}</div>;
+        },
+      },
     ],
     []
   );
@@ -125,7 +132,7 @@ const Attendance = () => {
             ) : data.length > 0 ? (
               <Table tableInstance={tableInstance} />
             ) : (
-              'Wow, such empty'
+              "Wow, such empty"
             )}
           </TableContainer>
           {/* TEMPORARY ADD RECORD */}

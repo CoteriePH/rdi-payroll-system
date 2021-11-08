@@ -17,7 +17,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import attendanceSlice from "features/attendance/attendanceSlice";
+import attendanceSlice from "@/features/attendance/attendanceSlice";
 
 const persistConfig = {
   key: "root",

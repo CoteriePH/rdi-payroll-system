@@ -1,16 +1,16 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import API from 'utils/API';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import API from "@/utils/API";
 
 const initialState = {
   data: [],
   isError: false,
   isFetching: false,
   isSuccess: false,
-  errorMessage: ''
+  errorMessage: "",
 };
 
 export const findAllAttendance = createAsyncThunk(
-  '/attendances/all',
+  "/attendances/all",
   async (_, { rejectWithValue }) => {
     try {
       const res = await API.get(`attendances`);
@@ -29,7 +29,7 @@ export const findAllAttendance = createAsyncThunk(
 );
 
 const attendanceSlice = createSlice({
-  name: 'attendance',
+  name: "attendance",
   initialState,
   reducers: {},
   extraReducers: {
@@ -46,8 +46,8 @@ const attendanceSlice = createSlice({
       state.isFetching = false;
       state.isError = true;
       state.errorMessage = payload.message;
-    }
-  }
+    },
+  },
 });
 
 // export const {} = attendanceSlice.actions;
