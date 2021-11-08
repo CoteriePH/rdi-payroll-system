@@ -14,16 +14,10 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-<<<<<<< HEAD
-  REGISTER
-} from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
-import attendanceSlice from 'features/attendance/attendanceSlice';
-=======
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
->>>>>>> dev
+import attendanceSlice from "features/attendance/attendanceSlice";
 
 const persistConfig = {
   key: "root",
@@ -40,10 +34,7 @@ const rootReducer = combineReducers({
   positions: positionSlice,
   companies: companySlice,
   requests: requestSlice,
-<<<<<<< HEAD
-  attendances: attendanceSlice
-=======
->>>>>>> dev
+  attendances: attendanceSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
