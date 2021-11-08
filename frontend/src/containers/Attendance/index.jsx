@@ -59,28 +59,38 @@ const Attendance = () => {
         Header: "TIME IN",
         accessor: "time_in",
         Cell: (props) => {
-          const time = props.value.split(":");
-          return (
-            <div>
-              {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
-                "hh:mm:ss A"
-              )}
-            </div>
-          );
+          {
+            if (props.value) {
+              const time = props.value?.split(":");
+              return (
+                <div>
+                  {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
+                    "hh:mm:ss A"
+                  )}
+                </div>
+              );
+            } else {
+              return <div>N/A</div>;
+            }
+          }
         },
       },
       {
         Header: "TIME OUT",
         accessor: "time_out",
         Cell: (props) => {
-          const time = props.value.split(":");
-          return (
-            <div>
-              {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
-                "hh:mm:ss A"
-              )}
-            </div>
-          );
+          if (props.value) {
+            const time = props.value?.split(":");
+            return (
+              <div>
+                {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
+                  "hh:mm:ss A"
+                )}
+              </div>
+            );
+          } else {
+            return <div>N/A</div>;
+          }
         },
       },
       {
