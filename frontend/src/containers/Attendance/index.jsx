@@ -108,6 +108,9 @@ const Attendance = () => {
       {
         Header: "TRT",
         accessor: "total_running_time",
+        Cell: (props) => {
+          return <div>{props.value ? props.value : "N/A"}</div>;
+        },
       },
       {
         Header: "NO. OF ENTRIES",
