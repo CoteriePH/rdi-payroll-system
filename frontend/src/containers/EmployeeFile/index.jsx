@@ -15,6 +15,7 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
+import Payslip from "@/components/Modals/Payslip";
 
 const EmployeeFile = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const EmployeeFile = () => {
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPayslipOpen, setIsPayslipOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   //TODO - NEXT BUTTON
@@ -37,6 +39,13 @@ const EmployeeFile = () => {
   };
   const onModalClose = () => {
     setIsModalOpen(false);
+  };
+
+  const onPayslipOpen = () => {
+    setIsPayslipOpen(true);
+  };
+  const onPayslipClose = () => {
+    setIsPayslipOpen(false);
   };
 
   useEffect(() => {
@@ -125,6 +134,15 @@ const EmployeeFile = () => {
                   >
                     Add Record
                   </Button>
+                  <Button
+                    onClick={onPayslipOpen}
+                    minW="10rem"
+                    h="2rem"
+                    fontWeight="bold"
+                    fontFamily="avenirRoman"
+                  >
+                    Payslip
+                  </Button>
                 </>
               ) : null
             }
@@ -136,6 +154,7 @@ const EmployeeFile = () => {
       </Container>
       <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
       <EditEmployee isOpen={isEditModalOpen} onClose={onEditModalClose} />
+      <Payslip isOpen={isPayslipOpen} onClose={onPayslipClose} />
     </Wrapper>
   );
 };
