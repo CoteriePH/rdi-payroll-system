@@ -17,6 +17,8 @@
 
 ```bash
 git clone git@github.com:TempName-1/rdi-payroll-system.git
+or
+git clone https://github.com/TempName-1/rdi-payroll-system.git
 ```
 
 2. **Checkout to dev branch**
@@ -29,7 +31,7 @@ git checkout dev
 
 ```bash
 cd frontend
-npm install
+npm run dev
 ```
 
 4. **Host the app locally**
