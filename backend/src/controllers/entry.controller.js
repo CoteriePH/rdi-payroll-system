@@ -2,18 +2,55 @@ const res = require("express/lib/response");
 const db = require("../models");
 const { Op, sequelize, Sequelize } = require("../models");
 const Entry = db.entry;
+const {
+  totalRunningTime,
+} = require("../helpers/entry.helper");
 
+
+//TEST FOR NEW DAYS
+//dateNow.setDate(dateNow.getDate() + 1);
 
 exports.create = async (req, res) => {
   try {
+    //retrive data from db
+    let entry = await Entry.findOne({ 
+      attributes:['entries'],
+      raw: true,
+      where: {
+      [Op.and]: [
+          {employee_id: req.body.employee_id},
+          {entries: 2},
+          {date: new Date().toDateString()},
+      ]
+    },
+    });
+
     //INIT
     let entry_details = req.body;
 
     //MODIFY FIELDS
+    if(entry != null){
+      
+        let lastEntry = await Entry.max('entries',{ 
+          raw: true,
+          where: {
+            [Op.and]: [
+              {employee_id: req.body.employee_id},
+              {date: new Date().toDateString()},
+            ]
+        },
+        });
+        
+        entry_details.entries = lastEntry+1;
+      
+    }
+    else{
+      entry_details.entries = 1;
+    }
+
     entry_details.time_in = Date.now();
     entry_details.time_out = null;
     entry_details.running_time = null;
-    entry_details.entries = 1;
     entry_details.date = Date.now();
 
     //save
@@ -37,21 +74,8 @@ exports.findOne = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-
-    let entry = Entry.findOne({ 
-        attributes:['time_in'],
-        where: {
-        [Op.and]: [
-            {employee_id: req.body.employee_id},
-            {time_out: null},
-            {date: new Date().toDateString()}
-        ]
-      },
-     });
-
-     let timeIn = entry.time_in
-
-     let {time_out} = req.body;
+    
+    let {time_out} = req.body;
 
     await Entry.update({
         time_out: Date.now(),
@@ -64,8 +88,34 @@ exports.update = async (req, res) => {
             {date: new Date().toDateString()}
         ]
       },}
-      
     );
+
+    let entry = await Entry.findOne({ 
+      attributes:['time_in', 'time_out'],
+      raw: true,
+      where: {
+      [Op.and]: [
+          {employee_id: req.body.employee_id},
+          {time_out:{[Op.ne]: null}},
+      ]
+    },
+    });
+    
+
+    let timeOut = entry.time_out.getTime()
+    let timeIn = entry.time_in.getTime()
+
+    await Entry.update({
+      running_time:totalRunningTime(timeIn,timeOut),
+      computed: true,
+    },{where: {
+      [Op.and]: [
+        {employee_id: req.body.employee_id},
+        {computed:false},
+    ]
+      },}
+    );
+    
     return res.status(200).send("Entry updated successfully");
   } catch (error) {
     return res.status(400).send(error.message);

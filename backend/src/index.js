@@ -30,6 +30,7 @@ db.sequelize.sync().then(() => {
   require("./routes/deduction.routes")(app);
   require("./routes/request.routes")(app);
   require("./routes/attendance.routes")(app);
+  require("./routes/attendanceEntry.routes")(app);
   require("./routes/addtnl_deduction.routes")(app);
   require("./routes/cash_advance.routes")(app);
   require("./routes/entry.routes")(app);

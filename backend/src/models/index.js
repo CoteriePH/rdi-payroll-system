@@ -30,6 +30,7 @@ db.sequelize = sequelize;
 db.user = require("./user.model.js")(sequelize, Sequelize, DataTypes);
 db.employee = require("./employee.model.js")(sequelize, Sequelize, DataTypes);
 db.company = require("./company.model.js")(sequelize, Sequelize, DataTypes);
+db.attendanceEntry = require("./attendanceEntry.model.js")(sequelize, Sequelize, DataTypes);
 db.file = require("./file.model.js")(sequelize, Sequelize, DataTypes);
 db.deduction = require("./deduction.model.js")(sequelize, Sequelize, DataTypes);
 db.entry = require("./entry.model.js")(sequelize, Sequelize, DataTypes);
@@ -116,6 +117,16 @@ db.attendance.belongsTo(db.employee, {
 });
 db.employee.hasMany(db.attendance, {
   as: "attendances",
+  foreignKey: "employee_id",
+});
+
+
+//OneToMany - (One Employee ----> MANY attendnaceEntry)
+db.attendanceEntry.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+});
+db.employee.hasMany(db.attendanceEntry, {
+  as: "attendanceentries",
   foreignKey: "employee_id",
 });
 

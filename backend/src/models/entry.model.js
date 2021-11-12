@@ -29,6 +29,11 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
           type: DataTypes.DATEONLY,
           allowNull: false,
         },
+        computed: {
+          type: DataTypes.BOOLEAN,
+          allowNull: false,
+          defaultValue: false,
+        },
       },
       {
         timestamps: true,
