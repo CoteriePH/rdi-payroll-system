@@ -5,8 +5,8 @@ export const Box = styled.span`
   position: absolute;
   top: 0;
   left: 0;
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   background-color: ${theme.colors.white};
   border-radius: 3px;
   border: ${(props) =>
@@ -25,8 +25,8 @@ export const Container = styled.label`
   svg {
     display: none;
     position: absolute;
-    top: 3px;
-    left: 1px;
+    top: 1px;
+    left: 0px;
   }
 
   input {

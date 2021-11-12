@@ -17,6 +17,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import cashAdvanceSlice from "./features/cash_advance/cashAdvanceSlice";
 
 const persistConfig = {
   key: "root",
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   positions: positionSlice,
   companies: companySlice,
   requests: requestSlice,
+  cash_advance: cashAdvanceSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
