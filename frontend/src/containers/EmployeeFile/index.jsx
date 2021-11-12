@@ -9,11 +9,12 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useTable } from "react-table";
 import { Wrapper, TextLink, Container, Flex, TableContainer } from "./styles";
-import AddEmployee from "@/components/Modals/AddEmployee";
 import Button from "@/components/Button/";
 import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
+import EditEmployee from "@/components/Modals/EditEmployee";
+import AddEmployee from "@/components/Modals/AddEmployee";
 
 const EmployeeFile = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,15 @@ const EmployeeFile = () => {
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  //TODO - NEXT BUTTON
+  const onEditModalOpen = () => {
+    setIsEditModalOpen(true);
+  };
+  const onEditModalClose = () => {
+    setIsEditModalOpen(false);
+  };
 
   const onModalOpen = () => {
     setIsModalOpen(true);
@@ -66,28 +76,22 @@ const EmployeeFile = () => {
         },
       },
       {
+        minWidth: 100,
+        width: 100,
+        maxWidth: 100,
         Header: "",
         accessor: "id",
         Cell: () => {
-          return <TextLink>Edit</TextLink>;
+          return <TextLink onClick={onEditModalOpen}>Edit</TextLink>;
         },
       },
     ],
     []
   );
-
-  const tableInstance = useTable({ columns, data });
-
-  // if (isFetching) {
-  //   /**
-  //    * TODO - Loading Component
-  //    */
-  //   return <div>Loading</div>;
-  // }
   return (
     <Wrapper>
       <Container>
-        {/* NOTE: Gayahin nalang tong flex sa ibang @/components */}
+        {/* NOTE: Gayahin nalang tong flex sa ibang components */}
         <Flex justify="space-between" direction="column" flex={8}>
           <TableContainer>
             {/* TODO - Component kung alang laman data */}
@@ -96,7 +100,7 @@ const EmployeeFile = () => {
             {isFetching ? (
               <div>Loading</div>
             ) : data.length > 0 ? (
-              <Table tableInstance={tableInstance} />
+              <Table columns={columns} data={data} />
             ) : (
               "Wow, such empty"
             )}
@@ -105,37 +109,27 @@ const EmployeeFile = () => {
           <Toolbar
             leftChildren={
               authRole === ROLES.ENCODER ? (
-                <Button
-                  onClick={onModalOpen}
-                  minW="10rem"
-                  h="2rem"
-                  fontWeight="bold"
-                  fontFamily="avenirRoman"
-                >
-                  Add Record
-                </Button>
+                <>
+                  <Button
+                    onClick={onModalOpen}
+                    minW="10rem"
+                    h="2rem"
+                    fontWeight="bold"
+                    fontFamily="avenirRoman"
+                  >
+                    Add Record
+                  </Button>
+                </>
               ) : null
             }
-          >
-            {/* <Button
-              h="2rem"
-              minW="10rem"
-              onClick={onModalOpen}
-              fontWeight="bold"
-              borderColor="darkViolet"
-              border="2px"
-              bg="white"
-              color="darkViolet"
-            >
-              Add Record
-            </Button> */}
-          </Toolbar>
+          ></Toolbar>
         </Flex>
         <Flex bg="gray" flex={1}>
           {isOpen && <Menu />}
         </Flex>
       </Container>
       <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      <EditEmployee isOpen={isEditModalOpen} onClose={onEditModalClose} />
     </Wrapper>
   );
 };

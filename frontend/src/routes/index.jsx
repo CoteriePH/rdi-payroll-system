@@ -24,7 +24,18 @@ const routes = [
   },
   {
     path: "cash-advance",
+    exact: true,
     component: lazy(() => import("@/containers/CashAdvance")),
+  },
+  {
+    path: "cash-advance/processed",
+    exact: true,
+    component: lazy(() => import("@/containers/ProcessedCA")),
+  },
+  {
+    path: "cash-advance/unprocessed",
+    exact: true,
+    component: lazy(() => import("@/containers/UnprocessedCA")),
   },
   {
     path: "request",

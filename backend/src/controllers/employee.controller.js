@@ -61,6 +61,7 @@ exports.findAll = async (req, res) => {
   const date_hired_from = req.query.date_hired_from;
   const date_hired_to = req.query.date_hired_to;
   const sex = req.query.sex;
+  const cash_advance_eligibility = req.query.cash_advance_eligibility;
   // const time_shift = req.query.time_shift;
 
   // TODO - REFACTOR TIME SHIFT
@@ -78,6 +79,7 @@ exports.findAll = async (req, res) => {
   if (department) andItems.push({ department_id: department });
   if (position) andItems.push({ position_id: position });
   if (sex) andItems.push({ sex: sex });
+  if (cash_advance_eligibility) andItems.push({ cash_advance_eligibility });
 
   // TODO - REFACTOR
   if (MORNING === "true") {
