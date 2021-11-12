@@ -13,6 +13,7 @@ import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
 import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
+import Loader from "@/components/Loader";
 const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
@@ -68,10 +69,7 @@ const Payroll = () => {
   const tableInstance = useTable({ columns, data });
 
   if (isFetching) {
-    /**
-     * TODO - Loading Component
-     */
-    return <div>Loading</div>;
+    return <Loader />;
   }
   return (
     <Wrapper>

@@ -29,3 +29,14 @@ export const HStack = styled.div`
   flex-direction:column
   gap: 0.5rem;
 `;
+
+export const Flex = styled.div`
+  display: flex;
+  align-items: ${(props) => (props.align ? props.align : null)};
+  justify-content: ${(props) => (props.justify ? props.justify : null)};
+  flex-direction: ${(props) => (props.direction ? props.direction : "row")};
+  flex-grow: ${(props) => (props.flex ? props.flex : 1)};
+  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : null)};
+  gap: ${(props) => (props.gap ? `${props.gap}rem` : null)};
+  flex-wrap: ${(props) => (props.wrap ? 'wrap' : null)};
+`;
