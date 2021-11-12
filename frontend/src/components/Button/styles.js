@@ -1,21 +1,25 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 // TODO - variant or colorScheme
 
 export const Container = styled.button`
   cursor: pointer;
   user-select: none;
-  color: ${(props) => (props.color ? theme.colors[props.color] : theme.colors.white)};
-  background-color: ${(props) => (props.bg ? theme.colors[props.bg] : theme.colors.default)};
+  color: ${(props) =>
+    props.color ? theme.colors[props.color] : theme.colors.white};
+  background-color: ${(props) =>
+    props.bg ? theme.colors[props.bg] : theme.colors.default};
   border: ${(props) =>
     props.border && props.borderColor
-      ? `${props.border ? props.border : '2px'} solid ${theme.colors[props.borderColor]}`
-      : 'none'};
+      ? `${props.border ? props.border : "2px"} solid ${
+          theme.colors[props.borderColor]
+        }`
+      : "none"};
   outline: none;
-  min-width: ${(props) => (props.minW ? props.minW : '13rem')};
-  width: ${(props) => (props.w ? props.w : '100%')};
-  height: ${(props) => (props.h ? props.h : '2.5rem')};
+  min-width: ${(props) => (props.minW ? props.minW : "13rem")};
+  width: ${(props) => (props.w ? props.w : "100%")};
+  height: ${(props) => (props.h ? props.h : "2.5rem")};
   border-radius: 5px;
   text-transform: uppercase;
   font-weight: ${(props) => (props.fontWeight ? props.fontWeight : null)};

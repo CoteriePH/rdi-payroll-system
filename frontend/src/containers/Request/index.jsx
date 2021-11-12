@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
-import React from 'react';
-import Dropdown from 'components/Dropdown';
-import Button from 'components/Button';
+import React from "react";
+import Dropdown from "@/components/Dropdown";
+import Button from "@/components/Button";
 import {
   Wrapper,
   GhostArea,
@@ -24,18 +24,18 @@ import {
   AttachFile,
   Clip,
   FlexButton,
-  FlexMore
-} from './styles';
-import { useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
-import { addRequest } from 'features/request/requestSlice';
+  FlexMore,
+} from "./styles";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { addRequest } from "@/features/request/requestSlice";
 
 function Request() {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
   const onSubmit = (data) => {
     //TODO - CLASSIFICATIONS/SUBJECTS
-    data.subject = 'TEST SUBJECT';
+    data.subject = "TEST SUBJECT";
     dispatch(addRequest(data));
     reset({});
   };
@@ -46,7 +46,7 @@ function Request() {
         <Dropdown bg="gray" label="CLASSIFICATION"></Dropdown>
       </FlexDrop>
       <GhostArea>
-        <TextArea {...register('desc', { required: true })} />
+        <TextArea {...register("desc", { required: true })} />
       </GhostArea>
       <WordTools>
         <Tools>

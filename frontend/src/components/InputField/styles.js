@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -24,10 +24,6 @@ export const Container = styled.div`
       width: 1rem;
     }
   }
-
-  // &:focus-within {
-  //   box-shadow: 0pt 0pt 0pt 2pt ${(props) => (props.menu ? 'white' : props.theme.colors.violet)};
-  // }
 `;
 
 export const Input = styled.input`
@@ -39,12 +35,17 @@ export const Input = styled.input`
   border-radius: 5px;
   font-size: ${(props) => props.theme.fontSizes.xs};
   font-family: ${(props) => props.theme.fontSizes.avenirRoman};
-  background-color: ${theme.colors.gray};
+  background-color: ${(props) =>
+    props.border ? theme.colors.white : theme.colors.gray};
+  border: ${(props) => (props.border ? `1px solid silver` : null)};
 `;
 
 export const Label = styled.small`
   text-transform: uppercase;
   margin-left: 0.2rem;
-  font-size: ${(props) => props.theme.fontSizes.xs};
+  font-size: ${(props) =>
+    props.fontSize
+      ? props.theme.fontSizes[props.fontSize]
+      : props.theme.fontSizes.xs};
   font-family: ${(props) => props.theme.fontSizes.avenirRoman};
 `;

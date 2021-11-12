@@ -1,5 +1,5 @@
-import styled from 'styled-components';
-import { theme } from 'theme';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const Box = styled.span`
   position: absolute;
@@ -9,13 +9,12 @@ export const Box = styled.span`
   width: 20px;
   background-color: ${theme.colors.white};
   border-radius: 3px;
-  
-  ${(props) =>
-    !props.disabled &&
-    ` 
-    &:hover {
-      background-color: ${theme.colors.violet};
-  }`}
+  border: ${(props) =>
+    props.border ? `1px solid ${theme.colors.darkViolet}` : null};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.disabled ? null : theme.colors.violet};
   }
 `;
 
@@ -55,5 +54,5 @@ export const Wrapper = styled.div`
   span {
     user-select: none;
   }
-  color: ${(props) => props.disabled && 'gray'};
+  color: ${(props) => props.disabled && "gray"};
 `;

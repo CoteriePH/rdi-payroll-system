@@ -1,11 +1,16 @@
-import { NavLink } from 'react-router-dom';
-import './Link.css';
+import { NavLink } from "react-router-dom";
+import "./Link.css";
 
-function Link({ children, to }) {
+function Link({ children, to, ...rest }) {
   return (
     <>
       <li className="list-style">
-        <NavLink exact className="link" activeClassName="link-active" to={to}>
+        <NavLink
+          {...rest}
+          className="link"
+          activeClassName="link-active"
+          to={to}
+        >
           {children}
         </NavLink>
       </li>

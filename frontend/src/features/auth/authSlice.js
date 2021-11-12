@@ -1,55 +1,61 @@
-import { toast } from 'react-toastify';
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { signin } from 'utils/auth.routes';
-import API from 'utils/API';
+import { toast } from "react-toastify";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { signin } from "@/utils/auth.routes";
+import API from "@/utils/API";
 
-export const signinUser = createAsyncThunk('/auth/signin', async (data, { rejectWithValue }) => {
-  try {
-    const res = await signin(JSON.stringify(data));
-    if (res.status === 200) {
-      localStorage.setItem('token', res.data.accessToken);
-      return res.data;
-    } else {
-      return rejectWithValue(res.data);
+export const signinUser = createAsyncThunk(
+  "/auth/signin",
+  async (data, { rejectWithValue }) => {
+    try {
+      const res = await signin(JSON.stringify(data));
+      if (res.status === 200) {
+        localStorage.setItem("token", res.data.accessToken);
+        return res.data;
+      } else {
+        return rejectWithValue(res.data);
+      }
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
     }
-  } catch (error) {
-    if (!error.response) {
-      throw error;
-    }
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
-export const verifyAuth = createAsyncThunk('/auth/verify-auth', async (_, { rejectWithValue }) => {
-  try {
-    const res = await API.get(`auth/verify-token`, {
-      headers: { auth: localStorage.getItem('token') }
-    });
-    if (res.status === 200) {
-      return res.data;
-    } else {
-      return rejectWithValue(res.data);
+export const verifyAuth = createAsyncThunk(
+  "/auth/verify-auth",
+  async (_, { rejectWithValue }) => {
+    try {
+      const res = await API.get(`auth/verify-token`, {
+        headers: { auth: localStorage.getItem("token") },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return rejectWithValue(res.data);
+      }
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
     }
-  } catch (error) {
-    if (!error.response) {
-      throw error;
-    }
-    return rejectWithValue(error.response.data);
   }
-});
+);
 
 const initialState = {
-  username: '',
-  role: '',
+  username: "",
+  role: "",
   isFetching: false,
   isError: false,
   isSuccess: false,
-  errorMessage: '',
-  isAuth: false
+  errorMessage: "",
+  isAuth: false,
 };
 
 export const authSlice = createSlice({
-  name: 'auth',
+  name: "auth",
   initialState: initialState,
   reducers: {
     clearState: (state) => {
@@ -60,9 +66,9 @@ export const authSlice = createSlice({
       return state;
     },
     logout: () => {
-      localStorage.removeItem('token');
+      localStorage.removeItem("token");
       return initialState;
-    }
+    },
   },
   extraReducers: {
     [signinUser.pending]: (state) => {
@@ -97,8 +103,8 @@ export const authSlice = createSlice({
       state.isError = true;
       state.errorMessage = payload;
       state.isAuth = false;
-    }
-  }
+    },
+  },
 });
 
 export const { clearState, logout } = authSlice.actions;
