@@ -121,26 +121,6 @@ const EmployeeFile = () => {
                   >
                     Add Record
                   </Button>
-                  <Button
-                    value="rd"
-                    onClick={(e) => onModalOpen(e)}
-                    minW="10rem"
-                    h="2rem"
-                    fontWeight="bold"
-                    fontFamily="avenirRoman"
-                  >
-                    Record Deduction
-                  </Button>
-                  <Button
-                    value="re"
-                    onClick={(e) => onModalOpen(e)}
-                    minW="10rem"
-                    h="2rem"
-                    fontWeight="bold"
-                    fontFamily="avenirRoman"
-                  >
-                    Record Earnings
-                  </Button>
                 </>
               ) : null
             }
@@ -155,12 +135,6 @@ const EmployeeFile = () => {
       )}
       {whichModal === "tl" && (
         <EditEmployee isOpen={isModalOpen} onClose={onModalClose} />
-      )}
-      {whichModal === "rd" && (
-        <RecordDeduction isOpen={isModalOpen} onClose={onModalClose} />
-      )}
-      {whichModal === "re" && (
-        <RecordEarnings isOpen={isModalOpen} onClose={onModalClose} />
       )}
     </Wrapper>
   );
