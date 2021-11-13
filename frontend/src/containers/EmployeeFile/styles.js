@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { theme } from "@/theme";
 
-export const TextLink = styled.a`
+export const TextLink = styled.button`
+  border: none;
+  background: none;
   color: ${(props) => props.theme.colors.lightViolet};
   cursor: pointer;
   text-decoration: underline;

@@ -15,6 +15,8 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
+import RecordDeduction from "@/components/Modals/RecordDeduction";
+import RecordEarnings from "@/components/Modals/RecordEarnings";
 
 const EmployeeFile = () => {
   const dispatch = useDispatch();
@@ -22,17 +24,12 @@ const EmployeeFile = () => {
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [whichModal, setwhichModal] = useState("");
 
   //TODO - NEXT BUTTON
-  const onEditModalOpen = () => {
-    setIsEditModalOpen(true);
-  };
-  const onEditModalClose = () => {
-    setIsEditModalOpen(false);
-  };
 
-  const onModalOpen = () => {
+  const onModalOpen = (e) => {
+    setwhichModal(e.target.value);
     setIsModalOpen(true);
   };
   const onModalClose = () => {
@@ -82,7 +79,11 @@ const EmployeeFile = () => {
         Header: "",
         accessor: "id",
         Cell: () => {
-          return <TextLink onClick={onEditModalOpen}>Edit</TextLink>;
+          return (
+            <TextLink value="tl" onClick={(e) => onModalOpen(e)}>
+              Edit
+            </TextLink>
+          );
         },
       },
     ],
@@ -111,13 +112,34 @@ const EmployeeFile = () => {
               authRole === ROLES.ENCODER ? (
                 <>
                   <Button
-                    onClick={onModalOpen}
+                    value="add"
+                    onClick={(e) => onModalOpen(e)}
                     minW="10rem"
                     h="2rem"
                     fontWeight="bold"
                     fontFamily="avenirRoman"
                   >
                     Add Record
+                  </Button>
+                  <Button
+                    value="rd"
+                    onClick={(e) => onModalOpen(e)}
+                    minW="10rem"
+                    h="2rem"
+                    fontWeight="bold"
+                    fontFamily="avenirRoman"
+                  >
+                    Record Deduction
+                  </Button>
+                  <Button
+                    value="re"
+                    onClick={(e) => onModalOpen(e)}
+                    minW="10rem"
+                    h="2rem"
+                    fontWeight="bold"
+                    fontFamily="avenirRoman"
+                  >
+                    Record Earnings
                   </Button>
                 </>
               ) : null
@@ -128,8 +150,18 @@ const EmployeeFile = () => {
           {isOpen && <Menu />}
         </Flex>
       </Container>
-      <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
-      <EditEmployee isOpen={isEditModalOpen} onClose={onEditModalClose} />
+      {whichModal === "add" && (
+        <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      )}
+      {whichModal === "tl" && (
+        <EditEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      )}
+      {whichModal === "rd" && (
+        <RecordDeduction isOpen={isModalOpen} onClose={onModalClose} />
+      )}
+      {whichModal === "re" && (
+        <RecordEarnings isOpen={isModalOpen} onClose={onModalClose} />
+      )}
     </Wrapper>
   );
 };
