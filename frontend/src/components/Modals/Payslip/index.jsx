@@ -15,6 +15,20 @@ import {
   BtnWrapper,
   CompName,
   BigText,
+  TrdCol,
+  Details,
+  BasicPay,
+  DetailOne,
+  DetailTwo,
+  Name,
+  EmpNum,
+  Date,
+  Position,
+  BasicMoney,
+  BasicDate,  
+  SubDetail,
+  DataInfo,
+  BasicCaption
 
 } from "./styles";
 import Button from "@/components/Button";
@@ -68,12 +82,50 @@ const Payslip = ({ isOpen, onClose }) => {
               <SndWrapper>
                 <CompName>COMPANY NAME</CompName>
                 <BigText>EMPLOYEE'S PAYSLIP</BigText>              
-              </SndWrapper>
+              </SndWrapper>              
               <BtnWrapper>
-                <Button w="100%">EXPORT</Button>
-                <Button w="100%">PRINT PAYSLIP</Button>
+                <Button                   
+                  minW = "6em">EXPORT</Button>
+                <Button
+                  minW = "6em">PRINT PAYSLIP</Button>
               </BtnWrapper>
             </SndCol>
+            <br />
+            <TrdCol>
+              <Details>
+                <DetailOne>
+                  <SubDetail>                    
+                    <div>NAME:</div>                     
+                    <div>EMPLOYEE NO. :</div>                                         
+                  </SubDetail>
+
+                  <DataInfo>                    
+                    <Name>JANE M. DOE</Name>
+                    <EmpNum>0000-00021</EmpNum>
+                  </DataInfo>
+                </DetailOne>
+
+                <DetailTwo>
+                  <SubDetail>
+                    <div>DATE PROCESSED: </div>
+                    <div>POSITION:</div>                                        
+                  </SubDetail>
+
+                  <DataInfo>                    
+                    <Date>Aug 21, 2021</Date>
+                    <Position>Encoder</Position>
+                  </DataInfo>                         
+                </DetailTwo>
+
+              </Details>
+
+              <BasicPay>                
+                  <BasicCaption>
+                    Basic Pay:<BasicMoney>P537.00</BasicMoney>
+                  </BasicCaption>                                
+                  <BasicDate>AUG-01-2021 TO AUG-07-2021</BasicDate>                                               
+              </BasicPay>
+            </TrdCol>
           </Wrapper>
         </form>
       </FormProvider>
