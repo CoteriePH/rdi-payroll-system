@@ -98,7 +98,7 @@ export const TrdCol = styled.div`
 export const Details = styled.div`
   display: flex;
   column-gap: 2em;
-  
+  font-size: 0.90rem;
 `;
 
 export const DetailOne = styled.div`
@@ -145,7 +145,7 @@ export const Position = styled.div`
 `;
 
 export const BasicPay= styled.div`
-  
+  font-size: 0.90rem;
 `;
 
 export const BasicCaption= styled.div`
@@ -163,7 +163,93 @@ export const BasicMoney = styled.span`
 export const BasicDate = styled.div`
   text-transform: uppercase;
   font-family: ${theme.fonts.avenirBlack};
-  color: ${theme.colors.default}
+  color: ${theme.colors.default};
+`;
+
+export const Hr = styled.hr`
+  border: 0;
+  width: 95%;
+  height: 1px;
+  background-color: #808180;
+`;
+export const Hr1 = styled.hr`
+  border: 0;
+  width: 98%;
+  height: 1px;
+  background-color: #808180;
+  float: left;
+  margin: 0em;
+  margin-top: 1em;
+`;
+
+export const FrthCol = styled.div`
+  padding: 1em 2em;
+  display: flex;
+`;
+
+export const BigCol = styled.div`  
+  flex-basis: 75%;
+`;
+
+export const BigUpper = styled.div`
+  display: flex;
+  column-gap: 1em;
+`;
+
+export const BigLower = styled.div`
+  
+  
   
 `;
 
+export const Approve = styled.div`
+  
+`;
+export const WasApprove = styled.div`
+  
+`;
+export const MarkCheck = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: #aaa;
+
+`;
+
+export const Attendance = styled.div`
+  flex-basis: 58%;
+`;
+
+export const Deductions = styled.div`
+  flex-basis: 38%;
+`;
+
+export const ADTitle = styled.div`
+  font-family: ${theme.fonts.avenirBlack};
+  font-size: 2rem;
+`;
+
+export const AttContent = styled.div`
+/* border is only for seeing its boundary */
+  border: solid black 1px; 
+  padding: .5em;
+`;
+
+export const DeducContent = styled.div`
+/* border is only for seeing its boundary */
+  border: solid black 1px; 
+  padding: .5em;
+`;
+
+
+export const SmallCol = styled.div`
+  background-color: #EDECEC; 
+  flex-basis: 25%;
+  
+  border-radius: 1em;
+`;
+
+
+
+export const Pay = styled.div`
+  padding: 0em 3em;
+`;

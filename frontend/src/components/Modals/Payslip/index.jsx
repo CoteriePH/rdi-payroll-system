@@ -28,8 +28,23 @@ import {
   BasicDate,  
   SubDetail,
   DataInfo,
-  BasicCaption
-
+  BasicCaption,
+  Hr,
+  Hr1,
+  FrthCol,
+  BigCol,
+  SmallCol,
+  Attendance,
+  Deductions,
+  Pay,
+  ADTitle,
+  AttContent,
+  DeducContent,
+  BigUpper,
+  BigLower,
+  Approve,
+  WasApprove,
+  MarkCheck
 } from "./styles";
 import Button from "@/components/Button";
 
@@ -116,7 +131,6 @@ const Payslip = ({ isOpen, onClose }) => {
                     <Position>Encoder</Position>
                   </DataInfo>                         
                 </DetailTwo>
-
               </Details>
 
               <BasicPay>                
@@ -126,6 +140,45 @@ const Payslip = ({ isOpen, onClose }) => {
                   <BasicDate>AUG-01-2021 TO AUG-07-2021</BasicDate>                                               
               </BasicPay>
             </TrdCol>
+            <Hr />
+
+            <FrthCol>
+              <BigCol> 
+                <BigUpper>        
+                  <Attendance>
+                    <ADTitle>attendance</ADTitle>
+                    <AttContent>
+                      {/* TABLE INSERT HERE? */}
+                    </AttContent>
+                  </Attendance>
+                  <Deductions>
+                    <ADTitle>deductions</ADTitle>
+                    <DeducContent>
+                      {/* TABLE INSERT HERE? */}
+                    </DeducContent>
+                  </Deductions>
+                </BigUpper>
+                <Hr1  />
+                <BigLower>                  
+                  <Approve>
+                    <MarkCheck>
+                      
+                    </MarkCheck>
+                    <WasApprove>
+
+                    </WasApprove>
+                  </Approve>
+                </BigLower>                
+              </BigCol>
+
+              <SmallCol>
+                <Pay>
+                  Regular Pay??                
+                  {/* TABLE INSERT HERE? */}
+                </Pay>
+              </SmallCol>
+            </FrthCol>
+
           </Wrapper>
         </form>
       </FormProvider>
