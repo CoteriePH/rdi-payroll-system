@@ -197,22 +197,24 @@ export const BigUpper = styled.div`
 `;
 
 export const BigLower = styled.div`
-  
-  
-  
+  padding: 0em 1.5em;  
 `;
 
 export const Approve = styled.div`
-  
+  margin-top: 1.5em;
+  display: flex;
+  column-gap: .5em;
+  justify-content: flex-end;
 `;
 export const WasApprove = styled.div`
-  
+  padding-top: .1em;
+  font-family: ${theme.fonts.avenirBlack};
+  color: #5CBD67;
 `;
 export const MarkCheck = styled.div`
-  width: 10px;
-  height: 10px;
-  background-color: #aaa;
-
+  width: 1.5em;
+  height: 1.5em;
+  color: #5CBD67;
 `;
 
 export const Attendance = styled.div`
@@ -243,12 +245,9 @@ export const DeducContent = styled.div`
 
 export const SmallCol = styled.div`
   background-color: #EDECEC; 
-  flex-basis: 25%;
-  
+  flex-basis: 25%;  
   border-radius: 1em;
 `;
-
-
 
 export const Pay = styled.div`
   padding: 0em 3em;
