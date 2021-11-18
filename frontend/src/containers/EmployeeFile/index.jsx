@@ -15,7 +15,7 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
-
+import PayslipIcon from "@/components/View/PayslipIcon";
 const EmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
@@ -106,6 +106,11 @@ const EmployeeFile = () => {
             )}
           </TableContainer>
           {/* TEMPORARY ADD RECORD */}
+          {/* Singit ko lang gawa ko dito,
+              Appropriate path naman 'to para hindi mahirap
+              ayusin kung saan 'tong component nakalagay  - LeJexy */}
+          
+          <PayslipIcon></PayslipIcon>
           <Toolbar
             leftChildren={
               authRole === ROLES.ENCODER ? (
