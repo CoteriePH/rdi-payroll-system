@@ -15,7 +15,7 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
-
+import GridItem from "@/components/View/GridItem";
 const EmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
@@ -104,8 +104,14 @@ const EmployeeFile = () => {
             ) : (
               "Wow, such empty"
             )}
+
           </TableContainer>
           {/* TEMPORARY ADD RECORD */}
+                        {/* 
+                Singit ko lang dito yung Grid 
+                Item for Display and Development Purposes
+             */}
+          <GridItem />
           <Toolbar
             leftChildren={
               authRole === ROLES.ENCODER ? (
@@ -123,6 +129,7 @@ const EmployeeFile = () => {
               ) : null
             }
           ></Toolbar>
+
         </Flex>
         <Flex bg="gray" flex={1}>
           {isOpen && <Menu />}
