@@ -1,24 +1,37 @@
-import Menu from "@/components/Menu";
-import Settings from "@/components/Menu/settings";
-import Table from "@/components/Table";
-import { settingsSelector } from "@/features/settings/settingsSlice";
-import React from "react";
-import { useSelector } from "react-redux";
 import { findAllEmployees } from "@/features/employee/employeeSlice";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useTable } from "react-table";
 import { Wrapper, TextLink, Container, Flex, TableContainer } from "./styles";
+import Button from "@/components/Button/";
 import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
-import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
-import Loader from "@/components/Loader";
-const Payroll = () => {
+import EditEmployee from "@/components/Modals/EditEmployee";
+import AddEmployee from "@/components/Modals/AddEmployee";
+
+const EncoderEmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+
+  //TODO - NEXT BUTTON
+  const onEditModalOpen = () => {
+    setIsEditModalOpen(true);
+  };
+  const onEditModalClose = () => {
+    setIsEditModalOpen(false);
+  };
+
+  const onModalOpen = () => {
+    setIsModalOpen(true);
+  };
+  const onModalClose = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     dispatch(findAllEmployees());
@@ -43,7 +56,8 @@ const Payroll = () => {
         Cell: (props) => {
           return (
             <div>
-              {props.row.original.first_name} {props.row.original.last_name}
+              {props.row.original.first_name} {props.row.original.middle_name}{" "}
+              {props.row.original.last_name}
             </div>
           );
         },
@@ -55,69 +69,63 @@ const Payroll = () => {
           return <div>{getTimeDuration(props.value)} years</div>;
         },
       },
+      {
+        minWidth: 100,
+        width: 100,
+        maxWidth: 100,
+        Header: "",
+        accessor: "id",
+        Cell: () => {
+          return <TextLink onClick={onEditModalOpen}>Edit</TextLink>;
+        },
+      },
     ],
     []
   );
-
-  if (isFetching) {
-    return <Loader />;
-  }
   return (
     <Wrapper>
       <Container>
-        {/* NOTE: Gayahin nalang tong flex sa ibang @/components */}
-        {/* TODO - Add nalang ng global styles na pwede gamitin kahit san like Flex */}
+        {/* NOTE: Gayahin nalang tong flex sa ibang components */}
         <Flex justify="space-between" direction="column" flex={8}>
           <TableContainer>
             {/* TODO - Component kung alang laman data */}
-
             {/* NOTE: To use Settings Component set parent div to position relative*/}
             <Settings />
-            {data.length > 0 ? (
+            {isFetching ? (
+              <div>Loading</div>
+            ) : data.length > 0 ? (
               <Table columns={columns} data={data} />
             ) : (
               "Wow, such empty"
             )}
           </TableContainer>
-          <Toolbar leftChildren={<></>}></Toolbar>
-        </Flex>
-        <Flex bg="gray" flex={1}>
-          {isOpen && (
-            <Menu>
-              {authRole === ROLES.ENCODER ? (
+          {/* TEMPORARY ADD RECORD */}
+          <Toolbar
+            leftChildren={
+              authRole === ROLES.ENCODER ? (
                 <>
                   <Button
+                    onClick={onModalOpen}
                     minW="10rem"
                     h="2rem"
                     fontWeight="bold"
                     fontFamily="avenirRoman"
                   >
-                    RECORD DEDUCTION
-                  </Button>
-                  <Button
-                    minW="10rem"
-                    h="2rem"
-                    fontWeight="bold"
-                    fontFamily="avenirRoman"
-                  >
-                    RECORD EARNINGS
-                  </Button>
-                  <Button
-                    minW="13rem"
-                    h="2rem"
-                    fontWeight="bold"
-                    fontFamily="avenirRoman"
-                  >
-                    REQUEST FOR APPROVAL
+                    Add Record
                   </Button>
                 </>
-              ) : null}
-            </Menu>
-          )}
+              ) : null
+            }
+          ></Toolbar>
+        </Flex>
+        <Flex bg="gray" flex={1}>
+          {isOpen && <Menu />}
         </Flex>
       </Container>
+      <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
+      <EditEmployee isOpen={isEditModalOpen} onClose={onEditModalClose} />
     </Wrapper>
   );
 };
 
-export default Payroll;
+export default EncoderEmployeeFile;
