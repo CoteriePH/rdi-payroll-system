@@ -15,7 +15,7 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
-import LGButton from "@/components/View/LGButtons";
+
 const EmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
@@ -106,8 +106,6 @@ const EmployeeFile = () => {
             )}
           </TableContainer>
           {/* TEMPORARY ADD RECORD */}
-          {/* List and Grid Button */}
-          <LGButton/>
           <Toolbar
             leftChildren={
               authRole === ROLES.ENCODER ? (
