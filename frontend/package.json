@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "@vitejs/plugin-react": "1.0.5",
+    "typescript-styled-plugin": "^0.18.1",
     "vite": "^2.6.4",
     "vite-plugin-react-svg": "^0.2.0",
     "vite-plugin-svgr": "^0.4.0"
