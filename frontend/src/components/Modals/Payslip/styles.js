@@ -20,8 +20,9 @@ export const ModalStyle = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #f7f6f7;
-  width: 70rem;
-  height: 37rem;
+  width: 75%;
+  max-width: 75rem;
+  height: 85%;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;

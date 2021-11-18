@@ -100,7 +100,8 @@ const Payslip = ({ isOpen, onClose }) => {
               </SndWrapper>              
               <BtnWrapper>
                 <Button                   
-                  minW = "6em">EXPORT</Button>
+                  minW = "6em"
+                  bg = "#fff">EXPORT</Button>
                 <Button
                   minW = "6em">PRINT PAYSLIP</Button>
               </BtnWrapper>
