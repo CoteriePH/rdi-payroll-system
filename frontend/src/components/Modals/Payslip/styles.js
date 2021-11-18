@@ -251,5 +251,5 @@ export const SmallCol = styled.div`
 `;
 
 export const Pay = styled.div`
-  padding: 0em 3em;
+  padding: .5em 3em;
 `;
