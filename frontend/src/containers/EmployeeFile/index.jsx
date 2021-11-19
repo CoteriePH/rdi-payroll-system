@@ -16,6 +16,8 @@ import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
 import LGButton from "@/components/View/LGButtons";
+import FolderIcon from "@/components/View/FolderIcon"
+import PayslipIcon from "@/components/View/PayslipIcon";
 const EmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
@@ -108,6 +110,8 @@ const EmployeeFile = () => {
           {/* TEMPORARY ADD RECORD */}
           {/* List and Grid Button */}
           <LGButton/>
+          <FolderIcon/>
+          <PayslipIcon/>
           <Toolbar
             leftChildren={
               authRole === ROLES.ENCODER ? (
