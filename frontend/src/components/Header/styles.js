@@ -2,11 +2,15 @@ import { theme } from "@/theme";
 import { Link, NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+export const HeaderAudPayroll = styled.div`
+  display: ${(props)=>(props.tempDisplay ? props.tempDisplay : "none")};
+  
+`;
 export const HeaderCan = styled.div`
   padding: 1.5em 0em 1.2em 2.5em;
   box-shadow: 0px 10px 10px rgba(46, 54, 68, 0.1);
   display: flex;
-  justify-content: space-between;
+  justify-content: ${(props) => (props.jc ? props.jc : "space-between")};
 `;
 
 export const HeaderName = styled.div`
@@ -17,9 +21,20 @@ export const HeaderName = styled.div`
 `;
 
 export const HeaderDate = styled.div`
+  display: ${(props) => (props.display)};
   font-family: ${(props) => props.theme.fonts.avenirBook};
   color: rgb(10, 10, 10, 0.7);
   letter-spacing: 5px;
+`;
+export const ChevronForProll = styled.div` 
+  width: 2.5em;
+  height: 2.5em;
+  color: ${theme.colors.default};  
+  margin-right: .5em;  
+  &:hover{
+    cursor: pointer;
+    color: ${theme.colors.lightViolet}
+  }
 `;
 
 export const TitleContainer = styled.div``;

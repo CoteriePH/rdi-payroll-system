@@ -8,6 +8,8 @@ import {
   TitleContainer,
   TabsContainer,
   TabLink,
+  ChevronForProll,
+  HeaderAudPayroll
 } from "./styles";
 
 function Header(props) {
@@ -24,10 +26,29 @@ function Header(props) {
 
   return (
     <>
-      <HeaderCan>
-        <TitleContainer>
-          <HeaderName>{props.headerName}</HeaderName>
-          <HeaderDate>
+      <HeaderCan         
+        jc={props.jc}>
+        <HeaderAudPayroll tempDisplay = {props.tempDisplay}>
+          <ChevronForProll>          
+              <svg 
+                mlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 24 24">
+                  <path d="M13.293 6.293L7.586 12l5.707 5.707l1.414-1.414L10.414 12l4.293-4.293z" fill="currentColor"/>
+              </svg>
+          </ChevronForProll>
+          <HeaderName>
+            {props.generatePayroll}
+          </HeaderName> 
+          From:  <input type="date" />
+          To: <input type="date" />               
+        </HeaderAudPayroll>
+        
+        {/* ChevronForProll is for Auditor Payroll */}
+        <TitleContainer>          
+          <HeaderName>
+            {props.headerName}
+          </HeaderName>
+          <HeaderDate display={props.display}>
             <CurrDate />
           </HeaderDate>
         </TitleContainer>
@@ -50,6 +71,7 @@ function Header(props) {
       </HeaderCan>
     </>
   );
+
 }
 
 export default Header;
