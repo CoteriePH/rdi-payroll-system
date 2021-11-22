@@ -2,11 +2,9 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
-    display: flex;        
-    justify-content: center; /* this is for display only */
-    column-gap: .8em;    
-    /* width: 10%; */
-        
+    display: flex;            
+    column-gap: 1em;    
+    width: 100%;        
 `;
 
 export const ListButton = styled.div`
@@ -17,6 +15,7 @@ export const ListButton = styled.div`
     border-radius: .5em;
     &:hover{
         box-shadow: 0pt 0pt 0pt 1pt ${theme.colors.default};
+        cursor: pointer;
     }
 `;
 
@@ -28,6 +27,7 @@ export const GridButton = styled.div`
     border-radius: .5em;
     &:hover{
         box-shadow: 0pt 0pt 0pt 1pt ${theme.colors.default};
+        cursor: pointer;
     }
     
 `;

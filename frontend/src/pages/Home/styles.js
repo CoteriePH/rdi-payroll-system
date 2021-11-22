@@ -9,7 +9,8 @@ export const MainRight = styled.div`
   flex-direction: column;
   flex-grow: 6;
   height: 100vh;
-  overflow: hidden;
+  width: 100%; 
+  overflow: hidden;  
 `;
 
 export const WrapperRight = styled.div`

@@ -27,7 +27,6 @@ function App() {
     <>
       <Suspense fallback={<Loader primary />}>
         <Switch>
-          {/* MAY BUG ATA SA PUBLIC ROUTES */}
           <PublicRoute path="/login">
             <LoginPage />
           </PublicRoute>
