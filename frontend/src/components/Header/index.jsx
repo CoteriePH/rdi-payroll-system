@@ -9,8 +9,12 @@ import {
   TabsContainer,
   TabLink,
   ChevronForProll,
-  HeaderAudPayroll
+  HeaderAudPayroll,
+  From,
+  To,
+  FlexRun
 } from "./styles";
+import Button from "@/components/Button"
 
 function Header(props) {
   let { pathname } = useLocation();
@@ -35,15 +39,26 @@ function Header(props) {
                 viewBox="0 0 24 24">
                   <path d="M13.293 6.293L7.586 12l5.707 5.707l1.414-1.414L10.414 12l4.293-4.293z" fill="currentColor"/>
               </svg>
-          </ChevronForProll>
+          </ChevronForProll>          
           <HeaderName>
             {props.generatePayroll}
           </HeaderName> 
-          From:  <input type="date" />
-          To: <input type="date" />               
+          <From>
+            From:  
+          </From>
+          <input type="date" />
+          <To>
+            To: 
+          </To>
+          <input type="date" />            
+          <FlexRun>
+            <Button
+              w="5%">
+                RUN
+            </Button>
+          </FlexRun>                                           
         </HeaderAudPayroll>
-        
-        {/* ChevronForProll is for Auditor Payroll */}
+               
         <TitleContainer>          
           <HeaderName>
             {props.headerName}
@@ -52,7 +67,8 @@ function Header(props) {
             <CurrDate />
           </HeaderDate>
         </TitleContainer>
-        <TabsContainer>
+        <TabsContainer
+          TabContDisp={props.TabContDisp}>
           {tabsMap.get(pathname)?.map(({ title, to }, idx) => {
             return (
               <TabLink

@@ -4,8 +4,43 @@ import styled from "styled-components";
 
 export const HeaderAudPayroll = styled.div`
   display: ${(props)=>(props.tempDisplay ? props.tempDisplay : "none")};
+  column-gap: 1em;
+  width: 100%;
+`;
+export const From = styled.div`
+  padding: 1em .5em;
+  line-height: 10px;
+  text-transform: uppercase;
+  font-family: ${theme.fonts.avenirRoman} ;
   
 `;
+
+export const To = styled.div`
+  padding: 1em .5em;
+  line-height: 10px;
+  text-transform: uppercase;
+  font-family: ${theme.fonts.avenirRoman} ;
+  
+`;
+
+export const ChevronForProll = styled.div` 
+  width: 2.5em;
+  height: 2.5em;
+  color: ${theme.colors.default};     
+  &:hover{
+    cursor: pointer;
+    color: ${theme.colors.lightViolet}
+  }
+`;
+
+export const FlexRun = styled.div` 
+  flex-grow: 2;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 2.5em;
+    
+`;
+
 export const HeaderCan = styled.div`
   padding: 1.5em 0em 1.2em 2.5em;
   box-shadow: 0px 10px 10px rgba(46, 54, 68, 0.1);
@@ -26,21 +61,12 @@ export const HeaderDate = styled.div`
   color: rgb(10, 10, 10, 0.7);
   letter-spacing: 5px;
 `;
-export const ChevronForProll = styled.div` 
-  width: 2.5em;
-  height: 2.5em;
-  color: ${theme.colors.default};  
-  margin-right: .5em;  
-  &:hover{
-    cursor: pointer;
-    color: ${theme.colors.lightViolet}
-  }
-`;
+
 
 export const TitleContainer = styled.div``;
 
 export const TabsContainer = styled.div`
-  display: flex;
+  display: ${(props)=> (props.TabContDisp ? props.TabContDisp : "flex")};
   gap: 3rem;
   padding: 1.5em 2.5em 1.2em 2.5em;
   .active {
