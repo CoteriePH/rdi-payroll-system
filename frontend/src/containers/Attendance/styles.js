@@ -97,21 +97,16 @@ export const SubWrapper = styled.div`
 `;
 
 export const Left = styled.div`
-    flex-basis:78%;
+    flex-basis:80%;
     
 `;
 
-export const Right = styled.div`
-    flex-basis: 22%;
-`;
-
 export const EmpSpecs = styled.div`
-    display: flex;
-    justify-content: center;
-    column-gap: 20px;
+    display: flex;    
+    column-gap: 3em;
     box-shadow: 0pt 0pt 0pt 1pt #D3BFE8;
     border-radius: .2em;
-    padding: .5em 1em;
+    padding: .5em 2em;
     
 `;
 
@@ -158,11 +153,6 @@ export const InputSpecs = styled.input`
     
 `;
 
-export const Rate = styled.div`
-     
-`;
-
-
 export const ColumnTitle = styled.div`
     font-family: ${theme.fonts.avenirBlack};
     font-size: ${theme.fontSizes.xl2};
@@ -172,124 +162,185 @@ export const ColumnTitle = styled.div`
     align-items: center;
 `;
 
-export const SalaryEarnings = styled.div`
-    box-shadow: 0pt 0pt 0pt 1pt #D3BFE8;
-    margin: 1em 0em;
-    padding: 1em 2em;
-    border-radius: .2em;
-    display: flex;
-    
-    column-gap: 2em;
-`;
-
 export const BasicPay = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 export const OvertimeRate = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 export const NightDiff = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 export const SunPay = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
+
 export const LegalHoliday = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
+`;
+
+export const SalaryEarnings = styled.div`
+    box-shadow: 0pt 0pt 0pt 1pt #D3BFE8;
+    margin: 1em 0em;
+    padding: 1em 1.3em;
+    border-radius: .2em;
+    display: flex;        
+    column-gap: 1.5em;
 `;
 
 export const SalaryDeductions = styled.div`
     box-shadow: 0pt 0pt 0pt 1pt #D3BFE8;
     margin: 1em 0em;
-    padding: 1em 2em;
+    padding: 1em 1.3em;
     border-radius: .2em;
-    display: flex;    
-    column-gap: 2em;
+    display: flex;         
+    column-gap: 1.5em;
 `;
 
 export const FinancialAssistance = styled.div`
     box-shadow: 0pt 0pt 0pt 1pt #D3BFE8;
     margin: 1em 0em;
-    padding: 1em 2em;
+    padding: 1em 1.3em;
     border-radius: .2em;
-    display: flex;    
-    column-gap: 2em;
+    display: flex;          
+    column-gap: 1.5em;
 `;
 
-export const Section = styled.div`
 
-    
+export const SectionOne = styled.div`    
+    margin-left: .3em;
 `;
+
+export const SectionTwo = styled.div`    
+    margin-left: 1.5em;
+`;
+export const SectionThree = styled.div`    
+    margin-left: 1.3em;
+`;
+
+export const SectionFour = styled.div`    
+    margin-left: .3em;
+`;
+
 
 export const SSSContri = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 
 export const LoveFunds = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 
 export const LoveLoans = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 
 export const PhiLoans = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 
 export const CashAdv = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
 
 export const Others = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
-`;
-
-export const Span = styled.span`
-    
+    margin-top: .8em;
 `;
 
 export const SickPay = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
      
 `;
 
 export const SepaPay = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 
 `;
 
 export const BonusPay = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: .5em;
+    margin-top: .8em;
 `;
+
+export const OneThreeComputation = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .8em;
+`;
+
+export const ThisYearSalary = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .8em;
+`;
+
+export const OneThreePay = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .8em;
+`;
+
+export const Run = styled.div`
+    color: ${theme.colors.default};    
+`;
+export const ModifiedButton = styled.button`
+    color: #fff;
+    background-color: ${theme.colors.default};
+    font-family: ${theme.fonts.avenirRoman};
+    font-size: ${theme.fontSizes.md};
+    border: none;
+    border-radius: .3em;
+    padding: .3em .5em;
+    outline: none;
+    &:hover{
+        cursor: pointer;
+        background-color: ${theme.colors.darkViolet};
+    }
+    margin-left: .5em;
+`;
+
+export const ViewMonth = styled.div`
+    color: ${theme.colors.default};
+    text-decoration: underline;
+    &:hover{
+        cursor: pointer;
+        color: ${theme.colors.darkViolet};       
+    }
+    text-align: right;
+    margin-top: .8em;
+`;
+
+export const Section = styled.div`    
+    
+`;
+
 export const DaysWorked = styled.div`
      
 `;
@@ -300,4 +351,60 @@ export const NumOfHours = styled.div`
 
 export const SundayPay = styled.div`
 
+`;
+
+export const Span = styled.span`
+    
+`;
+
+export const Rate = styled.div`
+     
+`;
+
+export const Right = styled.div`
+    flex-basis: 20%;
+    padding: 2em 0em 2em 2em;    
+    
+`;
+
+export const GrossPay = styled.div`
+    font-family: ${theme.fonts.avenirRoman};
+    text-decoration: uppercase;    
+`;
+
+export const LessDeduc = styled.div`
+    font-family: ${theme.fonts.avenirRoman};
+    text-decoration: uppercase;
+    margin-top: 4em;
+`;
+
+export const NetPay = styled.div`
+    font-family: ${theme.fonts.avenirBlack};
+    color: ${theme.colors.default};
+    text-decoration: uppercase;
+    margin-top: 4em;
+`;
+
+export const FewButtons = styled.div`
+    margin-top: 4em;
+    display: flex;        
+    flex-direction: column;
+    align-items: flex-end;
+    row-gap: 1em;
+    
+`;
+export const Li = styled.div`
+    margin-top: 4em;
+    
+`;
+
+export const InputHR = styled.input` 
+    width: 93%;
+    font-family: ${theme.fonts.avenirBlack};
+    font-size: ${theme.fontSizes.md};
+    border: none;    
+    outline: none;
+    padding: .2em .5em;
+    margin: .5em 0em;
+    box-shadow: 0pt 2pt 0pt -1pt #aaa;
 `;

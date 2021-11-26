@@ -48,9 +48,25 @@ import {
   LegalHoliday,
   SickPay,
   SepaPay,
-  BonusPay
+  BonusPay,
+  OneThreeComputation,
+  ThisYearSalary,
+  OneThreePay,
+  Run,
+  ModifiedButton,
+  ViewMonth,
+  SectionOne,
+  SectionTwo,
+  SectionThree,
+  SectionFour,
+  GrossPay,
+  InputHR,
+  LessDeduc,
+  NetPay,
+  FewButtons
 } from "./styles"
 import Checkbox from "@/components/Checkbox"
+import Button from "@/components/Button"
 
 function Attendance() {
   // Yung content nito should be in auditor/payroll. Dito na lang muna yung playground since
@@ -114,7 +130,7 @@ function Attendance() {
               <EmpInfo>
                 <SalaryEarnings>
                   <ColumnTitle>Salary Earnings</ColumnTitle>
-                  <Section>
+                  <SectionOne>
                     <BasicPay>
                       <div>Basic Pay:</div>
                       <Input type="text" maxLength="9"/>
@@ -127,8 +143,8 @@ function Attendance() {
                       <div>Night Differential:</div>
                       <Input type="text" maxLength="9"/>
                     </NightDiff>
-                  </Section>
-                  <Section>
+                  </SectionOne>
+                  <SectionTwo>
                     <SunPay>
                       <div>Sunday Pay:</div>
                       <Input type="text" maxLength="9"/>
@@ -137,14 +153,14 @@ function Attendance() {
                       <div>Legal Holiday:</div>
                       <Input type="text" maxLength="9"/>
                     </LegalHoliday>
-                  </Section>
+                  </SectionTwo>
                 </SalaryEarnings>
 
                 <SalaryDeductions>
                   <ColumnTitle>Salary Deduction</ColumnTitle>
                   <Section>
                     <SSSContri>
-                      <div>SSS Contributions:</div>
+                      <Span>SSS Contributions:</Span>
                       <Input type="text" maxLength="9"/>
                     </SSSContri>
                     <LoveFunds>
@@ -174,11 +190,10 @@ function Attendance() {
 
                 <FinancialAssistance>
                   <ColumnTitle>Financial Assistance</ColumnTitle>
-                  <Section>
+                  <SectionThree>
                     <SickPay>
                       <div>Sick Pay:</div>
                       <Input type="text" maxLength="9"/>
-
                     </SickPay>
 
                     <SepaPay>
@@ -192,16 +207,50 @@ function Attendance() {
                       <Input type="text" maxLength="9"/>
 
                     </BonusPay>                    
-                  </Section>
-                  <Section>
+                  </SectionThree>
+                  <SectionFour>
+                    <OneThreeComputation>
+                        <Run>Run 13th month pay computation?</Run>
+                        {/* <Button minW="5em">RUN</Button> */}
+                        <ModifiedButton>yes</ModifiedButton>
+                    </OneThreeComputation>
 
-                  </Section>
+                    <ThisYearSalary>
+                        <div>2021 Salary:</div>
+                        <Input type="text" maxLength="9"/>
+                    </ThisYearSalary>
+
+                    <OneThreePay>
+                        <div>13th Month Pay:</div>
+                        <Input type="text" maxLength="9"/>
+                    </OneThreePay>
+                    <ViewMonth>
+                      View this year's monthly salary
+                    </ViewMonth>
+                  </SectionFour>
                 </FinancialAssistance>
               </EmpInfo>
             </Left>
             
             <Right>
-    
+              <GrossPay>
+                <div>GROSS PAY:</div>
+                <InputHR maxLength="21"></InputHR>
+              </GrossPay>
+              <LessDeduc>
+                <div>LESS DEDUCTION:</div>
+                <InputHR maxLength="21"></InputHR>
+              </LessDeduc>
+              <NetPay>
+                <div>NET PAYABLE:</div>
+                <InputHR maxLength="21"></InputHR>
+              </NetPay>
+
+              <FewButtons>                                
+                <Button>VIEW</Button>
+                <Button>EXPORT</Button>
+                <Button>PRINT</Button>
+              </FewButtons>
             </Right>
         </SubWrapper>
 
