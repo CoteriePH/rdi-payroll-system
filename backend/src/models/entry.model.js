@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
           allowNull: true,
         },
         running_time: {
-          type: DataTypes.DECIMAL(4, 2),
+          type: DataTypes.DECIMAL(5, 2),
           allowNull: true,
         },
         entries: {
