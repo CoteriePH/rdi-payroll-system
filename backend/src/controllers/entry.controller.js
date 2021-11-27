@@ -10,7 +10,6 @@ const {
 
 
 let dates = new Date();
-console.log(timePH())
 
 exports.create = async (req, res) => {
   try {
