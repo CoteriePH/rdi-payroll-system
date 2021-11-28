@@ -14,12 +14,13 @@ import Toolbar from "@/components/Toolbar";
 import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
 import Loader from "@/components/Loader";
+import { Link } from "react-router-dom";
+
 const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
-
   useEffect(() => {
     dispatch(findAllEmployees());
   }, []);
@@ -53,6 +54,13 @@ const Payroll = () => {
         accessor: "date_hired",
         Cell: (props) => {
           return <div>{getTimeDuration(props.value)} years</div>;
+        },
+      },
+      {
+        Header: "",
+        accessor: "id",
+        Cell: (props) => {
+          return <Link to={`payroll/${props.value}`}>view</Link>;
         },
       },
     ],
