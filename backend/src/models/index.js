@@ -31,6 +31,7 @@ db.user = require("./user.model.js")(sequelize, Sequelize, DataTypes);
 db.employee = require("./employee.model.js")(sequelize, Sequelize, DataTypes);
 db.company = require("./company.model.js")(sequelize, Sequelize, DataTypes);
 db.file = require("./file.model.js")(sequelize, Sequelize, DataTypes);
+db.payroll = require("./payroll")(sequelize, Sequelize, DataTypes);
 db.deduction = require("./deduction.model.js")(sequelize, Sequelize, DataTypes);
 db.addtnl_deduction = require("./addtnl_deduction.model")(
   sequelize,
@@ -169,3 +170,34 @@ db.employee.hasMany(db.cash_advance, {
   foreignKey: "employee_id",
 });
 module.exports = db;
+
+//OneToMany (One employee  ---> Many Payroll)
+db.payroll.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.employee.hasMany(db.payroll, {
+  as: "payrolls",
+  foreignKey: "employee_id",
+});
+module.exports = db;
+
+//OneAndOnlyONE (One earnings  ---> one payroll)
+db.earning.belongsTo(db.payroll, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.payroll.hasOne(db.earning, {
+  as: "earning",
+  foreignKey: "employee_id",
+});
+
+//OneAndOnlyONE (One deductions  ---> one payroll)
+db.deduction.belongsTo(db.payroll, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.payroll.hasOne(db.deduction, {
+  as: "deduction",
+  foreignKey: "employee_id",
+});
