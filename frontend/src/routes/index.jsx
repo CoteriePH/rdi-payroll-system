@@ -8,7 +8,12 @@ const routes = [
   },
   {
     path: "payroll",
+    exact: true,
     component: lazy(() => import("@/containers/Payroll")),
+  },
+  {
+    path: "payroll/:id",
+    component: lazy(() => import("@/containers/Payroll/view")),
   },
   {
     path: "attendance",

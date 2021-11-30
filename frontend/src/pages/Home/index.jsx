@@ -18,7 +18,7 @@ const MainWrapper = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.auth);
-
+  const { data } = useSelector((state) => state.employees);
   // encoder based sidebar
   const routesMap = new Map();
   routesMap.set("/", "HUMAN RESOURCES");
@@ -42,6 +42,17 @@ const MainWrapper = ({ children }) => {
 
   const handleLogout = () => {
     dispatch(logout());
+  };
+  // Return null if pathname contains the employeeIds
+  const renderHeader = () => {
+    const employeeIds = data.map((e) => e.id);
+    const path = location.pathname.split("/");
+
+    if (employeeIds.includes(path.at(-1))) {
+      return null;
+    } else {
+      return <Header headerName={headerName} />;
+    }
   };
 
   return (
@@ -85,7 +96,7 @@ const MainWrapper = ({ children }) => {
         </Sidebar>
 
         <MainRight>
-          <Header headerName={headerName} />
+          {renderHeader()}
           <WrapperRight>{children}</WrapperRight>
         </MainRight>
       </MainCan>
