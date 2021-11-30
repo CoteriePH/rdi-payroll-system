@@ -17,7 +17,8 @@ export const Container = styled.button`
         }`
       : "none"};
   outline: none;
-  min-width: ${(props) => (props.minW ? props.minW : "13rem")};
+  min-width: ${(props) => (props.minW ? props.minW : "5rem")};
+  /* min-width: ${(props) => (props.minW ? props.minW : "13rem")}; */
   width: ${(props) => (props.w ? props.w : "100%")};
   height: ${(props) => (props.h ? props.h : "2.5rem")};
   border-radius: 5px;

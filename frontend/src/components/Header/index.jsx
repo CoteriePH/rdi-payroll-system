@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import CurrDate from "./date";
 import {
   HeaderCan,
@@ -8,7 +8,13 @@ import {
   TitleContainer,
   TabsContainer,
   TabLink,
+  ChevronForProll,
+  HeaderAudPayroll,
+  From,
+  To,
+  FlexRun,
 } from "./styles";
+import Button from "@/components/Button";
 
 function Header(props) {
   let { pathname } = useLocation();
@@ -24,14 +30,35 @@ function Header(props) {
 
   return (
     <>
-      <HeaderCan>
+      <HeaderCan jc={props.jc}>
+        <HeaderAudPayroll tempDisplay={props.tempDisplay}>
+          <Link to="/payroll">
+            <ChevronForProll>
+              <svg mlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <path
+                  d="M13.293 6.293L7.586 12l5.707 5.707l1.414-1.414L10.414 12l4.293-4.293z"
+                  fill="currentColor"
+                />
+              </svg>
+            </ChevronForProll>
+          </Link>
+          <HeaderName>{props.generatePayroll}</HeaderName>
+          <From>From:</From>
+          <input type="date" />
+          <To>To:</To>
+          <input type="date" />
+          <FlexRun>
+            <Button w="5%">RUN</Button>
+          </FlexRun>
+        </HeaderAudPayroll>
+
         <TitleContainer>
           <HeaderName>{props.headerName}</HeaderName>
-          <HeaderDate>
+          <HeaderDate display={props.display}>
             <CurrDate />
           </HeaderDate>
         </TitleContainer>
-        <TabsContainer>
+        <TabsContainer TabContDisp={props.TabContDisp}>
           {tabsMap.get(pathname)?.map(({ title, to }, idx) => {
             return (
               <TabLink
