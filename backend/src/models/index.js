@@ -120,7 +120,7 @@ db.employee.hasMany(db.attendance, {
   foreignKey: "employee_id",
 });
 
-//OneToMany - (One schedule ----> One employee)
+//OneToMany - (One schedule ----> Many employee)
 db.employee.belongsTo(db.schedule, {
   foreignKey: { name: "schedule_id", allowNull: false },
 });
