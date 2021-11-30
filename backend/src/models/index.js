@@ -33,6 +33,7 @@ db.company = require("./company.model.js")(sequelize, Sequelize, DataTypes);
 db.file = require("./file.model.js")(sequelize, Sequelize, DataTypes);
 db.payroll = require("./payroll")(sequelize, Sequelize, DataTypes);
 db.deduction = require("./deduction.model.js")(sequelize, Sequelize, DataTypes);
+db.schedule = require("./schedule.model.js")(sequelize, Sequelize, DataTypes);
 db.addtnl_deduction = require("./addtnl_deduction.model")(
   sequelize,
   Sequelize,
@@ -117,6 +118,15 @@ db.attendance.belongsTo(db.employee, {
 db.employee.hasMany(db.attendance, {
   as: "attendances",
   foreignKey: "employee_id",
+});
+
+//OneToMany - (One schedule ----> One employee)
+db.employee.belongsTo(db.schedule, {
+  foreignKey: { name: "schedule_id", allowNull: false },
+});
+db.schedule.hasMany(db.employee, {
+  as: "schedules",
+  foreignKey: "schedule_id",
 });
 
 //TODO - prone to error (add (after create) listener on employee model)

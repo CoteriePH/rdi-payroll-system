@@ -21,6 +21,12 @@ module.exports = {
 
     const positionRows = positions[0];
 
+    const schedules = await queryInterface.sequelize.query(
+      `SELECT id FROM schedules;`
+    );
+
+    const scheduleRows = schedules[0];
+    
     return await queryInterface.bulkInsert("employees", [
       {
         id: uuidv4(),
@@ -43,6 +49,7 @@ module.exports = {
         company_id: companyRows[0].id,
         department_id: departmentRows[0].id,
         position_id: positionRows[1].id,
+        schedule_id: scheduleRows[0].id,
       },
       {
         id: uuidv4(),
@@ -65,6 +72,7 @@ module.exports = {
         company_id: companyRows[1].id,
         department_id: departmentRows[1].id,
         position_id: positionRows[2].id,
+        schedule_id: scheduleRows[0].id,
       },
       {
         id: uuidv4(),
@@ -87,6 +95,7 @@ module.exports = {
         company_id: companyRows[1].id,
         department_id: departmentRows[1].id,
         position_id: positionRows[3].id,
+        schedule_id: scheduleRows[0].id,
       },
       {
         id: uuidv4(),
@@ -109,6 +118,7 @@ module.exports = {
         company_id: companyRows[2].id,
         department_id: departmentRows[3].id,
         position_id: positionRows[3].id,
+        schedule_id: scheduleRows[0].id,
       },
     ]);
   },
