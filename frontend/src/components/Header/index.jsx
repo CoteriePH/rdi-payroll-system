@@ -13,6 +13,7 @@ import {
   From,
   To,
   FlexRun,
+  InputDates
 } from "./styles";
 import Button from "@/components/Button";
 
@@ -43,10 +44,12 @@ function Header(props) {
             </ChevronForProll>
           </Link>
           <HeaderName>{props.generatePayroll}</HeaderName>
-          <From>From:</From>
-          <input type="date" />
-          <To>To:</To>
-          <input type="date" />
+          <InputDates dates={props.dates}>
+            <From>From:</From>
+            <input type="date" />
+            <To>To:</To>
+            <input type="date" />
+          </InputDates>
           <FlexRun>
             <Button w="5%">RUN</Button>
           </FlexRun>

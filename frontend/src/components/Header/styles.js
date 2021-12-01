@@ -7,6 +7,12 @@ export const HeaderAudPayroll = styled.div`
   column-gap: 1em;
   width: 100%;
 `;
+
+export const InputDates = styled.div`
+  display: ${(props)=> (props.dates ? props.dates : "flex")};
+  
+`;
+
 export const From = styled.div`
   padding: 1em .5em;
   line-height: 10px;
