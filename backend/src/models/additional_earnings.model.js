@@ -33,6 +33,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
                 type: DataTypes.DECIMAL(19, 4),
                 allowNull: false,
             },
+            remarks: {
+                type: DataTypes.STRING,
+                allowNull: false,
+            }
         },
         {
             timestamps: true,
