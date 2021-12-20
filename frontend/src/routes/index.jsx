@@ -24,6 +24,10 @@ const routes = [
     component: lazy(() => import("@/containers/EmployeeFile")),
   },
   {
+    path: "for-approval",
+    component: lazy(() => import("@/containers/ForApproval")),
+  },
+  {
     path: "memo",
     component: lazy(() => import("@/containers/Memo")),
   },
