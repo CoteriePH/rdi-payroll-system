@@ -6,8 +6,11 @@ import NotificationBar from '@/components/NotificationBar';
 const ForApproval = () => {
   return(
     <Wrapper>
-      <input type="checkbox" />
+      
       <NotificationBar />
+      <NotificationBar />
+      <NotificationBar />      
+
     </Wrapper>
     );
 }
