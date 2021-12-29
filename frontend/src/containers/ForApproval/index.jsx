@@ -26,13 +26,24 @@ const ForApproval = () => {
       </div>
     </Inputs>
     <NotifbarTray>
+
+        <NotificationBar />      
+      
         <NotificationBar
           Warning = "block" />
 
         <NotificationBar
           Danger = "block" />
 
-        <NotificationBar />      
+        <NotificationBar
+           BlueBell = "block" />    
+
+        <NotificationBar
+          BubbleMessage = "block" />  
+
+ 
+
+
         
              
       </NotifbarTray>

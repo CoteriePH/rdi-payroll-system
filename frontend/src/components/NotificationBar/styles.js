@@ -65,4 +65,13 @@ export const Danger = styled.svg`
     display: ${(props) => (props.Danger ? props.Danger : "none")};
 `;
 
+export const BlueBell = styled.svg`
+    color: #0374D8;
+    display: ${(props)=> (props.BlueBell) ? props.BlueBell : "none"};
+`;
+
+export const BubbleMessage = styled.svg`
+    color: #5AC0DF;
+    display: ${(props)=> (props.BubbleMessage ? props.BubbleMessage : "none")}
+`;
 
