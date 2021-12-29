@@ -27,25 +27,25 @@ const ForApproval = () => {
     </Inputs>
     <NotifbarTray>
 
-        <NotificationBar />      
+        <NotificationBar
+          SubTextCount = "This is a SubTextCount." />      
       
         <NotificationBar
+          SubTextCount = "This is first warning."
           Warning = "block" />
 
         <NotificationBar
+          SubTextCount = "This is second or third warning idk."
           Danger = "block" />
 
         <NotificationBar
-           BlueBell = "block" />    
+          SubTextCount = "This is an important information."
+          BlueBell = "block" />    
 
         <NotificationBar
+          SubTextCount = "This is an announcement."
           BubbleMessage = "block" />  
 
- 
-
-
-        
-             
       </NotifbarTray>
 
     </Wrapper>

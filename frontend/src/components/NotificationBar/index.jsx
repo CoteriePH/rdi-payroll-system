@@ -55,7 +55,7 @@ const NotificationBar = (props) => {
             
            
                 <WarningCount>
-                    This is a first warning
+                    {props.SubTextCount}
                 </WarningCount>
 
                 <Description>
