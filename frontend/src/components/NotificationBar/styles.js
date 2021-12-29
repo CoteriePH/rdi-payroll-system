@@ -30,8 +30,7 @@ export const Name = styled.div`
 
 export const Icon = styled.div`    
     width: 2.1rem;
-    height: 2.1rem;
-    color: #FFC837;
+    height: 2.1rem;    
     margin-left: auto;        
 `;
 
@@ -56,5 +55,14 @@ export const Date = styled.div`
     margin-bottom: .8em;
 `;
 
+export const Warning = styled.svg`
+    color: #FFC837;
+    display: ${(props) => (props.Warning ? props.Warning : "none")};
+`;
+
+export const Danger = styled.svg`
+    color: #FE0E0E;
+    display: ${(props) => (props.Danger ? props.Danger : "none")};
+`;
 
 
