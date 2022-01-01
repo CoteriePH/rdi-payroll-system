@@ -47,6 +47,10 @@ const routes = [
     component: lazy(() => import("@/containers/UnprocessedCA")),
   },
   {
+    path: "reports",
+    component: lazy(() => import("@/containers/Reports")),
+  },
+  {
     path: "request",
     component: lazy(() => import("@/containers/Request")),
   },
