@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { findAllEmployees } from "@/features/employee/employeeSlice";
+import { settingsSelector } from "@/features/settings/settingsSlice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTable } from "react-table";
 import { Wrapper, TextLink, Container, Flex, TableContainer } from "./styles";
 import Button from "@/components/Button/";
@@ -9,6 +11,8 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
+import Settings from "@/components/Menu/settings";
+import Table from "@/components/Table";
 
 const EncoderEmployeeFile = () => {
   const dispatch = useDispatch();
