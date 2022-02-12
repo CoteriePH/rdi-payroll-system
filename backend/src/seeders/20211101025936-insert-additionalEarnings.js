@@ -8,7 +8,7 @@ module.exports = {
     );
 
     const employeeRows = employees[0];
-    return await queryInterface.bulkInsert("tbl_addtnl _earnings", [
+    return await queryInterface.bulkInsert("additional_earnings", [
       {
         id: uuidv4(),
         employee_id: 11,
@@ -45,6 +45,6 @@ module.exports = {
     ]);
   },
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("tbl_addtnl _earnings", null, {});
+    return queryInterface.bulkDelete("additional_earnings", null, {});
   },
 };
