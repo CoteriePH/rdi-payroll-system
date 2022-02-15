@@ -7,3 +7,16 @@ export const accuracyColorPicker = (val) => {
   else if (val < parseFloat(50)) return theme.colors.red;
   else return theme.colors.default;
 };
+
+export const caStatusColorPicker = (val) => {
+  switch (val) {
+    case "PAID":
+      return theme.colors.green;
+    case "INCOMPLETE":
+      return theme.colors.red;
+    case "DELAYED":
+      return "orange";
+    default:
+      break;
+  }
+};

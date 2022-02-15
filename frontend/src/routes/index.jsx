@@ -8,7 +8,12 @@ const routes = [
   },
   {
     path: "payroll",
+    exact: true,
     component: lazy(() => import("@/containers/Payroll")),
+  },
+  {
+    path: "payroll/:id",
+    component: lazy(() => import("@/containers/Payroll/view")),
   },
   {
     path: "attendance",
@@ -19,12 +24,27 @@ const routes = [
     component: lazy(() => import("@/containers/EmployeeFile")),
   },
   {
+    path: "for-approval",
+    component: lazy(() => import("@/containers/ForApproval")),
+  },
+  {
     path: "memo",
     component: lazy(() => import("@/containers/Memo")),
   },
   {
     path: "cash-advance",
+    exact: true,
     component: lazy(() => import("@/containers/CashAdvance")),
+  },
+  {
+    path: "cash-advance/processed",
+    exact: true,
+    component: lazy(() => import("@/containers/ProcessedCA")),
+  },
+  {
+    path: "cash-advance/unprocessed",
+    exact: true,
+    component: lazy(() => import("@/containers/UnprocessedCA")),
   },
   {
     path: "request",

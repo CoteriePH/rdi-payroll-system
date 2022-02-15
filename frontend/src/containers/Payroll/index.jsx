@@ -13,12 +13,14 @@ import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
 import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
+import Loader from "@/components/Loader";
+import { Link } from "react-router-dom";
+
 const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
   const authRole = useSelector((state) => state.auth.role);
-
   useEffect(() => {
     dispatch(findAllEmployees());
   }, []);
@@ -57,21 +59,16 @@ const Payroll = () => {
       {
         Header: "",
         accessor: "id",
-        Cell: () => {
-          return <TextLink>Edit</TextLink>;
+        Cell: (props) => {
+          return <Link to={`payroll/${props.value}`}>view</Link>;
         },
       },
     ],
     []
   );
 
-  const tableInstance = useTable({ columns, data });
-
   if (isFetching) {
-    /**
-     * TODO - Loading Component
-     */
-    return <div>Loading</div>;
+    return <Loader />;
   }
   return (
     <Wrapper>
@@ -85,7 +82,7 @@ const Payroll = () => {
             {/* NOTE: To use Settings Component set parent div to position relative*/}
             <Settings />
             {data.length > 0 ? (
-              <Table tableInstance={tableInstance} />
+              <Table columns={columns} data={data} />
             ) : (
               "Wow, such empty"
             )}

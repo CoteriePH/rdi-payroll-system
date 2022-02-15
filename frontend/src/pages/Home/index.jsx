@@ -18,7 +18,7 @@ const MainWrapper = ({ children }) => {
   const location = useLocation();
   const dispatch = useDispatch();
   const { role } = useSelector((state) => state.auth);
-
+  const { data } = useSelector((state) => state.employees);
   // encoder based sidebar
   const routesMap = new Map();
   routesMap.set("/", "HUMAN RESOURCES");
@@ -31,10 +31,28 @@ const MainWrapper = ({ children }) => {
   routesMap.set("/for-approval", "FOR APPROVAL");
   routesMap.set("/reports", "REPORTS");
 
-  const headerName = routesMap.get(location.pathname);
+  let headerName = "RDI PAYROLL SYSTEM";
+  if (location.pathname.includes("/cash-advance")) {
+    headerName = routesMap.get(
+      location.pathname.replace(/cash-advance\/?.*/g, "cash-advance")
+    );
+  } else if (routesMap.has(location.pathname)) {
+    headerName = routesMap.get(location.pathname);
+  }
 
   const handleLogout = () => {
     dispatch(logout());
+  };
+  // Return null if pathname contains the employeeIds
+  const renderHeader = () => {
+    const employeeIds = data.map((e) => e.id);
+    const path = location.pathname.split("/");
+
+    if (employeeIds.includes(path.at(-1))) {
+      return null;
+    } else {
+      return <Header headerName={headerName} />;
+    }
   };
 
   return (
@@ -44,7 +62,9 @@ const MainWrapper = ({ children }) => {
           <LinkWrapper>
             {role === ROLES.ENCODER && (
               <>
-                <Link to={`/`}>HUMAN RESOURCES</Link>
+                <Link exact to={`/`}>
+                  HUMAN RESOURCES
+                </Link>
                 <Link to={`/payroll`}>PAYROLL</Link>
                 <Link to={`/attendance`}>ATTENDANCE</Link>
                 <Link to={`/employee-file`}>EMPLOYEE FILE</Link>
@@ -76,7 +96,7 @@ const MainWrapper = ({ children }) => {
         </Sidebar>
 
         <MainRight>
-          <Header headerName={headerName} />
+          {renderHeader()}
           <WrapperRight>{children}</WrapperRight>
         </MainRight>
       </MainCan>

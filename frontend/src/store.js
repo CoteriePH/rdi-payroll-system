@@ -18,12 +18,13 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import attendanceSlice from "@/features/attendance/attendanceSlice";
+import cashAdvanceSlice from "./features/cash_advance/cashAdvanceSlice";
 
 const persistConfig = {
   key: "root",
   version: 1,
   storage,
-  whitelist: ["auth"],
+  whitelist: ["auth", "employees"],
 };
 
 const rootReducer = combineReducers({
@@ -35,6 +36,7 @@ const rootReducer = combineReducers({
   companies: companySlice,
   requests: requestSlice,
   attendances: attendanceSlice,
+  cash_advance: cashAdvanceSlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

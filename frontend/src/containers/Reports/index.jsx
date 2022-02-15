@@ -1,7 +1,9 @@
 import React from 'react';
 
 function Reports() {
-  return <div>THIS IS REPORTS</div>;
+  return (
+    <div>HEHEHEHE</div>
+  );
 }
 
 export default Reports;

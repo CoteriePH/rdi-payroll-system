@@ -27,7 +27,6 @@ import {
   findAllEmployees,
   findAllFilteredEmployees,
 } from "@/features/employee/employeeSlice.js";
-import { VStack } from "@/styles";
 
 const Menu = ({ children }) => {
   const methods = useForm();
@@ -44,7 +43,7 @@ const Menu = ({ children }) => {
   const { data: positions, isFetching: isFetchingPositions } = useSelector(
     (state) => state.positions
   );
-
+  const filters = useSelector((state) => state.settings.filters);
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
@@ -62,6 +61,7 @@ const Menu = ({ children }) => {
     data.company = selectedCompany;
     data.department = selectedDepartment;
     data.position = selectedPosition;
+    data = { ...data, ...filters };
     dispatch(findAllFilteredEmployees(data));
   };
 

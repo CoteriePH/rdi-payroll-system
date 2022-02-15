@@ -1,7 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+import { theme } from "@/theme";
 
 export const TableStyles = styled.div`
   flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: space-between;
+  height: 100%;
   table {
     width: 100%;
     text-align: center;
@@ -13,16 +19,29 @@ export const TableStyles = styled.div`
       }
       td {
         font-family: ${(props) => props.theme.fonts.avenirRoman};
-        padding: 0.8em 2em;
+        padding: 1em;
       }
     }
-
     th {
       color: ${(props) => props.theme.colors.violet};
       font-family: ${(props) => props.theme.fonts.avenirBlack};
       font-size: 1em;
-      padding-bottom: 0.3em;
+      align-items: center;
+      justify-content: center;
+      padding: 0em 1em;
+      padding-bottom: 1em;
       border-bottom: 1px solid ${(props) => props.theme.colors.violet};
     }
   }
+`;
+
+export const CheckboxContainer = styled.li`
+  list-style-type: none;
+  padding-bottom: 0.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  flex-wrap: wrap;
 `;

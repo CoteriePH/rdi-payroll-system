@@ -9,13 +9,12 @@ export const Box = styled.span`
   width: 20px;
   background-color: ${theme.colors.white};
   border-radius: 3px;
-  
-  ${(props) =>
-    !props.disabled &&
-    ` 
-    &:hover {
-      background-color: ${theme.colors.violet};
-  }`}
+  border: ${(props) =>
+    props.border ? `1px solid ${theme.colors.darkViolet}` : null};
+
+  &:hover {
+    background-color: ${(props) =>
+      props.disabled ? null : theme.colors.violet};
   }
 `;
 

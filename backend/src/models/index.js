@@ -31,7 +31,9 @@ db.user = require("./user.model.js")(sequelize, Sequelize, DataTypes);
 db.employee = require("./employee.model.js")(sequelize, Sequelize, DataTypes);
 db.company = require("./company.model.js")(sequelize, Sequelize, DataTypes);
 db.file = require("./file.model.js")(sequelize, Sequelize, DataTypes);
+db.payroll = require("./payroll")(sequelize, Sequelize, DataTypes);
 db.deduction = require("./deduction.model.js")(sequelize, Sequelize, DataTypes);
+db.schedule = require("./schedule.model.js")(sequelize, Sequelize, DataTypes);
 db.addtnl_deduction = require("./addtnl_deduction.model")(
   sequelize,
   Sequelize,
@@ -51,6 +53,7 @@ db.department = require("./department.model.js")(
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
 db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
+db.additionalEarnings = require("./additional_earnings.model.js")(sequelize, Sequelize, DataTypes);
 db.cash_advance = require("./cash_advance.model")(
   sequelize,
   Sequelize,
@@ -118,6 +121,15 @@ db.employee.hasMany(db.attendance, {
   foreignKey: "employee_id",
 });
 
+//OneToMany - (One schedule ----> Many employee)
+db.employee.belongsTo(db.schedule, {
+  foreignKey: { name: "schedule_id", allowNull: false },
+});
+db.schedule.hasMany(db.employee, {
+  as: "schedules",
+  foreignKey: "schedule_id",
+});
+
 //TODO - prone to error (add (after create) listener on employee model)
 //OneAndOnlyONE (One Employee  ---> One File)
 db.file.belongsTo(db.employee, {
@@ -149,6 +161,19 @@ db.employee.hasOne(db.earning, {
   foreignKey: "employee_id",
 });
 
+//OneAndOnlyONE (One earning  ---> one additional earnings)
+
+db.earning.hasOne(db.additionalEarnings, {
+  as: "additional_earnings",
+  foreignKey: "earning_id",
+});
+
+db.additionalEarnings.belongsTo(db.earning, {
+  foreignKey: { name: "earning_id", allowNull: false },
+  foreignKeyConstraint: true,
+}); 
+
+
 //OneAndOnlyONE (One deduction  ---> one additional deduction)
 db.addtnl_deduction.belongsTo(db.deduction, {
   foreignKey: { name: "deduction_id", allowNull: false },
@@ -169,3 +194,34 @@ db.employee.hasMany(db.cash_advance, {
   foreignKey: "employee_id",
 });
 module.exports = db;
+
+//OneToMany (One employee  ---> Many Payroll)
+db.payroll.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.employee.hasMany(db.payroll, {
+  as: "payrolls",
+  foreignKey: "employee_id",
+});
+module.exports = db;
+
+//OneAndOnlyONE (One earnings  ---> one payroll)
+db.earning.belongsTo(db.payroll, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.payroll.hasOne(db.earning, {
+  as: "earning",
+  foreignKey: "employee_id",
+});
+
+//OneAndOnlyONE (One deductions  ---> one payroll)
+db.deduction.belongsTo(db.payroll, {
+  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
+db.payroll.hasOne(db.deduction, {
+  as: "deduction",
+  foreignKey: "employee_id",
+});
