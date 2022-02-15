@@ -19,6 +19,7 @@ module.exports = {
         total: Math.floor(Math.random() * 300),
         created_at: new Date(),
         updated_at: new Date(),
+        remarks: "The Remark",
       },
       {
         id: uuidv4(),
@@ -30,6 +31,7 @@ module.exports = {
         total: Math.floor(Math.random() * 300),
         created_at: new Date(),
         updated_at: new Date(),
+        remarks: "The Remark",
       },
       {
         id: uuidv4(),
@@ -41,6 +43,7 @@ module.exports = {
         total: Math.floor(Math.random() * 300),
         created_at: new Date(),
         updated_at: new Date(),
+        remarks: "The Remark",
       },
     ]);
   },
