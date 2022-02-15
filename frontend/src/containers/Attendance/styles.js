@@ -20,6 +20,8 @@ export const Container = styled.div`
 
 export const Flex = styled.div`
   display: flex;
+  width: ${(props) => (props.width ? props.width : 1)};
+  flex-basis: ${(props) => (props.basis ? props.basis : 1)};
   align-items: ${(props) => (props.align ? props.align : null)};
   justify-content: ${(props) => (props.justify ? props.justify : null)};
   flex-direction: ${(props) => (props.direction ? props.direction : "row")};

@@ -37,13 +37,6 @@ const Attendance = () => {
   const columns = React.useMemo(
     () => [
       {
-        Header: "DATE",
-        accessor: "date",
-        Cell: (props) => {
-          return <div>{dayjs(props.value).format("YYYY-MM-DD")}</div>;
-        },
-      },
-      {
         Header: "EMPLOYEE NAME",
         Cell: (props) => {
           return (
@@ -54,6 +47,14 @@ const Attendance = () => {
           );
         },
       },
+      {
+        Header: "DATE",
+        accessor: "date",
+        Cell: (props) => {
+          return <div>{dayjs(props.value).format("YYYY-MM-DD")}</div>;
+        },
+      },
+
       {
         //TODO TIME CONVERTER HELPER
         Header: "TIME IN",
@@ -123,8 +124,6 @@ const Attendance = () => {
     []
   );
 
-  const tableInstance = useTable({ columns, data });
-
   // if (isFetching) {
   //   /**
   //    * TODO - Loading Component
@@ -135,15 +134,15 @@ const Attendance = () => {
     <Wrapper>
       <Container>
         {/* NOTE: Gayahin nalang tong flex sa ibang components */}
-        <Flex justify="space-between" direction="column" flex={8}>
+        <Flex justify="space-between" direction="column">
           <TableContainer>
             {/* TODO - Component kung alang laman data */}
             {/* NOTE: To use Settings Component set parent div to position relative*/}
             <Settings />
             {isFetching ? (
               <div>Loading</div>
-            ) : data.length > 0 ? (
-              <Table tableInstance={tableInstance} />
+            ) : data.length > 0 && columns ? (
+              <Table columns={columns} data={data} />
             ) : (
               "Wow, such empty"
             )}
@@ -178,9 +177,7 @@ const Attendance = () => {
             </Button> */}
           </Toolbar>
         </Flex>
-        <Flex bg="gray" flex={1}>
-          {isOpen && <Menu />}
-        </Flex>
+        <Flex bg="gray">{isOpen && <Menu />}</Flex>
       </Container>
       <AddEmployee isOpen={isModalOpen} onClose={onModalClose} />
     </Wrapper>
