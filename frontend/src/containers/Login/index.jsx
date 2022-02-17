@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import {
   Container,
   Left,
@@ -22,7 +21,6 @@ import Image from "next/image";
 const LoginPage = () => {
   const methods = useForm();
   const dispatch = useDispatch();
-  const history = useHistory();
   const router = useRouter();
 
   const { isError, isSuccess } = useSelector(authSelector);
@@ -51,7 +49,7 @@ const LoginPage = () => {
     }
     if (isSuccess) {
       dispatch(clearState());
-      history.replace("/");
+      // history.replace("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isError, isSuccess]);
