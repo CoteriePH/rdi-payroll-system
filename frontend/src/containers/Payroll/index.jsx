@@ -8,6 +8,7 @@ import { ROLES } from "@/constants/constants";
 import { findAllEmployees } from "@/features/employee/employeeSlice";
 import { settingsSelector } from "@/features/settings/settingsSlice";
 import getTimeDuration from "@/helpers/getTimeDuration";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,8 @@ const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   useEffect(() => {
     dispatch(findAllEmployees());
   }, [dispatch]);
