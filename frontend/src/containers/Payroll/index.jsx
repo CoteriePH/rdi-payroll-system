@@ -57,7 +57,7 @@ const Payroll = () => {
         Header: "",
         accessor: "id",
         Cell: (props) => {
-          return <Link href={`payroll/${props.value}`}>view</Link>;
+          return <Link href={`payroll/${props.value}`}>View</Link>;
         },
       },
     ],
