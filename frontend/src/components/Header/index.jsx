@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import CurrDate from "./date";
 import {
   HeaderCan,
@@ -19,10 +19,7 @@ import Link from "next/link";
 
 function Header(props) {
   const { pathname } = useRouter();
-
-  useEffect(() => {
-    console.log("p", pathname);
-  }, [pathname]);
+  let modPathName = pathname;
 
   const tabsMap = new Map();
   tabsMap.set("/cash-advance", [
@@ -30,9 +27,9 @@ function Header(props) {
     { title: "UNPROCESSED C.A.'s", to: "/cash-advance/unprocessed" },
     { title: "PROCESSED C.A.'s", to: "/cash-advance/processed" },
   ]);
-  // if (pathname.includes("cash-advance")) {
-  //   pathname = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
-  // }
+  if (pathname.includes("cash-advance")) {
+    modPathName = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
+  }
 
   return (
     <>
@@ -65,7 +62,7 @@ function Header(props) {
           </HeaderDate>
         </TitleContainer>
         <TabsContainer TabContDisp={props.TabContDisp}>
-          {tabsMap.get(pathname)?.map(({ title, to }, idx) => {
+          {tabsMap.get(modPathName)?.map(({ title, to }, idx) => {
             return (
               <Link key={title + to} href={to} passHref>
                 <TabLink

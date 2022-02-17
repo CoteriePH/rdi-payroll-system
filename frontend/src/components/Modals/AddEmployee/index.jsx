@@ -1,5 +1,20 @@
-import React from "react";
+import Button from "@/components/Button";
+import FileInput from "@/components/FileInput";
+import InputField from "@/components/InputField";
+import PhotoInput from "@/components/PhotoInput";
+import RadioInput from "@/components/RadioInput";
+import SelectField from "@/components/SelectField";
+import { findAllCompanies } from "@/features/company/companySlice";
+import { findAllDepartments } from "@/features/department/departmentSlice";
+import { addEmployee } from "@/features/employee/employeeSlice";
+import { findAllPositions } from "@/features/position/positionSlice";
+import { HeaderText, Text } from "@/styles";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import ReactModal from "react-modal";
+import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
 import {
   ButtonsContainer,
   FilesContainer,
@@ -13,23 +28,6 @@ import {
   Section,
   SubSection,
 } from "./styles";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import InputField from "@/components/InputField";
-import { FormProvider, useForm } from "react-hook-form";
-import RadioInput from "@/components/RadioInput";
-import SelectField from "@/components/SelectField";
-import { useDispatch } from "react-redux";
-import { addEmployee } from "@/features/employee/employeeSlice";
-import { useEffect } from "react";
-import { findAllCompanies } from "@/features/company/companySlice";
-import { findAllDepartments } from "@/features/department/departmentSlice";
-import { findAllPositions } from "@/features/position/positionSlice";
-import { useSelector } from "react-redux";
-import { HeaderText, Text } from "@/styles";
-import Button from "@/components/Button";
-import FileInput from "@/components/FileInput";
-import PhotoInput from "@/components/PhotoInput";
 ReactModal.setAppElement("#__next");
 
 //TODO MOVE TO UTILS/HELPERS
@@ -84,7 +82,7 @@ const AddEmployee = ({ isOpen, onClose }) => {
     dispatch(findAllCompanies());
     dispatch(findAllDepartments());
     dispatch(findAllPositions());
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     // TODO - REFACTOR

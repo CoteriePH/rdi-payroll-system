@@ -36,7 +36,7 @@ const CashAdvance = () => {
   const { isFetching: isGenerating, isSuccess: isGenerated } = useSelector(
     (state) => state.cash_advance
   );
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(addFilter({ cash_advance_eligibility: 1 }));
     dispatch(findAllFilteredEmployees({ cash_advance_eligibility: 1 }));
   }, [dispatch]);
@@ -56,7 +56,7 @@ const CashAdvance = () => {
     return () => {
       dispatch(resetEmployeeToRun());
     };
-  }, [data]);
+  }, [dispatch, data]);
 
   const onRunCashAdvanceOpen = () => {
     setIsRunOpen(true);

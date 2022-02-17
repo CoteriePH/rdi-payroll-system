@@ -40,7 +40,7 @@ const EncoderEmployeeFile = () => {
 
   useEffect(() => {
     dispatch(findAllEmployees());
-  }, []);
+  }, [dispatch]);
 
   const columns = React.useMemo(
     () => [
