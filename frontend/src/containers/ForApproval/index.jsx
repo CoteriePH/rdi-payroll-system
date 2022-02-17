@@ -5,14 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { findAllUnprocessedCAs } from "@/features/cash_advance/cashAdvanceSlice";
 import dayjs from "dayjs";
 const ForApproval = () => {
-  const dispatch = useDispatch();
-  const { unprocessedData: unprocessedCashAdvanceData, isFetching } =
-    useSelector((state) => state.cash_advance);
-
-  useEffect(() => {
-    dispatch(findAllUnprocessedCAs());
-  }, [dispatch]);
-
   return (
     <Wrapper>
       <Inputs>
@@ -32,7 +24,7 @@ const ForApproval = () => {
         </div>
       </Inputs>
       <NotifbarTray>
-        {unprocessedCashAdvanceData.map((unprocessedCashAdvanceData) => (
+        {/* {unprocessedCashAdvanceData.map((unprocessedCashAdvanceData) => (
           <NotificationBar
             key={unprocessedCashAdvanceData.id}
             SubTextCount="Cash Advance"
@@ -41,9 +33,9 @@ const ForApproval = () => {
               "MMMM DD, YYYY"
             )}
           />
-        ))}
+        ))} */}
 
-        {/* <NotificationBar
+        <NotificationBar
           SubTextCount="This is first warning."
           Warning="block"
         />
@@ -61,7 +53,7 @@ const ForApproval = () => {
         <NotificationBar
           SubTextCount="This is an announcement."
           BubbleMessage="block"
-        /> */}
+        />
       </NotifbarTray>
     </Wrapper>
   );

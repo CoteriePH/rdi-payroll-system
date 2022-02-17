@@ -14,6 +14,7 @@ const InputField = ({
   name,
   required,
   type,
+  withBorder = false,
 }) => {
   const [placeholderName, setPlaceholderName] = useState(placeholder);
   const { register } = useFormContext();
@@ -33,7 +34,7 @@ const InputField = ({
   return (
     <Wrapper>
       {label && <Label>{label}</Label>}
-      <Container disabled={disabled} menu={menu}>
+      <Container withBorder={withBorder} disabled={disabled} menu={menu}>
         {uname && (
           <span>
             <Image src="/icons/person.svg" width={20} height={20} alt="lock" />
