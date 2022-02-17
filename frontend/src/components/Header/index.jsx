@@ -19,15 +19,20 @@ import Link from "next/link";
 
 function Header(props) {
   const { pathname } = useRouter();
+
+  useEffect(() => {
+    console.log("p", pathname);
+  }, [pathname]);
+
   const tabsMap = new Map();
   tabsMap.set("/cash-advance", [
     { title: "RUN", to: "/cash-advance" },
     { title: "UNPROCESSED C.A.'s", to: "/cash-advance/unprocessed" },
     { title: "PROCESSED C.A.'s", to: "/cash-advance/processed" },
   ]);
-  if (pathname.includes("cash-advance")) {
-    pathname = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
-  }
+  // if (pathname.includes("cash-advance")) {
+  //   pathname = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
+  // }
 
   return (
     <>
@@ -62,16 +67,17 @@ function Header(props) {
         <TabsContainer TabContDisp={props.TabContDisp}>
           {tabsMap.get(pathname)?.map(({ title, to }, idx) => {
             return (
-              <TabLink
-                exact
-                activeClassName="active"
-                to={to}
-                key={`${title}-${idx}`}
-                size="xl"
-                color="darkGray"
-              >
-                {title}
-              </TabLink>
+              <Link key={title + to} href={to} passHref>
+                <TabLink
+                  exact
+                  activeClassName="active"
+                  key={`${title}-${idx}`}
+                  size="xl"
+                  color="darkGray"
+                >
+                  {title}
+                </TabLink>
+              </Link>
             );
           })}
         </TabsContainer>

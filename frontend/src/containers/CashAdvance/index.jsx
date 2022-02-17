@@ -23,12 +23,14 @@ import {
   resetEmployeeToRun,
   toggleEmployeeToRun,
 } from "@/features/cash_advance/cashAdvanceSlice";
+import { useSession } from "next-auth/react";
 
 const CashAdvance = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRunOpen, setIsRunOpen] = useState(false);
   const { isFetching: isGenerating, isSuccess: isGenerated } = useSelector(
@@ -37,19 +39,19 @@ const CashAdvance = () => {
   useEffect(async () => {
     dispatch(addFilter({ cash_advance_eligibility: 1 }));
     dispatch(findAllFilteredEmployees({ cash_advance_eligibility: 1 }));
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     return () => {
       dispatch(resetEmployeeToRun());
       dispatch(resetFilters());
     };
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     if (isGenerated) {
       dispatch(findAllFilteredEmployees({ cash_advance_eligibility: 1 }));
       setIsRunOpen(false);
     }
-  }, [isGenerating, isGenerated]);
+  }, [isGenerating, isGenerated, dispatch]);
   useEffect(() => {
     return () => {
       dispatch(resetEmployeeToRun());

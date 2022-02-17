@@ -13,6 +13,7 @@ import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
 import Settings from "@/components/Menu/settings";
 import Table from "@/components/Table";
+import Menu from "@/components/Menu";
 
 const EncoderEmployeeFile = () => {
   const dispatch = useDispatch();

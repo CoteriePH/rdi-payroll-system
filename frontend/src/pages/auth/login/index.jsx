@@ -1,9 +1,9 @@
 import React from "react";
-import LoginPage from "../../../containers/Login";
+import Login from "../../../containers/Login";
 import { getSession } from "next-auth/react";
 
-const Login = () => {
-  return <LoginPage />;
+const LoginPage = () => {
+  return <Login />;
 };
 
 export const getServerSideProps = async (ctx) => {
@@ -23,4 +23,4 @@ export const getServerSideProps = async (ctx) => {
   };
 };
 
-export default Login;
+export default LoginPage;

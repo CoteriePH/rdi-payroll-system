@@ -1,10 +1,10 @@
 import { Department, Name, Wrapper } from "./styles";
-import FolderIcon from "@/assets/icons/folder.svg";
+import Image from "next/image";
 
 const Folder = ({ employeeNo, name, department, isGrid = false }) => {
   return (
     <Wrapper isGrid={isGrid}>
-      <FolderIcon />
+      <Image src="/icons/folder.svg" width="100px" height="100px" />
       {!isGrid && <p>{employeeNo}</p>}
       <Name>{name}</Name>
       <Department>{department}</Department>

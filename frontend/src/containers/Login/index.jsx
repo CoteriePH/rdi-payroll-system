@@ -11,13 +11,13 @@ import {
 } from "./styles.js";
 import InputField from "@/components/Input/index.jsx";
 import Button from "@/components/Button/index.jsx";
-import Logo from "@/assets/icons/logo.svg";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { authSelector, clearState } from "@/features/auth/authSlice.js";
 import React from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const LoginPage = () => {
   const methods = useForm();
@@ -65,7 +65,7 @@ const LoginPage = () => {
         </Powered>
       </Left>
       <Right>
-        <Logo />
+        <Image src="/icons/logo.svg" width={100} height={100} alt="logo" />
         <LoginContainer>
           <FormProvider {...methods}>
             <Form onSubmit={methods.handleSubmit(onSubmit)}>

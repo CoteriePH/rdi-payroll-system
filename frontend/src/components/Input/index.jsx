@@ -36,12 +36,12 @@ const InputField = ({
       <Container disabled={disabled} menu={menu}>
         {uname && (
           <span>
-            <Image src="@/assets/icons/person.svg" alt="lock" />
+            <Image src="/icons/person.svg" width={20} height={20} alt="lock" />
           </span>
         )}
         {pwd && (
           <span>
-            <Image src="@/assets/icons/lock.svg" alt="lock" />
+            <Image src="/icons/lock.svg" width={20} height={20} alt="lock" />
           </span>
         )}
         <Input

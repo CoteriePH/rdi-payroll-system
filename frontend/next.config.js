@@ -8,4 +8,7 @@ module.exports = {
 
     return config;
   },
+  env: {
+    NEXTAUTH_SECRET: "RDIPAYROLLSYSTEM143",
+  },
 };

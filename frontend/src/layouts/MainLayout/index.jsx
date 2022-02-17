@@ -1,5 +1,4 @@
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "@/features/auth/authSlice";
 import Sidebar from "@/components/Sidebar";
 import {
   MainCan,
@@ -12,14 +11,16 @@ import {
 // import MainCan from "./styles";
 import Link from "@/components/Link";
 import Button from "@/components/Button";
-import { getSession, useSession } from "next-auth/react";
+import { getSession, signOut, useSession } from "next-auth/react";
 import Header from "@/components/Header";
+import { useRouter } from "next/router";
 
 const MainLayout = ({ children }) => {
   const dispatch = useDispatch();
   const { data: session, status } = useSession();
   const role = session?.user.role;
   const { data } = useSelector((state) => state.employees);
+  const { pathname } = useRouter();
 
   // encoder based sidebar
   const routesMap = new Map();
@@ -34,16 +35,16 @@ const MainLayout = ({ children }) => {
   routesMap.set("/reports", "REPORTS");
 
   let headerName = "RDI PAYROLL SYSTEM";
-  // if (location.pathname.includes("/cash-advance")) {
-  //   headerName = routesMap.get(
-  //     location.pathname.replace(/cash-advance\/?.*/g, "cash-advance")
-  //   );
-  // } else if (routesMap.has(location.pathname)) {
-  //   headerName = routesMap.get(location.pathname);
-  // }
+  if (pathname.includes("/cash-advance")) {
+    headerName = routesMap.get(
+      pathname.replace(/cash-advance\/?.*/g, "cash-advance")
+    );
+  } else if (routesMap.has(pathname)) {
+    headerName = routesMap.get(pathname);
+  }
 
   const handleLogout = () => {
-    dispatch(logout());
+    signOut();
   };
   // Return null if pathname contains the employeeIds
   const renderHeader = () => {

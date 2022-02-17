@@ -30,7 +30,7 @@ import { HeaderText, Text } from "@/styles";
 import Button from "@/components/Button";
 import FileInput from "@/components/FileInput";
 import PhotoInput from "@/components/PhotoInput";
-ReactModal.setAppElement("#root");
+ReactModal.setAppElement("#__next");
 
 //TODO MOVE TO UTILS/HELPERS
 const employeeSchema = yup
