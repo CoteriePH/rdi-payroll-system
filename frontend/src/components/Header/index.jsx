@@ -27,8 +27,17 @@ function Header(props) {
     { title: "UNPROCESSED C.A.'s", to: "/cash-advance/unprocessed" },
     { title: "PROCESSED C.A.'s", to: "/cash-advance/processed" },
   ]);
+
+  tabsMap.set("/for-approval", [
+    { title: "MEMO", to: "/for-approval" },
+    { title: "REQUESTS", to: "/for-approval/requests" },
+  ]);
+
   if (pathname.includes("cash-advance")) {
     modPathName = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
+  }
+  if (pathname.includes("for-approval")) {
+    modPathName = pathname.replace(/for-approval\/?.*/g, "for-approval");
   }
 
   return (
