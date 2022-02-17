@@ -1,29 +1,26 @@
+import Button from "@/components/Button/";
 import Menu from "@/components/Menu";
 import Settings from "@/components/Menu/settings";
+import RunCashAdvance from "@/components/Modals/RunCashAdvance";
 import Table from "@/components/Table";
+import TableCheckbox from "@/components/TableCheckbox";
+import Toolbar from "@/components/Toolbar";
+import { ROLES } from "@/constants/constants";
+import {
+  resetEmployeeToRun,
+  toggleEmployeeToRun,
+} from "@/features/cash_advance/cashAdvanceSlice";
+import { findAllFilteredEmployees } from "@/features/employee/employeeSlice";
 import {
   addFilter,
   resetFilters,
   settingsSelector,
 } from "@/features/settings/settingsSlice";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { findAllFilteredEmployees } from "@/features/employee/employeeSlice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Wrapper, Container, Flex, TableContainer } from "./styles";
-import Button from "@/components/Button/";
 import getTimeDuration from "@/helpers/getTimeDuration";
-import Toolbar from "@/components/Toolbar";
-import { ROLES } from "@/constants/constants";
-import RunCashAdvance from "@/components/Modals/RunCashAdvance";
-import TableCheckbox from "@/components/TableCheckbox";
-import {
-  resetBatchIdsToExecute,
-  resetEmployeeToRun,
-  toggleEmployeeToRun,
-} from "@/features/cash_advance/cashAdvanceSlice";
 import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Flex, TableContainer, Wrapper } from "./styles";
 
 const CashAdvance = () => {
   const dispatch = useDispatch();
