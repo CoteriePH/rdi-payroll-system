@@ -103,9 +103,7 @@ export const declineCashAdvance = createAsyncThunk(
   "/cash-advance/delete",
   async (id, { rejectWithValue }) => {
     try {
-      await API.delete(`cash-advance/${id}`, {
-        cash_advance_eligibility: 1,
-      });
+      await API.delete(`cash-advance/${id}/decline`);
       return id;
     } catch (error) {
       return rejectWithValue(
