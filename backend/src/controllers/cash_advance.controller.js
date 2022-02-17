@@ -138,12 +138,26 @@ exports.update = async (req, res) => {
 
 exports.delete = async (req, res) => {
   try {
+    const { cash_advance_eligibility } = req.body;
+    if (cash_advance_eligibility == "true" || cash_advance_eligibility == 1) {
+      const cash_advance = await CashAdvance.findByPk(req.params.id);
+      await Employee.update(
+        {
+          cash_advance_eligibility,
+        },
+        {
+          where: {
+            id: cash_advance.employee_id,
+          },
+        }
+      );
+    }
     await CashAdvance.destroy({
       where: {
         id: req.params.id,
       },
     });
-    return res.status(200).send("Cash advance deleted successfully.");
+    return res.status(200).send("Cash advance deleted successfully");
   } catch (error) {
     return res.status(400).send(error.message);
   }
