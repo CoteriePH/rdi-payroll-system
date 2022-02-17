@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useComponentIsVisible from "@/context/useComponentIsVisible";
 import { Container, Label, List, Options, Wrapper } from "./styles.js";
-import { ReactComponent as DropdownIcon } from "@/assets/icons/dropdown.svg";
+import Image from "next/image";
 
 const Dropdown = ({
   label,
@@ -24,7 +24,12 @@ const Dropdown = ({
     <Wrapper ref={ref} onClick={() => setIsComponentVisible((prev) => !prev)}>
       <Container bg={bg}>
         <Label>{labelState}</Label>
-        <DropdownIcon />
+        <Image
+          src="/icons/dropdown.svg"
+          alt="dropdown"
+          width="20px"
+          height="20px"
+        />
       </Container>
       {isComponentVisible && (
         <Options>

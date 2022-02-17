@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 const colors = {
   default: (props) => props.theme.colors.violet,
-  white: (props) => props.theme.colors.white
+  white: (props) => props.theme.colors.white,
 };
 
 export const Container = styled.div`

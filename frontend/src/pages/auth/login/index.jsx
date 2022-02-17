@@ -1,21 +1,26 @@
-import HumanResources from "@/containers/HumanResources";
+import React from "react";
+import LoginPage from "../../../containers/Login";
 import { getSession } from "next-auth/react";
 
-export default function Home() {
-  return <HumanResources />;
-}
+const Login = () => {
+  return <LoginPage />;
+};
 
 export const getServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
-  if (!session) {
+
+  if (session) {
     return {
       redirect: {
-        destination: "/auth/login",
+        destination: "/",
         permanent: false,
       },
     };
   }
+
   return {
     props: { session },
   };
 };
+
+export default Login;

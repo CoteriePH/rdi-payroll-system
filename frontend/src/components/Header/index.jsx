@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
 import CurrDate from "./date";
 import {
   HeaderCan,
@@ -15,9 +14,11 @@ import {
   FlexRun,
 } from "./styles";
 import Button from "@/components/Button";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Header(props) {
-  let { pathname } = useLocation();
+  const { pathname } = useRouter();
   const tabsMap = new Map();
   tabsMap.set("/cash-advance", [
     { title: "RUN", to: "/cash-advance" },
@@ -32,7 +33,7 @@ function Header(props) {
     <>
       <HeaderCan jc={props.jc}>
         <HeaderAudPayroll tempDisplay={props.tempDisplay}>
-          <Link to="/payroll">
+          <Link href="/payroll" passHref>
             <ChevronForProll>
               <svg mlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path

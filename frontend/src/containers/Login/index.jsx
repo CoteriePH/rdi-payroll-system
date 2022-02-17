@@ -11,26 +11,31 @@ import {
 } from "./styles.js";
 import InputField from "@/components/Input/index.jsx";
 import Button from "@/components/Button/index.jsx";
-import { ReactComponent as Logo } from "@/assets/icons/logo.svg";
-
+import Logo from "@/assets/icons/logo.svg";
 import { useForm, FormProvider } from "react-hook-form";
-
 import { useDispatch, useSelector } from "react-redux";
-import {
-  authSelector,
-  signinUser,
-  clearState,
-} from "@/features/auth/authSlice.js";
+import { authSelector, clearState } from "@/features/auth/authSlice.js";
+import React from "react";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const LoginPage = () => {
   const methods = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
+  const router = useRouter();
 
   const { isError, isSuccess } = useSelector(authSelector);
 
-  const onSubmit = (data) => {
-    dispatch(signinUser(data));
+  const onSubmit = async (data) => {
+    await signIn("credentials", {
+      callbackUrl: `${
+        router.query.callbackUrl
+          ? router.query.callbackUrl
+          : window.location.origin
+      }`,
+      ...data,
+    });
   };
 
   useEffect(() => {

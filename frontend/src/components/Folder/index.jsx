@@ -1,5 +1,5 @@
 import { Department, Name, Wrapper } from "./styles";
-import { ReactComponent as FolderIcon } from "@/assets/icons/folder.svg";
+import FolderIcon from "@/assets/icons/folder.svg";
 
 const Folder = ({ employeeNo, name, department, isGrid = false }) => {
   return (
