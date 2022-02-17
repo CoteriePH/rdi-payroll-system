@@ -19,7 +19,8 @@ const EncoderEmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
