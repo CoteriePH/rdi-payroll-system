@@ -123,7 +123,7 @@ const EmployeeFile = () => {
           {/* TEMPORARY ADD RECORD */}
           <Toolbar
             leftChildren={
-              authRole === ROLES.ENCODER ? (
+              authRole === "ENCODER" ? (
                 <>
                   <Button
                     onClick={onModalOpen}
@@ -134,16 +134,17 @@ const EmployeeFile = () => {
                   >
                     Add Record
                   </Button>
-                  <Button
-                    onClick={onPayslipOpen}
-                    minW="10rem"
-                    h="2rem"
-                    fontWeight="bold"
-                    fontFamily="avenirRoman"
-                  >
-                    Payslip
-                  </Button>
                 </>
+              ) : authRole === "AUDITOR" ? (
+                <Button
+                  onClick={onPayslipOpen}
+                  minW="10rem"
+                  h="2rem"
+                  fontWeight="bold"
+                  fontFamily="avenirRoman"
+                >
+                  Payslip
+                </Button>
               ) : null
             }
           ></Toolbar>
