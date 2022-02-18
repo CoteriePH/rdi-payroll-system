@@ -9,6 +9,11 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
+      cash_advance_eligibility: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+        allowNull: false,
+      },
       first_name: {
         type: DataTypes.STRING,
         allowNull: false,

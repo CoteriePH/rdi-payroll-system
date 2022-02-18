@@ -4,7 +4,8 @@ export const Nav = styled.div`
   background-color: ${(props) => props.theme.colors.violet};
   list-style-type: none;
   height: 100vh;
-  width: 21em;
+  /* width: ${(props)=> (props.Width ? props.Width : "20%")}; */
+  width: 25%;
   position: relative;
   overflow: hidden;
   display: flex;
