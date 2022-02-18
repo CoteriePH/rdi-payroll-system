@@ -4,6 +4,7 @@ import InputField from "@/components/InputField";
 import PhotoInput from "@/components/PhotoInput";
 import RadioInput from "@/components/RadioInput";
 import SelectField from "@/components/SelectField";
+import { SCHEDULES } from "@/constants/constants";
 import { findAllCompanies } from "@/features/company/companySlice";
 import { findAllDepartments } from "@/features/department/departmentSlice";
 import { addEmployee } from "@/features/employee/employeeSlice";
@@ -201,13 +202,13 @@ const AddEmployee = ({ isOpen, onClose }) => {
                   name="time_shift"
                   id="time_shift"
                 >
-                  <option value="6:00 am - 2:30 pm">6:00 am - 2:30 pm</option>
-                  <option value="7:00 am – 4:00 pm">7:00 am – 4:00 pm</option>
-                  <option value="8:00 am – 5:00 pm">8:00 am – 5:00 pm</option>
-                  <option value="8:30 am – 5:30 pm">8:30 am – 5:30 pm</option>
-                  <option value="9:00 am – 6:00 pm">9:00 am – 6:00 pm</option>
-                  <option value="2:00 pm – 10:30 pm">2:00 pm – 10:30 pm</option>
-                  <option value="10:00 pm – 6:30 am">10:00 pm – 6:30 am</option>
+                  <option value="SCHEDULE_A">{SCHEDULES.SCHEDULE_A}</option>
+                  <option value="SCHEDULE_B">{SCHEDULES.SCHEDULE_B}</option>
+                  <option value="SCHEDULE_C">{SCHEDULES.SCHEDULE_C}</option>
+                  <option value="SCHEDULE_D">{SCHEDULES.SCHEDULE_D}</option>
+                  <option value="SCHEDULE_E">{SCHEDULES.SCHEDULE_E}</option>
+                  <option value="SCHEDULE_F">{SCHEDULES.SCHEDULE_F}</option>
+                  <option value="SCHEDULE_G">{SCHEDULES.SCHEDULE_G}</option>
                 </SelectField>
               </SubSection>
             </Section>

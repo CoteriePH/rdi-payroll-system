@@ -27,6 +27,8 @@ import {
   findAllEmployees,
   findAllFilteredEmployees,
 } from "@/features/employee/employeeSlice.js";
+import { SCHEDULES } from "@/constants/constants.js";
+import { findAllSchedules } from "@/features/schedule/scheduleSlice.js";
 
 const Menu = ({ children }) => {
   const methods = useForm();
@@ -43,6 +45,9 @@ const Menu = ({ children }) => {
   const { data: positions, isFetching: isFetchingPositions } = useSelector(
     (state) => state.positions
   );
+  const { data: schedules, isFetching: isFetchingSchedules } = useSelector(
+    (state) => state.schedules
+  );
   const filters = useSelector((state) => state.settings.filters);
   const [selectedCompany, setSelectedCompany] = useState("");
   const [selectedDepartment, setSelectedDepartment] = useState("");
@@ -53,7 +58,8 @@ const Menu = ({ children }) => {
     dispatch(findAllCompanies());
     dispatch(findAllDepartments());
     dispatch(findAllPositions());
-  }, []);
+    dispatch(findAllSchedules());
+  }, [dispatch]);
 
   const onSubmit = (data) => {
     // TODO - REFACTOR DROPDOWN
@@ -147,51 +153,50 @@ const Menu = ({ children }) => {
                     setCheckboxValue(!checkboxValue);
                     // TODO - REFACTOR
                     if (checkboxValue) {
-                      setValue("6:00 am - 2:30 pm", null);
-                      setValue("7:00 am – 4:00 pm", null);
-                      setValue("8:00 am – 5:00 pm", null);
-                      setValue("8:30 am – 5:30 pm", null);
-                      setValue("9:00 am – 6:00 pm", null);
-                      setValue("2:00 pm – 10:30 pm", null);
-                      setValue("10:00 pm – 6:30 am", null);
+                      setValue("SCHEDULE_A", null);
+                      setValue("SCHEDULE_B", null);
+                      setValue("SCHEDULE_C", null);
+                      setValue("SCHEDULE_D", null);
+                      setValue("SCHEDULE_E", null);
+                      setValue("SCHEDULE_F", null);
+                      setValue("SCHEDULE_G", null);
                     }
                   }}
                 />
                 <Grid col={1}>
                   <Checkbox
-                    name="6:00 am - 2:30 pm"
-                    label="6:00 am - 2:30 pm"
+                    name="SCHEDULE_A"
+                    label={SCHEDULES.SCHEDULE_A}
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="7:00 am – 4:00 pm"
-                    label="7:00 am – 4:00 pm"
+                    name="SCHEDULE_B"
+                    label={SCHEDULES.SCHEDULE_B}
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="8:00 am – 5:00 pm"
-                    label="8:00 am – 5:00 pm"
+                    name="SCHEDULE_C"
+                    label={SCHEDULES.SCHEDULE_C}
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="8:30 am – 5:30 pm"
-                    label="8:30 am – 5:30 pm"
+                    name="SCHEDULE_D"
+                    label={SCHEDULES.SCHEDULE_D}
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="9:00 am – 6:00 pm"
-                    label="9:00 am – 6:00 pm"
+                    name="SCHEDULE_E"
+                    label={SCHEDULES.SCHEDULE_E}
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="2:00 pm – 10:30 pm"
-                    label="2:00 pm – 10:30 pm"
+                    name="SCHEDULE_F"
+                    label={SCHEDULES.SCHEDULE_F}
                     disabled={!checkboxValue}
                   />
-
                   <Checkbox
-                    name="10:00 pm – 6:30 am"
-                    label="10:00 pm – 6:30 am"
+                    name="SCHEDULE_G"
+                    label={SCHEDULES.SCHEDULE_G}
                     disabled={!checkboxValue}
                   />
                 </Grid>

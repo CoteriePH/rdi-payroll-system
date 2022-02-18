@@ -8,7 +8,7 @@ import { Wrapper, TextLink, Container, Flex, TableContainer } from "./styles";
 import Button from "@/components/Button/";
 import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
-import { ROLES } from "@/constants/constants";
+import { ROLES, SCHEDULES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
 import Settings from "@/components/Menu/settings";
