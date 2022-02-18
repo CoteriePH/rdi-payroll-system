@@ -201,10 +201,13 @@ const AddEmployee = ({ isOpen, onClose }) => {
                   name="time_shift"
                   id="time_shift"
                 >
-                  <option value="MORNING">Morning</option>
-                  <option value="MID_MORNING">Mid Morning </option>
-                  <option value="NOON">Noon</option>
-                  <option value="AFTERNOON">Afternoon</option>
+                  <option value="6:00 am - 2:30 pm">6:00 am - 2:30 pm</option>
+                  <option value="7:00 am – 4:00 pm">7:00 am – 4:00 pm</option>
+                  <option value="8:00 am – 5:00 pm">8:00 am – 5:00 pm</option>
+                  <option value="8:30 am – 5:30 pm">8:30 am – 5:30 pm</option>
+                  <option value="9:00 am – 6:00 pm">9:00 am – 6:00 pm</option>
+                  <option value="2:00 pm – 10:30 pm">2:00 pm – 10:30 pm</option>
+                  <option value="10:00 pm – 6:30 am">10:00 pm – 6:30 am</option>
                 </SelectField>
               </SubSection>
             </Section>

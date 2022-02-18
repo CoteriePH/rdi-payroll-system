@@ -147,32 +147,51 @@ const Menu = ({ children }) => {
                     setCheckboxValue(!checkboxValue);
                     // TODO - REFACTOR
                     if (checkboxValue) {
-                      setValue("MORNING", null);
-                      setValue("NOON", null);
-                      setValue("MID_MORNING", null);
-                      setValue("AFTERNOON", null);
+                      setValue("6:00 am - 2:30 pm", null);
+                      setValue("7:00 am – 4:00 pm", null);
+                      setValue("8:00 am – 5:00 pm", null);
+                      setValue("8:30 am – 5:30 pm", null);
+                      setValue("9:00 am – 6:00 pm", null);
+                      setValue("2:00 pm – 10:30 pm", null);
+                      setValue("10:00 pm – 6:30 am", null);
                     }
                   }}
                 />
-                <Grid col={2}>
+                <Grid col={1}>
                   <Checkbox
-                    name="MORNING"
-                    label="Morning"
+                    name="6:00 am - 2:30 pm"
+                    label="6:00 am - 2:30 pm"
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="NOON"
-                    label="Noon"
+                    name="7:00 am – 4:00 pm"
+                    label="7:00 am – 4:00 pm"
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="MID_MORNING"
-                    label="Mid-morning"
+                    name="8:00 am – 5:00 pm"
+                    label="8:00 am – 5:00 pm"
                     disabled={!checkboxValue}
                   />
                   <Checkbox
-                    name="AFTERNOON"
-                    label="Afternoon"
+                    name="8:30 am – 5:30 pm"
+                    label="8:30 am – 5:30 pm"
+                    disabled={!checkboxValue}
+                  />
+                  <Checkbox
+                    name="9:00 am – 6:00 pm"
+                    label="9:00 am – 6:00 pm"
+                    disabled={!checkboxValue}
+                  />
+                  <Checkbox
+                    name="2:00 pm – 10:30 pm"
+                    label="2:00 pm – 10:30 pm"
+                    disabled={!checkboxValue}
+                  />
+
+                  <Checkbox
+                    name="10:00 pm – 6:30 am"
+                    label="10:00 pm – 6:30 am"
                     disabled={!checkboxValue}
                   />
                 </Grid>
