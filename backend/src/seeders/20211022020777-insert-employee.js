@@ -26,7 +26,7 @@ module.exports = {
     );
 
     const scheduleRows = schedules[0];
-    
+
     return await queryInterface.bulkInsert("employees", [
       {
         id: uuidv4(),
@@ -43,7 +43,7 @@ module.exports = {
         province: "Quezon",
         postal_code: "4301",
         date_hired: "2018-6-1",
-        time_shift: "AFTERNOON",
+        time_shift: "SCHEDULE_A",
         created_at: new Date(),
         updated_at: new Date(),
         company_id: companyRows[0].id,
@@ -66,7 +66,7 @@ module.exports = {
         city: "Zamboanga",
         province: "Quezon",
         postal_code: "4301",
-        time_shift: "MORNING",
+        time_shift: "SCHEDULE_A",
         created_at: new Date(),
         updated_at: new Date(),
         company_id: companyRows[1].id,
@@ -89,7 +89,7 @@ module.exports = {
         contact_no: "09881112222",
         employee_type: "REGULAR",
         date_hired: "2018-6-1",
-        time_shift: "MID_MORNING",
+        time_shift: "SCHEDULE_C",
         created_at: new Date(),
         updated_at: new Date(),
         company_id: companyRows[1].id,
@@ -112,7 +112,7 @@ module.exports = {
         province: "Quezon",
         postal_code: "4301",
         date_hired: "2018-6-1",
-        time_shift: "MID_MORNING",
+        time_shift: "SCHEDULE_D",
         created_at: new Date(),
         updated_at: new Date(),
         company_id: companyRows[2].id,
