@@ -31,16 +31,13 @@ export const ModalStyle = styled.div`
   outline: none;
 `;
 
-export const Wrapper = styled.div`
-
-`;
+export const Wrapper = styled.div``;
 
 export const UpperCol = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1em;
   box-shadow: 0px 0px 10px rgba(46, 54, 68, 0.1);
-  
 `;
 
 export const CompTitle = styled.div`
@@ -51,7 +48,7 @@ export const CompTitle = styled.div`
 
 export const PaginationNum = styled.div`
   font-family: ${theme.fonts.avenirBlack};
-  font-size: .85rem;
+  font-size: 0.85rem;
 `;
 
 export const CrossIcon = styled.div`
@@ -74,14 +71,12 @@ export const SndWrapper = styled.div`
 `;
 export const BtnWrapper = styled.div`
   display: flex;
-  column-gap: .8em;
-  
+  column-gap: 0.8em;
 `;
 
 export const CompName = styled.div`
   font-family: ${theme.fonts.avenirRoman};
   text-transform: uppercase;
-  
 `;
 
 export const BigText = styled.div`
@@ -99,26 +94,24 @@ export const TrdCol = styled.div`
 export const Details = styled.div`
   display: flex;
   column-gap: 2em;
-  font-size: 0.90rem;
+  font-size: 0.9rem;
 `;
 
 export const DetailOne = styled.div`
-  display: flex;  
+  display: flex;
 `;
 
 export const DetailTwo = styled.div`
-  display: flex;    
+  display: flex;
 `;
-
 
 export const SubDetail = styled.div`
   font-family: ${theme.fonts.avenirBook};
   display: flex;
   flex-direction: column;
   text-align: right;
-  padding-right: .5em;  
+  padding-right: 0.5em;
 `;
-
 
 export const DataInfo = styled.div`
   display: flex;
@@ -135,7 +128,7 @@ export const EmpNum = styled.div`
   text-transform: uppercase;
 `;
 
-export const Date = styled.div`
+export const StyledDate = styled.div`
   font-family: ${theme.fonts.avenirBlack};
   text-transform: uppercase;
 `;
@@ -145,17 +138,17 @@ export const Position = styled.div`
   text-transform: uppercase;
 `;
 
-export const BasicPay= styled.div`
-  font-size: 0.90rem;
+export const BasicPay = styled.div`
+  font-size: 0.9rem;
 `;
 
-export const BasicCaption= styled.div`
+export const BasicCaption = styled.div`
   text-align: right;
   text-transform: uppercase;
 `;
 
 export const BasicMoney = styled.span`
-  padding-left: .5em;
+  padding-left: 0.5em;
   text-transform: uppercase;
   font-family: ${theme.fonts.avenirBlack};
   color: ${theme.colors.default};
@@ -188,7 +181,7 @@ export const FrthCol = styled.div`
   display: flex;
 `;
 
-export const BigCol = styled.div`  
+export const BigCol = styled.div`
   flex-basis: 75%;
 `;
 
@@ -198,24 +191,24 @@ export const BigUpper = styled.div`
 `;
 
 export const BigLower = styled.div`
-  padding: 0em 1.5em;  
+  padding: 0em 1.5em;
 `;
 
 export const Approve = styled.div`
   margin-top: 1.5em;
   display: flex;
-  column-gap: .5em;
+  column-gap: 0.5em;
   justify-content: flex-end;
 `;
 export const WasApprove = styled.div`
-  padding-top: .1em;
+  padding-top: 0.1em;
   font-family: ${theme.fonts.avenirBlack};
-  color: #5CBD67;
+  color: #5cbd67;
 `;
 export const MarkCheck = styled.div`
   width: 1.5em;
   height: 1.5em;
-  color: #5CBD67;
+  color: #5cbd67;
 `;
 
 export const Attendance = styled.div`
@@ -232,24 +225,23 @@ export const ADTitle = styled.div`
 `;
 
 export const AttContent = styled.div`
-/* border is only for seeing its boundary */
-  border: solid black 1px; 
-  padding: .5em;
+  /* border is only for seeing its boundary */
+  border: solid black 1px;
+  padding: 0.5em;
 `;
 
 export const DeducContent = styled.div`
-/* border is only for seeing its boundary */
-  border: solid black 1px; 
-  padding: .5em;
+  /* border is only for seeing its boundary */
+  border: solid black 1px;
+  padding: 0.5em;
 `;
 
-
 export const SmallCol = styled.div`
-  background-color: #EDECEC; 
-  flex-basis: 25%;  
+  background-color: #edecec;
+  flex-basis: 25%;
   border-radius: 1em;
 `;
 
 export const Pay = styled.div`
-  padding: .5em 3em;
+  padding: 0.5em 3em;
 `;
