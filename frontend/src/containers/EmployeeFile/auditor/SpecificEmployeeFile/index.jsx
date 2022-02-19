@@ -18,7 +18,6 @@ import {
 } from "./styles";
 
 const SpecificEmployeeFile = ({ employee }) => {
-  const { data } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
 
   return (
@@ -92,12 +91,36 @@ const SpecificEmployeeFile = ({ employee }) => {
           <Divider />
           <Flex basis="75%" p="2em">
             <ListTable>
-              <FolderItem size="10em" name="PAYROLL" />
-              <FolderItem size="10em" name="ATTENDANCE" />
-              <FolderItem size="10em" name="CASH ADVANCE" />
-              <FolderItem size="10em" name="SALARY EARNINGS" />
-              <FolderItem size="10em" name="SALARY DEDUCTIONS" />
-              <FolderItem size="10em" name="MEMOS" />
+              <FolderItem
+                href={`/employee-file/${employee.id}/payroll`}
+                size="10em"
+                name="PAYROLL"
+              />
+              <FolderItem
+                href={`/employee-file/${employee.id}/attendance`}
+                size="10em"
+                name="ATTENDANCE"
+              />
+              <FolderItem
+                href={`/employee-file/${employee.id}/cash-advance`}
+                size="10em"
+                name="CASH ADVANCE"
+              />
+              <FolderItem
+                href={`/employee-file/${employee.id}/salary-earnings`}
+                size="10em"
+                name="SALARY EARNINGS"
+              />
+              <FolderItem
+                href={`/employee-file/${employee.id}/salary-deductions`}
+                size="10em"
+                name="SALARY DEDUCTIONS"
+              />
+              <FolderItem
+                href={`/employee-file/${employee.id}/memos`}
+                size="10em"
+                name="MEMOS"
+              />
             </ListTable>
           </Flex>
         </Flex>

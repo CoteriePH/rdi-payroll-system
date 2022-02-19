@@ -42,6 +42,7 @@ export const SectionHeader = styled.header`
 `;
 
 export const Flex = styled.div`
+  cursor: ${(props) => (props.cursor ? props.cursor : null)};
   display: flex;
   align-items: ${(props) => (props.align ? props.align : null)};
   justify-content: ${(props) => (props.justify ? props.justify : null)};
