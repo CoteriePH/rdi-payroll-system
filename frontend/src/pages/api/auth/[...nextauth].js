@@ -37,6 +37,7 @@ export default NextAuth({
   ],
   pages: {
     signIn: "/auth/login",
+    error: "/auth/error",
   },
   session: {
     strategy: "jwt",
