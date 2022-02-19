@@ -1,9 +1,11 @@
+import { useRouter } from "next/router";
 import React from "react";
 import { Wrapper, Folder, Name } from "./styles";
 
-const FolderIcon = ({ name }) => {
+const FolderIcon = ({ id, name, href = "/" }) => {
+  const router = useRouter();
   return (
-    <Wrapper>
+    <Wrapper onClick={() => router.push(href)}>
       <Folder>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
           <path
