@@ -18,9 +18,11 @@ import {
   Wrapper,
 } from "./styles";
 
-const SpecificEmployeeFile = ({ employee }) => {
+const FolderContent = ({ employee, name }) => {
   const { isOpen } = useSelector(settingsSelector);
+
   const router = useRouter();
+
   return (
     <Wrapper>
       {/* LIST VIEW */}
@@ -51,9 +53,20 @@ const SpecificEmployeeFile = ({ employee }) => {
                 </g>
               </svg>
             </Chevron>
-            <Path>
+            <Path onClick={() => router.push(`/employee-file/${employee.id}`)}>
               {employee?.first_name} {employee?.last_name}
             </Path>
+            <Chevron>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g transform="rotate(-90 12 12)">
+                  <path
+                    d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    fill="currentColor"
+                  />
+                </g>
+              </svg>
+            </Chevron>
+            <Path>{name}</Path>
             {/* di ko sure kung pano 'to i-modify */}
           </FilePath>
           <div>
@@ -94,36 +107,9 @@ const SpecificEmployeeFile = ({ employee }) => {
           <Divider />
           <Flex basis="75%" p="2em">
             <ListTable>
-              <FolderItem
-                href={`/employee-file/${employee.id}/payroll`}
-                size="10em"
-                name="PAYROLL"
-              />
-              <FolderItem
-                href={`/employee-file/${employee.id}/attendance`}
-                size="10em"
-                name="ATTENDANCE"
-              />
-              <FolderItem
-                href={`/employee-file/${employee.id}/employee-ca`}
-                size="10em"
-                name="CASH ADVANCE"
-              />
-              <FolderItem
-                href={`/employee-file/${employee.id}/salary-earnings`}
-                size="10em"
-                name="SALARY EARNINGS"
-              />
-              <FolderItem
-                href={`/employee-file/${employee.id}/salary-deductions`}
-                size="10em"
-                name="SALARY DEDUCTIONS"
-              />
-              <FolderItem
-                href={`/employee-file/${employee.id}/memos`}
-                size="10em"
-                name="MEMOS"
-              />
+              <div>File 1</div>
+              <div>File 2</div>
+              <div>File 3</div>
             </ListTable>
           </Flex>
         </Flex>
@@ -135,4 +121,4 @@ const SpecificEmployeeFile = ({ employee }) => {
   );
 };
 
-export default SpecificEmployeeFile;
+export default FolderContent;

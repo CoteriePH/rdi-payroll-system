@@ -2,8 +2,8 @@ import FolderContent from "@/containers/FolderContent";
 import { getOneEmployee } from "@/utils/employee.routes";
 import React from "react";
 
-const EmployeeSalaryEarningsPage = ({ employee }) => {
-  return <FolderContent employee={employee} name="Salary Earnings" />;
+const EmployeeCashAdvancePage = ({ employee }) => {
+  return <FolderContent employee={employee} name="Cash Advance" />;
 };
 
 export const getServerSideProps = async ({ params }) => {
@@ -19,4 +19,4 @@ export const getServerSideProps = async ({ params }) => {
   };
 };
 
-export default EmployeeSalaryEarningsPage;
+export default EmployeeCashAdvancePage;
