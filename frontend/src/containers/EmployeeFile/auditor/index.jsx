@@ -48,7 +48,10 @@ const AuditorEmployeeFile = () => {
 
         <ListTable>
           {data.map((employee) => (
-            <FolderIcon name={`${employee.first_name} ${employee.last_name}`} />
+            <FolderIcon
+              key={employee.id}
+              name={`${employee.first_name} ${employee.last_name}`}
+            />
           ))}
         </ListTable>
       </Flex>

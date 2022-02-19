@@ -46,4 +46,6 @@ export const FilePath = styled.div`
 export const ListTable = styled.div`
   position: relative;
   padding: 0.5em 1em;
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
 `;
