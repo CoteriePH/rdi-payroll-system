@@ -9,8 +9,8 @@ export const Wrapper = styled.div`
 `;
 
 export const Folder = styled.div`
-  width: 5em;
-  height: 5em;
+  height: ${(props) => props.size};
+  width: ${(props) => props.size};
   color: ${theme.colors.default};
 `;
 

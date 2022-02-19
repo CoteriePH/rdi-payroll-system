@@ -1,21 +1,21 @@
-import {
-  Wrapper,
-  Navigation,
-  FilePath,
-  CompanyIcon,
-  Chevron,
-  Path,
-  ListTable,
-} from "./styles";
-
-import FolderIcon from "@/components/View/FolderIcon";
-import LGButtons from "@/components/View/LGButtons";
-import { useSelector } from "react-redux";
-import { Flex } from "@/styles";
-import Settings from "@/components/Menu/settings";
-import { settingsSelector } from "@/features/settings/settingsSlice";
+import Button from "@/components/Button";
 import Menu from "@/components/Menu";
-import { useEffect } from "react";
+import Settings from "@/components/Menu/settings";
+import FolderItem from "@/components/View/FolderItem";
+import LGButtons from "@/components/View/LGButtons";
+import { settingsSelector } from "@/features/settings/settingsSlice";
+import { Divider, Flex, HeaderText, Text } from "@/styles";
+import Image from "next/image";
+import { useSelector } from "react-redux";
+import {
+  Chevron,
+  CompanyIcon,
+  FilePath,
+  ListTable,
+  Navigation,
+  Path,
+  Wrapper,
+} from "./styles";
 
 const SpecificEmployeeFile = ({ employee }) => {
   const { data } = useSelector((state) => state.employees);
@@ -59,18 +59,48 @@ const SpecificEmployeeFile = ({ employee }) => {
           </div>
           <Settings />
         </Navigation>
-
-        <ListTable>
-          {data.map((employee) => (
-            <>
-              <FolderIcon
-                key={employee.id}
-                id={employee.id}
-                name={`${employee.first_name} ${employee.last_name}`}
+        <Flex direction="row">
+          <Flex
+            p="2em"
+            direction="column"
+            basis="25%"
+            justify="center"
+            align="center"
+          >
+            <Flex>
+              <Image
+                width="100px"
+                height="100px"
+                src="/icons/person.svg"
+                alt="me.png"
               />
-            </>
-          ))}
-        </ListTable>
+            </Flex>
+            <Flex direction="column" justify="start" align="center" gap="0.75">
+              <HeaderText size="xxl">John Doe</HeaderText>
+              <Text>
+                EMPLOYEE NO: <span>0000-0000</span>
+              </Text>
+              <Text fontWeight="bold" color="lightViolet">
+                ACCOUNTING & FINANCE
+              </Text>
+            </Flex>
+            <Flex direction="column" gap="1" mt="2em" justify="flex-end">
+              <Button>View Legal Documents</Button>
+              <Button>View Employee Details</Button>
+            </Flex>
+          </Flex>
+          <Divider />
+          <Flex basis="75%" p="2em">
+            <ListTable>
+              <FolderItem size="10em" name="PAYROLL" />
+              <FolderItem size="10em" name="ATTENDANCE" />
+              <FolderItem size="10em" name="CASH ADVANCE" />
+              <FolderItem size="10em" name="SALARY EARNINGS" />
+              <FolderItem size="10em" name="SALARY DEDUCTIONS" />
+              <FolderItem size="10em" name="MEMOS" />
+            </ListTable>
+          </Flex>
+        </Flex>
       </Flex>
       <Flex bg="gray" flex={1}>
         {isOpen && <Menu />}

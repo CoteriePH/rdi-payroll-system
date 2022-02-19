@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 // REUSABLE GLOBAL STYLES ONLY
 export const HeaderText = styled.p`
+  margin: 0 !important;
   font-size: ${(props) =>
     props.size ? theme.fontSizes[props.size] : theme.fontSizes.xl2};
   color: ${(props) =>
@@ -46,7 +47,18 @@ export const Flex = styled.div`
   justify-content: ${(props) => (props.justify ? props.justify : null)};
   flex-direction: ${(props) => (props.direction ? props.direction : "row")};
   flex-grow: ${(props) => (props.flex ? props.flex : 1)};
+  flex-basis: ${(props) => (props.basis ? props.basis : 0)};
+  padding: ${(props) => (props.p ? props.p : 0)};
+  height: ${(props) => props.h};
+  width: ${(props) => props.w};
   background-color: ${(props) => (props.bg ? theme.colors[props.bg] : null)};
   gap: ${(props) => (props.gap ? `${props.gap}rem` : null)};
-  flex-wrap: ${(props) => (props.wrap ? 'wrap' : null)};
+  flex-wrap: ${(props) => (props.wrap ? "wrap" : null)};
+  margin-top: ${(props) => (props.mt ? props.mt : 0)};
+  margin-bottom: ${(props) => (props.mb ? props.mb : 0)};
+`;
+
+export const Divider = styled.hr`
+  margin-left: ${(props) => (props.ml ? props.ml : 0)};
+  margin-right: ${(props) => (props.mr ? props.mr : 0)};
 `;
