@@ -68,10 +68,11 @@ import {
 import Checkbox from "@/components/Checkbox";
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useRouter } from "next/router";
 
 const View = () => {
-  const { id } = useParams();
+  const router = useRouter();
+  const { id } = router.query;
   const { data } = useSelector((state) => state.employees);
   const generate = data.find((e) => e.id === id);
 
@@ -223,7 +224,7 @@ const View = () => {
                   <div>13th Month Pay:</div>
                   <Input type="text" maxLength="9" />
                 </OneThreePay>
-                <ViewMonth>View this year's monthly salary</ViewMonth>
+                <ViewMonth>{"View this year's monthly salary"}</ViewMonth>
               </SectionFour>
             </FinancialAssistance>
           </EmpInfo>

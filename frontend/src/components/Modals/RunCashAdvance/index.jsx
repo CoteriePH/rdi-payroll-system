@@ -34,7 +34,7 @@ import { addDays } from "@/helpers/date.helper";
 import Dinero from "dinero.js";
 import { toast } from "react-toastify";
 
-ReactModal.setAppElement("#root");
+ReactModal.setAppElement("#__next");
 
 const DATE_NOW = dayjs(Date.now()).format("YYYY-MM-DD");
 const DEFAULT_PAYOUT_DAYS = 15;

@@ -13,6 +13,7 @@ import {
   findAllProcessedCAs,
 } from "@/features/cash_advance/cashAdvanceSlice";
 import { caStatusColorPicker } from "@/helpers/colorPicker";
+import { useSession } from "next-auth/react";
 
 const ProcessedCA = () => {
   const dispatch = useDispatch();
@@ -20,8 +21,8 @@ const ProcessedCA = () => {
     (state) => state.cash_advance
   );
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
-
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   useEffect(() => {
     dispatch(findAllProcessedCAs());
   }, []);

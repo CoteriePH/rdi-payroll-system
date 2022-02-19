@@ -1,19 +1,14 @@
-import { NavLink } from "react-router-dom";
-import "./Link.css";
+import NextLink from "next/link";
+import { Container, StyledLink } from "./styles";
 
-function Link({ children, to, ...rest }) {
+function Link({ children, href, ...rest }) {
   return (
     <>
-      <li className="list-style">
-        <NavLink
-          {...rest}
-          className="link"
-          activeClassName="link-active"
-          to={to}
-        >
-          {children}
-        </NavLink>
-      </li>
+      <NextLink href={href} passHref>
+        <Container>
+          <StyledLink {...rest}>{children}</StyledLink>
+        </Container>
+      </NextLink>
     </>
   );
 }

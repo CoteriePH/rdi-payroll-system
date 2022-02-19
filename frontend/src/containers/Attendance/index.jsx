@@ -15,12 +15,14 @@ import { ROLES } from "@/constants/constants";
 import { findAllAttendance } from "@/features/attendance/attendanceSlice";
 import { accuracyColorPicker } from "@/helpers/colorPicker";
 import dayjs from "dayjs";
+import { useSession } from "next-auth/react";
 
 const Attendance = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.attendances);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const onModalOpen = () => {

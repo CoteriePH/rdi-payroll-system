@@ -1,60 +1,59 @@
+import Button from "@/components/Button/";
 import Menu from "@/components/Menu";
 import Settings from "@/components/Menu/settings";
+import RunCashAdvance from "@/components/Modals/RunCashAdvance";
 import Table from "@/components/Table";
+import TableCheckbox from "@/components/TableCheckbox";
+import Toolbar from "@/components/Toolbar";
+import { ROLES } from "@/constants/constants";
+import {
+  resetEmployeeToRun,
+  toggleEmployeeToRun,
+} from "@/features/cash_advance/cashAdvanceSlice";
+import { findAllFilteredEmployees } from "@/features/employee/employeeSlice";
 import {
   addFilter,
   resetFilters,
   settingsSelector,
 } from "@/features/settings/settingsSlice";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { findAllFilteredEmployees } from "@/features/employee/employeeSlice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Wrapper, Container, Flex, TableContainer } from "./styles";
-import Button from "@/components/Button/";
 import getTimeDuration from "@/helpers/getTimeDuration";
-import Toolbar from "@/components/Toolbar";
-import { ROLES } from "@/constants/constants";
-import RunCashAdvance from "@/components/Modals/RunCashAdvance";
-import TableCheckbox from "@/components/TableCheckbox";
-import {
-  resetBatchIdsToExecute,
-  resetEmployeeToRun,
-  toggleEmployeeToRun,
-} from "@/features/cash_advance/cashAdvanceSlice";
+import { useSession } from "next-auth/react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Flex, TableContainer, Wrapper } from "./styles";
 
 const CashAdvance = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isRunOpen, setIsRunOpen] = useState(false);
   const { isFetching: isGenerating, isSuccess: isGenerated } = useSelector(
     (state) => state.cash_advance
   );
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(addFilter({ cash_advance_eligibility: 1 }));
     dispatch(findAllFilteredEmployees({ cash_advance_eligibility: 1 }));
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     return () => {
       dispatch(resetEmployeeToRun());
       dispatch(resetFilters());
     };
-  }, []);
+  }, [dispatch]);
   useEffect(() => {
     if (isGenerated) {
       dispatch(findAllFilteredEmployees({ cash_advance_eligibility: 1 }));
       setIsRunOpen(false);
     }
-  }, [isGenerating, isGenerated]);
+  }, [isGenerating, isGenerated, dispatch]);
   useEffect(() => {
     return () => {
       dispatch(resetEmployeeToRun());
     };
-  }, [data]);
+  }, [dispatch, data]);
 
   const onRunCashAdvanceOpen = () => {
     setIsRunOpen(true);

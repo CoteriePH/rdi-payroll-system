@@ -13,12 +13,15 @@ import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
 import Settings from "@/components/Menu/settings";
 import Table from "@/components/Table";
+import Menu from "@/components/Menu";
+import { useSession } from "next-auth/react";
 
 const EncoderEmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -39,7 +42,7 @@ const EncoderEmployeeFile = () => {
 
   useEffect(() => {
     dispatch(findAllEmployees());
-  }, []);
+  }, [dispatch]);
 
   const columns = React.useMemo(
     () => [
