@@ -168,7 +168,7 @@ const companySlice = createSlice({
         state.data = [];
         state.isFetching = false;
         state.isError = true;
-        state.errorMessage = payload.message;
+        state.errorMessage = payload?.message;
       })
       .addCase(findAllProcessedCAs.pending, (state, { payload }) => {
         state.isFetching = true;
@@ -182,7 +182,7 @@ const companySlice = createSlice({
         state.processedData = [];
         state.isFetching = false;
         state.isError = true;
-        state.errorMessage = payload.message;
+        state.errorMessage = payload?.message;
       })
       .addCase(findAllUnprocessedCAs.pending, (state, { payload }) => {
         state.isFetching = true;
@@ -196,7 +196,7 @@ const companySlice = createSlice({
         state.unprocessedData = [];
         state.isFetching = false;
         state.isError = true;
-        state.errorMessage = payload.message;
+        state.errorMessage = payload?.message;
       })
       .addCase(generateCashAdvance.pending, (state, { payload }) => {
         state.isFetching = true;
