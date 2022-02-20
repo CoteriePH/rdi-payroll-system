@@ -4,7 +4,6 @@ import { theme } from "@/theme";
 export const Wrapper = styled.div`
     padding: 2.3em 2em;
 
-
 `;
 
 export const Inputs = styled.div`
@@ -16,7 +15,6 @@ export const Inputs = styled.div`
 `;
 
 export const NotifbarTray = styled.div`
-    display: flex;
-    gap: 1em;
+    display: flex;    
     flex-wrap: wrap;
 `;
