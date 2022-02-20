@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 import CurrDate from "./date";
 import {
   HeaderCan,
@@ -13,11 +12,18 @@ import {
   From,
   To,
   FlexRun,
+  InputDates,
 } from "./styles";
 import Button from "@/components/Button";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Header(props) {
-  let { pathname } = useLocation();
+  const { pathname } = useRouter();
+  let modPathName = pathname;
+
+  // let prevHref = props.prevhref ? props.prevHref : "/payroll";
+
   const tabsMap = new Map();
   tabsMap.set("/cash-advance", [
     { title: "RUN", to: "/cash-advance" },
@@ -25,14 +31,14 @@ function Header(props) {
     { title: "PROCESSED C.A.'s", to: "/cash-advance/processed" },
   ]);
   if (pathname.includes("cash-advance")) {
-    pathname = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
+    modPathName = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
   }
 
   return (
     <>
       <HeaderCan jc={props.jc}>
         <HeaderAudPayroll tempDisplay={props.tempDisplay}>
-          <Link to="/payroll">
+          <Link href={props.prevHref || "/payroll"} passHref>
             <ChevronForProll>
               <svg mlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path
@@ -43,10 +49,12 @@ function Header(props) {
             </ChevronForProll>
           </Link>
           <HeaderName>{props.generatePayroll}</HeaderName>
-          <From>From:</From>
-          <input type="date" />
-          <To>To:</To>
-          <input type="date" />
+          <InputDates dates={props.dates}>
+            <From>From:</From>
+            <input type="date" />
+            <To>To:</To>
+            <input type="date" />
+          </InputDates>
           <FlexRun>
             <Button w="5%">RUN</Button>
           </FlexRun>
@@ -59,18 +67,19 @@ function Header(props) {
           </HeaderDate>
         </TitleContainer>
         <TabsContainer TabContDisp={props.TabContDisp}>
-          {tabsMap.get(pathname)?.map(({ title, to }, idx) => {
+          {tabsMap.get(modPathName)?.map(({ title, to }, idx) => {
             return (
-              <TabLink
-                exact
-                activeClassName="active"
-                to={to}
-                key={`${title}-${idx}`}
-                size="xl"
-                color="darkGray"
-              >
-                {title}
-              </TabLink>
+              <Link key={title + to} href={to} passHref>
+                <TabLink
+                  exact
+                  activeClassName="active"
+                  key={`${title}-${idx}`}
+                  size="xl"
+                  color="darkGray"
+                >
+                  {title}
+                </TabLink>
+              </Link>
             );
           })}
         </TabsContainer>

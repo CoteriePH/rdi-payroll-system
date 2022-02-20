@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { findAllEmployees } from "@/features/employee/employeeSlice";
+import { settingsSelector } from "@/features/settings/settingsSlice";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTable } from "react-table";
 import { Wrapper, TextLink, Container, Flex, TableContainer } from "./styles";
 import Button from "@/components/Button/";
@@ -9,12 +11,17 @@ import Toolbar from "@/components/Toolbar";
 import { ROLES } from "@/constants/constants";
 import EditEmployee from "@/components/Modals/EditEmployee";
 import AddEmployee from "@/components/Modals/AddEmployee";
+import Settings from "@/components/Menu/settings";
+import Table from "@/components/Table";
+import Menu from "@/components/Menu";
+import { useSession } from "next-auth/react";
 
 const EncoderEmployeeFile = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -35,7 +42,7 @@ const EncoderEmployeeFile = () => {
 
   useEffect(() => {
     dispatch(findAllEmployees());
-  }, []);
+  }, [dispatch]);
 
   const columns = React.useMemo(
     () => [

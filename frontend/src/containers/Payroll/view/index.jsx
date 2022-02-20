@@ -1,81 +1,75 @@
-import React from "react";
+import Button from "@/components/Button";
 import Header from "@/components/Header";
+import { useRouter } from "next/router";
 import {
-  Wrapper,
-  SubWrapper,
-  Details,
-  PersonalInfo,
-  Department,
-  EmpPicture,
-  NameOthers,
-  EmpName,
-  First,
-  Middle,
-  Last,
-  FlexRow,
-  Position,
-  EmpNumber,
-  VerticalLine,
-  MainDept,
-  Dept,
-  Left,
-  Right,
-  EmpSpecs,
-  Span,
-  Rate,
-  DaysWorked,
-  NumOfHours,
-  SundayPay,
-  Input,
-  InputRate,
-  SalaryEarnings,
-  SalaryDeductions,
-  FinancialAssistance,
+  BasicPay,
+  BonusPay,
+  CashAdv,
   ColumnTitle,
+  DaysWorked,
+  Department,
+  Dept,
+  Details,
   EmpInfo,
-  Section,
-  SSSContri,
+  EmpName,
+  EmpNumber,
+  EmpPicture,
+  EmpSpecs,
+  FewButtons,
+  FinancialAssistance,
+  First,
+  FlexRow,
+  GrossPay,
+  Input,
+  InputHR,
+  InputRate,
+  InputSpecs,
+  Last,
+  Left,
+  LegalHoliday,
+  LessDeduc,
   LoveFunds,
   LoveLoans,
-  PhiLoans,
-  CashAdv,
-  Others,
-  InputSpecs,
-  BasicPay,
-  OvertimeRate,
-  NightDiff,
-  SunPay,
-  LegalHoliday,
-  SickPay,
-  SepaPay,
-  BonusPay,
-  OneThreeComputation,
-  ThisYearSalary,
-  OneThreePay,
-  Run,
+  MainDept,
+  Middle,
   ModifiedButton,
-  ViewMonth,
-  SectionOne,
-  SectionTwo,
-  SectionThree,
-  SectionFour,
-  GrossPay,
-  InputHR,
-  LessDeduc,
+  NameOthers,
   NetPay,
-  FewButtons,
+  NightDiff,
+  NumOfHours,
+  OneThreeComputation,
+  OneThreePay,
+  Others,
+  OvertimeRate,
+  PersonalInfo,
+  PhiLoans,
+  Position,
+  Rate,
+  Right,
+  Run,
+  SalaryDeductions,
+  SalaryEarnings,
+  Section,
+  SectionFour,
+  SectionOne,
+  SectionThree,
+  SectionTwo,
+  SepaPay,
+  SickPay,
+  Span,
+  SSSContri,
+  SubWrapper,
+  SundayPay,
+  SunPay,
+  ThisYearSalary,
+  VerticalLine,
+  ViewMonth,
+  Wrapper,
 } from "./styles";
-import Checkbox from "@/components/Checkbox";
-import Button from "@/components/Button";
-import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
 
-const View = () => {
-  const { id } = useParams();
-  const { data } = useSelector((state) => state.employees);
-  const generate = data.find((e) => e.id === id);
-
-  console.log(generate);
+const View = ({ employee }) => {
+  const router = useRouter();
+  const { id } = router.query;
 
   return (
     <Wrapper>
@@ -91,19 +85,19 @@ const View = () => {
           <EmpPicture></EmpPicture>
           <NameOthers>
             <EmpName>
-              <First>{generate.first_name}</First>
-              <Middle>{generate.middle_name.charAt(0)}.</Middle>
-              <Last>{generate.last_name}</Last>
+              <First>{employee.first_name}</First>
+              <Middle>{employee.middle_name.charAt(0)}.</Middle>
+              <Last>{employee.last_name}</Last>
             </EmpName>
             <FlexRow>
-              <Position>{generate.position.name}</Position>
+              <Position>{employee.position?.name}</Position>
               <VerticalLine></VerticalLine>
-              <EmpNumber>{generate.id}</EmpNumber>
+              <EmpNumber>{employee.id}</EmpNumber>
             </FlexRow>
           </NameOthers>
         </PersonalInfo>
         <Department>
-          <MainDept>{generate.department.name}</MainDept>
+          <MainDept>{employee.department?.name}</MainDept>
           <Dept>DEPARTMENT</Dept>
         </Department>
       </Details>
@@ -223,7 +217,13 @@ const View = () => {
                   <div>13th Month Pay:</div>
                   <Input type="text" maxLength="9" />
                 </OneThreePay>
-                <ViewMonth>View this year's monthly salary</ViewMonth>
+                <ViewMonth
+                  onClick={() =>
+                    router.push(`/payroll/${employee.id}/monthly-salary`)
+                  }
+                >
+                  {"View this year's monthly salary"}
+                </ViewMonth>
               </SectionFour>
             </FinancialAssistance>
           </EmpInfo>

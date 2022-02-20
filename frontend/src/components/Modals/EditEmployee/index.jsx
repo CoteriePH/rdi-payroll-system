@@ -20,11 +20,11 @@ import {
   SeSndCol,
   SndList,
   SndHeader,
-  ButtonNext
+  ButtonNext,
 } from "./styles";
 import Button from "@/components/Button";
 
-ReactModal.setAppElement("#root");
+ReactModal.setAppElement("#__next");
 
 const EditEmployee = ({ isOpen, onClose }) => {
   const methods = useForm({
@@ -72,7 +72,7 @@ const EditEmployee = ({ isOpen, onClose }) => {
               </CrossIcon>
             </CrossArea>
             <InfoHeader>
-              What do you want to edit in John Doe's Information
+              {"What do you want to edit in John Doe's Information"}
             </InfoHeader>
 
             <FstList>
@@ -116,7 +116,7 @@ const EditEmployee = ({ isOpen, onClose }) => {
               </FlxChkBx>
             </FstList>
             <SndList>
-            <SndHeader>Employement Status</SndHeader>
+              <SndHeader>Employement Status</SndHeader>
               <FlxChkBx>
                 <SeFstCol>
                   <Li>
@@ -131,7 +131,7 @@ const EditEmployee = ({ isOpen, onClose }) => {
                   </Li>
                   <Li>
                     <Checkbox border name="first_name" label="Position" />
-                  </Li>                  
+                  </Li>
                 </SeFstCol>
                 <SeSndCol>
                   <Li>
@@ -142,16 +142,14 @@ const EditEmployee = ({ isOpen, onClose }) => {
                   </Li>
                   <Li>
                     <Checkbox border name="email" label="Time Shaft" />
-                  </Li>                  
+                  </Li>
                 </SeSndCol>
               </FlxChkBx>
             </SndList>
           </form>
         </FormProvider>
         <ButtonNext>
-          <Button
-            w="5em"            
-          >NEXT</Button>          
+          <Button w="5em">NEXT</Button>
         </ButtonNext>
       </Wrapper>
     </ReactModal>

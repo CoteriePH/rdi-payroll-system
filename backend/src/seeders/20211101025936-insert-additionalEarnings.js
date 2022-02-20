@@ -8,7 +8,7 @@ module.exports = {
     );
 
     const employeeRows = employees[0];
-    return await queryInterface.bulkInsert("tbl_addtnl _earnings", [
+    return await queryInterface.bulkInsert("additional_earnings", [
       {
         id: uuidv4(),
         employee_id: 11,
@@ -19,6 +19,7 @@ module.exports = {
         total: Math.floor(Math.random() * 300),
         created_at: new Date(),
         updated_at: new Date(),
+        remarks: "The Remark",
       },
       {
         id: uuidv4(),
@@ -30,6 +31,7 @@ module.exports = {
         total: Math.floor(Math.random() * 300),
         created_at: new Date(),
         updated_at: new Date(),
+        remarks: "The Remark",
       },
       {
         id: uuidv4(),
@@ -41,10 +43,11 @@ module.exports = {
         total: Math.floor(Math.random() * 300),
         created_at: new Date(),
         updated_at: new Date(),
+        remarks: "The Remark",
       },
     ]);
   },
   down: async (queryInterface, Sequelize) => {
-    return queryInterface.bulkDelete("tbl_addtnl _earnings", null, {});
+    return queryInterface.bulkDelete("additional_earnings", null, {});
   },
 };

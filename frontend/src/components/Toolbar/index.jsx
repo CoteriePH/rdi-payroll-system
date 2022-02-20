@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
 import { exportEmployeesToCSV } from "@/features/employee/employeeSlice";
+import { useSession } from "next-auth/react";
 import React from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -8,11 +9,14 @@ import { Box, Wrapper } from "./styles";
 
 const Toolbar = ({ children, leftChildren }) => {
   const dispatch = useDispatch();
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+
+  const authRole = session?.user.role;
+
   return (
     <Wrapper>
       <Box>
-        {authRole === ROLES.AUDITOR ? (
+        {authRole === "AUDITOR" ? (
           <Button
             minW="10rem"
             h="2rem"

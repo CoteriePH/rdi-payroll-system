@@ -1,31 +1,30 @@
+import Button from "@/components/Button";
+import Loader from "@/components/Loader";
 import Menu from "@/components/Menu";
 import Settings from "@/components/Menu/settings";
 import Table from "@/components/Table";
-import { settingsSelector } from "@/features/settings/settingsSlice";
-import React from "react";
-import { useSelector } from "react-redux";
-import { findAllEmployees } from "@/features/employee/employeeSlice";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useTable } from "react-table";
-import { Wrapper, TextLink, Container, Flex, TableContainer } from "./styles";
-import getTimeDuration from "@/helpers/getTimeDuration";
 import Toolbar from "@/components/Toolbar";
-import Button from "@/components/Button";
 import { ROLES } from "@/constants/constants";
-import Loader from "@/components/Loader";
-import { Link } from "react-router-dom";
+import { findAllEmployees } from "@/features/employee/employeeSlice";
+import { settingsSelector } from "@/features/settings/settingsSlice";
+import getTimeDuration from "@/helpers/getTimeDuration";
+import { useSession } from "next-auth/react";
+import Link from "next/link";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Container, Flex, TableContainer, Wrapper } from "./styles";
 
 const Payroll = () => {
   const dispatch = useDispatch();
   const { data, isFetching } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
-  const authRole = useSelector((state) => state.auth.role);
+  const { data: session } = useSession();
+  const authRole = session?.user.role;
   useEffect(() => {
     dispatch(findAllEmployees());
-  }, []);
+  }, [dispatch]);
 
-  const columns = React.useMemo(
+  let columns = React.useMemo(
     () => [
       {
         Header: "COMPANY",
@@ -56,16 +55,22 @@ const Payroll = () => {
           return <div>{getTimeDuration(props.value)} years</div>;
         },
       },
+    ],
+    []
+  );
+
+  if (authRole === "AUDITOR") {
+    columns = [
+      ...columns,
       {
         Header: "",
         accessor: "id",
         Cell: (props) => {
-          return <Link to={`payroll/${props.value}`}>view</Link>;
+          return <Link href={`payroll/${props.value}`}>View</Link>;
         },
       },
-    ],
-    []
-  );
+    ];
+  }
 
   if (isFetching) {
     return <Loader />;
