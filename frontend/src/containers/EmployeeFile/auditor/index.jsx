@@ -9,6 +9,7 @@ import { ListTable, Wrapper } from "./styles";
 const AuditorEmployeeFile = () => {
   const { data } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
+
   return (
     <Wrapper>
       {/* LIST VIEW */}
