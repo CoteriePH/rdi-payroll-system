@@ -1,9 +1,10 @@
+import MonthlySalary from "@/containers/Payroll/MonthlySalary";
 import View from "@/containers/Payroll/view";
 import { getOneEmployee } from "@/utils/employee.routes";
 import React from "react";
 
-const PayrollViewpage = ({ employee }) => {
-  return <View employee={employee} />;
+const MonthlySalaryPage = ({ employee }) => {
+  return <MonthlySalary employee={employee} />;
 };
 
 export const getServerSideProps = async ({ params }) => {
@@ -19,4 +20,4 @@ export const getServerSideProps = async ({ params }) => {
   };
 };
 
-export default PayrollViewpage;
+export default MonthlySalaryPage;

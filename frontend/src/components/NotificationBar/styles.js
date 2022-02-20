@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
+    
     width: 21rem;
     height: 8rem;
     overflow: hidden;
@@ -9,6 +10,7 @@ export const Wrapper = styled.div`
     border-radius: .5rem;
     padding: 1em;
     position: relative;
+    margin: .8em .3em;  /* delete if necessary */
 `;
 
 export const ToAndIcon = styled.div`

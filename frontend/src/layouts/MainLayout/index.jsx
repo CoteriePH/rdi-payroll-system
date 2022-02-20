@@ -52,7 +52,8 @@ const MainLayout = ({ children }) => {
     const path = location.pathname.split("/");
 
     if (
-      employeeIds.includes(path.at(-1)) &&
+      (employeeIds.includes(path.at(-1)) ||
+        pathname.includes("monthly-salary")) &&
       !pathname.includes("/employee-file")
     ) {
       return null;
