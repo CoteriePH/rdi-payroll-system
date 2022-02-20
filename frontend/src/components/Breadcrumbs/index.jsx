@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Flex, Text } from "@/styles";
 
-const Breadcrumbs = ({ paths, prevHref }) => {
+const Breadcrumbs = ({ paths, prevHref, withMenu }) => {
   const router = useRouter();
   return (
     <Navigation>
@@ -70,6 +70,7 @@ const Breadcrumbs = ({ paths, prevHref }) => {
           <LGButtons />
         )}
       </div>
+      {withMenu ? <Settings /> : null}
     </Navigation>
   );
 };

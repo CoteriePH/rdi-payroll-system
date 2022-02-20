@@ -14,7 +14,7 @@ const AuditorEmployeeFile = () => {
     <Wrapper>
       {/* LIST VIEW */}
       <Flex direction="column" flex={15}>
-        <Breadcrumbs />
+        <Breadcrumbs withMenu />
         <ListTable>
           {data.map((employee) => (
             <>

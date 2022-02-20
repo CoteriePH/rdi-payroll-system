@@ -10,6 +10,8 @@ import { Divider, Flex, HeaderText, Text } from "@/styles";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
+import Input from "@/components/Input";
+
 import {
   Chevron,
   CompanyIcon,
@@ -19,11 +21,12 @@ import {
   Path,
   Wrapper,
 } from "./styles";
+import { FormProvider, useForm } from "react-hook-form";
+import InputField from "@/components/InputField";
 
 const FolderContent = ({ employee, name, onOpen, setFileId }) => {
-  const { isOpen } = useSelector(settingsSelector);
-
-  const router = useRouter();
+  const methods = useForm();
+  const { handleSubmit, reset, setValue } = methods;
 
   const onFileOpen = (id) => {
     if (setFileId) {
@@ -79,7 +82,16 @@ const FolderContent = ({ employee, name, onOpen, setFileId }) => {
             </Flex>
           </Flex>
           <Divider />
-          <Flex basis="75%" p="2em">
+          <Flex basis="75%" p="1.5em 1em" gap="1.5" direction="column">
+            <FormProvider {...methods}>
+              <form>
+                <Flex gap="0.5" align="center" justify="flex-end">
+                  <InputField type="date" name="start_date" />
+                  <Text>---</Text>
+                  <InputField type="date" name="end_date" />
+                </Flex>
+              </form>
+            </FormProvider>
             <ListTable>
               <File name="File 1" onOpen={() => onFileOpen(1)} />
               <File name="File 2" onOpen={() => onFileOpen(2)} />
