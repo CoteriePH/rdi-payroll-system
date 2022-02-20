@@ -1,12 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Payslip from "../Modals/Payslip";
+import { Flex, Text } from "@/styles";
+import Image from "next/image";
 
 const File = ({ name = "File", onOpen, ...rest }) => {
   return (
     <>
-      <div {...rest} onClick={onOpen}>
-        {name}
-      </div>
+      <Flex
+        {...rest}
+        cursor="pointer"
+        onClick={onOpen}
+        direction="column"
+        h="max-content"
+        gap="0.3"
+        justify="center"
+        align="center"
+      >
+        <Image src="/icons/file.svg" alt="file" width="100px" height="100px" />
+        <Text>{name}</Text>
+      </Flex>
     </>
   );
 };
