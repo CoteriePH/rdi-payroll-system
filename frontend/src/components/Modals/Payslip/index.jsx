@@ -54,7 +54,7 @@ import dayjs from "dayjs";
 
 ReactModal.setAppElement("#__next");
 
-const Payslip = ({ isOpen, onClose }) => {
+const Payslip = ({ isOpen, onClose, payrollId, setPayrollId, employee }) => {
   const dispatch = useDispatch();
   const methods = useForm({
     resolver: yupResolver(),
@@ -64,6 +64,12 @@ const Payslip = ({ isOpen, onClose }) => {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  useEffect(() => {
+    return () => {
+      setPayrollId(null);
+    };
+  }, [setPayrollId]);
 
   useEffect(() => {
     // TODO - FIND ALL EMPLOYEE'S ATTENDANCE
@@ -158,8 +164,10 @@ const Payslip = ({ isOpen, onClose }) => {
             </UpperCol>
             <SndCol>
               <SndWrapper>
-                <CompName>COMPANY NAME</CompName>
-                <BigText>EMPLOYEE'S PAYSLIP</BigText>
+                <CompName>{employee.company.name}</CompName>
+                <BigText>
+                  {employee.first_name} {employee.last_name}
+                </BigText>
               </SndWrapper>
               <BtnWrapper>
                 <Button minW="6em">EXPORT</Button>
@@ -176,7 +184,9 @@ const Payslip = ({ isOpen, onClose }) => {
                   </SubDetail>
 
                   <DataInfo>
-                    <Name>JANE M. DOE</Name>
+                    <Name>
+                      {employee.first_name} {employee.last_name}
+                    </Name>
                     <EmpNum>0000-00021</EmpNum>
                   </DataInfo>
                 </DetailOne>
@@ -189,7 +199,7 @@ const Payslip = ({ isOpen, onClose }) => {
 
                   <DataInfo>
                     <StyledDate>Aug 21, 2021</StyledDate>
-                    <Position>Encoder</Position>
+                    <Position>{employee.position.name}</Position>
                   </DataInfo>
                 </DetailTwo>
               </Details>

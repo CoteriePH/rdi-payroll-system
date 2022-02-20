@@ -162,7 +162,9 @@ exports.findAll = async (req, res) => {
   return res.status(200).send(employees);
 };
 exports.findOne = async (req, res) => {
-  const employee = await Employee.findByPk(req.params.id);
+  const employee = await Employee.findByPk(req.params.id, {
+    include: ["department", "position", "company"],
+  });
   return res.status(200).send(employee);
 };
 
