@@ -37,6 +37,7 @@ const FolderContent = ({ employee, name, onOpen, setFileId }) => {
       {/* LIST VIEW */}
       <Flex direction="column" flex={15}>
         <Breadcrumbs
+          prevHref={`/employee-file/${employee.id}`}
           paths={[
             {
               name: employee?.first_name + " " + employee?.last_name,

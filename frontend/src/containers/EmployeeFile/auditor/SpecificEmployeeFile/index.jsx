@@ -27,6 +27,7 @@ const SpecificEmployeeFile = ({ employee }) => {
       {/* LIST VIEW */}
       <Flex direction="column" flex={15}>
         <Breadcrumbs
+          prevHref={`/employee-file/`}
           paths={[
             {
               name: employee?.first_name + " " + employee?.last_name,

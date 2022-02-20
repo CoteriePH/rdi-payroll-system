@@ -3,8 +3,10 @@ import { Chevron, CompanyIcon, FilePath, Navigation, Path } from "./style";
 import LGButtons from "@/components/View/LGButtons";
 import Settings from "@/components/Menu/settings";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import { Flex, Text } from "@/styles";
 
-const Breadcrumbs = ({ paths }) => {
+const Breadcrumbs = ({ paths, prevHref }) => {
   const router = useRouter();
   return (
     <Navigation>
@@ -48,7 +50,25 @@ const Breadcrumbs = ({ paths }) => {
           : null}
       </FilePath>
       <div>
-        <LGButtons />
+        {prevHref ? (
+          <FilePath>
+            <Chevron>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                <g transform="rotate(-270 12 12)">
+                  <path
+                    d="M16.293 9.293L12 13.586L7.707 9.293l-1.414 1.414L12 16.414l5.707-5.707z"
+                    fill="currentColor"
+                  />
+                </g>
+              </svg>
+            </Chevron>
+            <Path onClick={() => (prevHref ? router.push(prevHref) : null)}>
+              back
+            </Path>
+          </FilePath>
+        ) : (
+          <LGButtons />
+        )}
       </div>
       <Settings />
     </Navigation>
