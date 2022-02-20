@@ -45,7 +45,7 @@ const companySlice = createSlice({
       state.data = [];
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload?.message;
     },
   },
 });
