@@ -1,27 +1,14 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Button from "@/components/Button";
-import Menu from "@/components/Menu";
-import Settings from "@/components/Menu/settings";
 import FolderItem from "@/components/View/FolderItem";
-import LGButtons from "@/components/View/LGButtons";
 import { settingsSelector } from "@/features/settings/settingsSlice";
 import { Divider, Flex, HeaderText, Text } from "@/styles";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
-import {
-  Chevron,
-  CompanyIcon,
-  FilePath,
-  ListTable,
-  Navigation,
-  Path,
-  Wrapper,
-} from "./styles";
+import { ListTable, Wrapper } from "./styles";
 
 const SpecificEmployeeFile = ({ employee }) => {
-  const { isOpen } = useSelector(settingsSelector);
-  const router = useRouter();
   return (
     <Wrapper>
       {/* LIST VIEW */}
@@ -102,9 +89,6 @@ const SpecificEmployeeFile = ({ employee }) => {
             </ListTable>
           </Flex>
         </Flex>
-      </Flex>
-      <Flex bg="gray" flex={1}>
-        {isOpen && <Menu />}
       </Flex>
     </Wrapper>
   );

@@ -89,9 +89,6 @@ const FolderContent = ({ employee, name, onOpen, setFileId }) => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex bg="gray" flex={1}>
-        {isOpen && <Menu />}
-      </Flex>
     </Wrapper>
   );
 };

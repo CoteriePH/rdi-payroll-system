@@ -70,7 +70,6 @@ const Breadcrumbs = ({ paths, prevHref }) => {
           <LGButtons />
         )}
       </div>
-      <Settings />
     </Navigation>
   );
 };
