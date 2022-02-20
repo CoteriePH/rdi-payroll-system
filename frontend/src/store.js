@@ -17,6 +17,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import attendanceSlice from "@/features/attendance/attendanceSlice";
 import cashAdvanceSlice from "./features/cash_advance/cashAdvanceSlice";
 
 const persistConfig = {
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   positions: positionSlice,
   companies: companySlice,
   requests: requestSlice,
+  attendances: attendanceSlice,
   cash_advance: cashAdvanceSlice,
 });
 

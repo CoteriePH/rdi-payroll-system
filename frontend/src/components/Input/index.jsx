@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 
-import { ReactComponent as Lock } from "@/assets/icons/lock.svg";
-import { ReactComponent as Person } from "@/assets/icons/person.svg";
-
 import { Container, Input, Wrapper, Label } from "./styles.js";
 import { useFormContext } from "react-hook-form";
+import Image from "next/image";
 
 const InputField = ({
   uname = false,
@@ -38,12 +36,12 @@ const InputField = ({
       <Container disabled={disabled} menu={menu}>
         {uname && (
           <span>
-            <Person />
+            <Image src="/icons/person.svg" width={20} height={20} alt="lock" />
           </span>
         )}
         {pwd && (
           <span>
-            <Lock />
+            <Image src="/icons/lock.svg" width={20} height={20} alt="lock" />
           </span>
         )}
         <Input

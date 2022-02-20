@@ -32,6 +32,7 @@ exports.exportToCSV = async (req, res) => {
     LEFT JOIN companies c ON e.company_id = c.id 
     LEFT JOIN positions p ON e.position_id = p.id
     LEFT JOIN departments d ON e.department_id = d.id
+    LEFT JOIN schedules s ON e.schedule_id = s.id
   `;
   const employees = await sequelize.query(query, {
     type: QueryTypes.SELECT,
@@ -58,6 +59,7 @@ exports.findAll = async (req, res) => {
   const company = req.query.company;
   const department = req.query.department;
   const position = req.query.position;
+  const schedule = req.query.schedule;
   const date_hired_from = req.query.date_hired_from;
   const date_hired_to = req.query.date_hired_to;
   const sex = req.query.sex;
@@ -78,6 +80,7 @@ exports.findAll = async (req, res) => {
   if (company) andItems.push({ company_id: company });
   if (department) andItems.push({ department_id: department });
   if (position) andItems.push({ position_id: position });
+  if (schedule) andItems.push({ schedule_id: schedule });
   if (sex) andItems.push({ sex: sex });
   if (cash_advance_eligibility) andItems.push({ cash_advance_eligibility });
 
@@ -153,6 +156,7 @@ exports.findAll = async (req, res) => {
     "earning",
     "files",
     "attendances",
+    "schedule",
   ];
   const employees = await Employee.findAll(options);
   return res.status(200).send(employees);
