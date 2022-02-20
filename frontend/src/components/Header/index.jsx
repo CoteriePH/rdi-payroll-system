@@ -17,10 +17,14 @@ import {
 import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 function Header(props) {
   const { pathname } = useRouter();
   let modPathName = pathname;
+
+  const { data: session } = useSession();
+  const authRole = session?.user?.role;
 
   // let prevHref = props.prevhref ? props.prevHref : "/payroll";
 
@@ -30,10 +34,13 @@ function Header(props) {
     { title: "UNPROCESSED C.A.'s", to: "/cash-advance/unprocessed" },
     { title: "PROCESSED C.A.'s", to: "/cash-advance/processed" },
   ]);
-  tabsMap.set("/employee-file", [
-    { title: "EMPLOYED", to: "/employee-file" },
-    { title: "TERMINATED", to: "/employee-file/terminated" },
-  ]);
+
+  if (authRole === "AUDITOR")
+    tabsMap.set("/employee-file", [
+      { title: "EMPLOYED", to: "/employee-file" },
+      { title: "TERMINATED", to: "/employee-file/terminated" },
+    ]);
+
   tabsMap.set("/attendance", [
     { title: "SUMMARY", to: "/attendance" },
     { title: "BIOMETRICS", to: "/attendance/biometrics" },
