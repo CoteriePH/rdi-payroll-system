@@ -1,5 +1,6 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
 import Button from "@/components/Button";
+import File from "@/components/File";
 import Menu from "@/components/Menu";
 import Settings from "@/components/Menu/settings";
 import FolderItem from "@/components/View/FolderItem";
@@ -19,10 +20,17 @@ import {
   Wrapper,
 } from "./styles";
 
-const FolderContent = ({ employee, name }) => {
+const FolderContent = ({ employee, name, onOpen, setFileId }) => {
   const { isOpen } = useSelector(settingsSelector);
 
   const router = useRouter();
+
+  const onFileOpen = (id) => {
+    if (setFileId) {
+      setFileId(id);
+      onOpen();
+    }
+  };
 
   return (
     <Wrapper>
@@ -72,9 +80,10 @@ const FolderContent = ({ employee, name }) => {
           <Divider />
           <Flex basis="75%" p="2em">
             <ListTable>
-              <div>File 1</div>
-              <div>File 2</div>
-              <div>File 3</div>
+              <File name="File 1" onOpen={() => onFileOpen(1)} />
+              <File name="File 2" onOpen={() => onFileOpen(2)} />
+              <File name="File 3" onOpen={() => onFileOpen(3)} />
+              <File name="File 4" onOpen={() => onFileOpen(4)} />
             </ListTable>
           </Flex>
         </Flex>

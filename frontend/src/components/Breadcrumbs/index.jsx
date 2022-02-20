@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Chevron, CompanyIcon, FilePath, Navigation, Path } from "./style";
 import LGButtons from "@/components/View/LGButtons";
 import Settings from "@/components/Menu/settings";
@@ -26,7 +26,7 @@ const Breadcrumbs = ({ paths }) => {
         {paths
           ? paths.map((path) => {
               return (
-                <>
+                <Fragment key={path.name + path.href}>
                   <Chevron>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                       <g transform="rotate(-90 12 12)">
@@ -42,7 +42,7 @@ const Breadcrumbs = ({ paths }) => {
                   >
                     {path.name}
                   </Path>
-                </>
+                </Fragment>
               );
             })
           : null}
