@@ -52,7 +52,7 @@ import Table from "@/components/Table";
 import { findAllAttendance } from "@/features/attendance/attendanceSlice";
 import dayjs from "dayjs";
 
-ReactModal.setAppElement("#root");
+ReactModal.setAppElement("#__next");
 
 const Payslip = ({ isOpen, onClose }) => {
   const dispatch = useDispatch();
