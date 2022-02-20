@@ -3,7 +3,7 @@ import Check from "@/assets/icons/Check";
 import { useFormContext } from "react-hook-form";
 
 const Checkbox = ({
-  label = "Morning",
+  label = "6:00 am - 2:30 pm",
   name,
   border = false,
   disabled = false,
