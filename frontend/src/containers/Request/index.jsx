@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React from "react";
 import Dropdown from "@/components/Dropdown";
 import Button from "@/components/Button";

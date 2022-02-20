@@ -14,5 +14,6 @@ module.exports = function (app) {
   app.get("/cash-advance/:id", controller.findOne);
   app.get("/cash-advance", controller.findAll);
   app.delete("/cash-advance/:id", controller.delete);
+  app.delete("/cash-advance/:id/decline", controller.decline);
   app.patch("/cash-advance/:id", controller.update);
 };

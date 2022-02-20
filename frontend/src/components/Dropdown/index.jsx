@@ -8,6 +8,7 @@ const Dropdown = ({
   isReset,
   options = [],
   setValue = () => {},
+  withBorder = false,
   bg = "white",
 }) => {
   const { ref, isComponentVisible, setIsComponentVisible } =
@@ -22,7 +23,7 @@ const Dropdown = ({
 
   return (
     <Wrapper ref={ref} onClick={() => setIsComponentVisible((prev) => !prev)}>
-      <Container bg={bg}>
+      <Container withBorder={withBorder} bg={bg}>
         <Label>{labelState}</Label>
         <Image
           src="/icons/dropdown.svg"

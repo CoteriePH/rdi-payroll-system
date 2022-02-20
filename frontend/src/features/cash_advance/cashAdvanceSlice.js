@@ -79,6 +79,42 @@ export const findAllUnprocessedCAs = createAsyncThunk(
   }
 );
 
+export const editCashAdvance = createAsyncThunk(
+  "/cash-advance/edit",
+  async (values, { rejectWithValue }) => {
+    const { id, ...rest } = values;
+    try {
+      const res = await API.patch(`cash-advance/${id}`, rest);
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        throw new Error(res.data);
+      }
+    } catch (error) {
+      if (!error.response) {
+        throw error;
+      }
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const declineCashAdvance = createAsyncThunk(
+  "/cash-advance/delete",
+  async (id, { rejectWithValue }) => {
+    try {
+      await API.delete(`cash-advance/${id}/decline`);
+      return id;
+    } catch (error) {
+      return rejectWithValue(
+        error.response.data.error ||
+          error.response.data ||
+          "Something went wrong!"
+      );
+    }
+  }
+);
+
 // TODO BACKEND GENERATE BATCH CA
 export const generateCashAdvanceByBatch = createAsyncThunk(
   "/cash-advance/generate-by-batch",

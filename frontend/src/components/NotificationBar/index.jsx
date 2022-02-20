@@ -73,11 +73,13 @@ const NotificationBar = (props) => {
       <WarningCount>{props.SubTextCount}</WarningCount>
 
       <Description>
-        Lorem Naka overflow hidden adipisicing elit. Quia natus enim perferendis
-        quae! Possimus odio odit aliquam eum inventore nam?
+        {props.description
+          ? props.description
+          : `Lorem Naka overflow hidden adipisicing elit. Quia natus enim perferendis
+        quae! Possimus odio odit aliquam eum inventore nam?`}
       </Description>
 
-      <Date>January 21, 2021</Date>
+      <Date>{props.date}</Date>
     </Wrapper>
   );
 };
