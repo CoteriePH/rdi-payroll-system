@@ -23,7 +23,7 @@ import {
 } from "./styles";
 import Header from "@/components/Header";
 import MarBox from "@/components/View/MarBox";
-function Attendance() {
+function MonthlySalary({ employee }) {
   return (
     <Wrapper>
       <Header
@@ -33,25 +33,26 @@ function Attendance() {
         TabContDisp="none"
         generatePayroll="generate payroll"
         jc="flex-start"
+        prevHref={`/payroll/${employee.id}`}
       />
       <Details>
         <PersonalInfo>
           <EmpPicture></EmpPicture>
           <NameOthers>
             <EmpName>
-              <First>John</First>
-              <Middle>Z.</Middle>
-              <Last>Dough</Last>
+              <First>{employee.first_name}</First>
+              <Middle>{employee.middle_name[0]}.</Middle>
+              <Last>{employee.last_name}</Last>
             </EmpName>
             <FlexRow>
-              <Position>AUDITOR</Position>
+              <Position>{employee.position?.name}</Position>
               <VerticalLine></VerticalLine>
-              <EmpNumber>1516-0121</EmpNumber>
+              <EmpNumber>{employee.id}</EmpNumber>
             </FlexRow>
           </NameOthers>
         </PersonalInfo>
         <Department>
-          <MainDept>ACCOUNTING / FINANCE</MainDept>
+          <MainDept>{employee.department?.name}</MainDept>
           <Dept>DEPARTMENT</Dept>
         </Department>
       </Details>
@@ -84,4 +85,4 @@ function Attendance() {
   );
 }
 
-export default Attendance;
+export default MonthlySalary;

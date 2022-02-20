@@ -51,7 +51,10 @@ const MainLayout = ({ children }) => {
     const employeeIds = data.map((e) => e.id);
     const path = location.pathname.split("/");
 
-    if (employeeIds.includes(path.at(-1))) {
+    if (
+      employeeIds.includes(path.at(-1)) ||
+      pathname.includes("monthly-salary")
+    ) {
       return null;
     } else {
       return <Header headerName={headerName} />;
