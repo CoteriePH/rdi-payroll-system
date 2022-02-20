@@ -1,22 +1,10 @@
-import {
-  Wrapper,
-  Navigation,
-  FilePath,
-  CompanyIcon,
-  Chevron,
-  Path,
-  ListTable,
-} from "./styles";
-
-import FolderIcon from "@/components/View/FolderIcon";
-import PayslipIcon from "@/components/View/PayslipIcon";
-import LGButtons from "@/components/View/LGButtons";
-import { useSelector } from "react-redux";
-import { Flex } from "@/styles";
-import Settings from "@/components/Menu/settings";
-import { settingsSelector } from "@/features/settings/settingsSlice";
-import Menu from "@/components/Menu";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import Menu from "@/components/Menu";
+import FolderIcon from "@/components/View/FolderIcon";
+import { settingsSelector } from "@/features/settings/settingsSlice";
+import { Flex } from "@/styles";
+import { useSelector } from "react-redux";
+import { ListTable, Wrapper } from "./styles";
 
 const AuditorEmployeeFile = () => {
   const { data } = useSelector((state) => state.employees);

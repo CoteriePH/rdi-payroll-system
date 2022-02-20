@@ -50,13 +50,14 @@ const SpecificEmployeeFile = ({ employee }) => {
                 alt="me.png"
               />
             </Flex>
+
             <Flex direction="column" justify="start" align="center" gap="0.75">
-              <HeaderText size="xxl">John Doe</HeaderText>
-              <Text>
-                EMPLOYEE NO: <span>0000-0000</span>
-              </Text>
+              <HeaderText size="xxl">
+                {employee.first_name} {employee.last_name}
+              </HeaderText>
+              <Text>TYPE: {employee.employee_type}</Text>
               <Text fontWeight="bold" color="lightViolet">
-                ACCOUNTING & FINANCE
+                {employee.department.name}
               </Text>
             </Flex>
             <Flex direction="column" gap="1" mt="2em" justify="flex-end">
