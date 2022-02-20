@@ -6,7 +6,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import { Flex, Text } from "@/styles";
 
-const Breadcrumbs = ({ paths, prevHref, withMenu }) => {
+const Breadcrumbs = ({ paths, prevHref, withMenu, setView }) => {
   const router = useRouter();
   return (
     <Navigation>
@@ -51,7 +51,7 @@ const Breadcrumbs = ({ paths, prevHref, withMenu }) => {
       </FilePath>
       <div>
         {prevHref ? (
-          <FilePath>
+          <FilePath onClick={() => (prevHref ? router.push(prevHref) : null)}>
             <Chevron>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g transform="rotate(-270 12 12)">
@@ -62,12 +62,10 @@ const Breadcrumbs = ({ paths, prevHref, withMenu }) => {
                 </g>
               </svg>
             </Chevron>
-            <Path onClick={() => (prevHref ? router.push(prevHref) : null)}>
-              back
-            </Path>
+            <Path>back</Path>
           </FilePath>
         ) : (
-          <LGButtons />
+          <LGButtons setView={setView} />
         )}
       </div>
       {withMenu ? <Settings /> : null}
