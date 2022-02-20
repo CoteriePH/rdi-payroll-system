@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {
   Container,
   Left,
@@ -11,19 +10,23 @@ import {
 import InputField from "@/components/Input/index.jsx";
 import Button from "@/components/Button/index.jsx";
 import { useForm, FormProvider } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { authSelector, clearState } from "@/features/auth/authSlice.js";
-import React from "react";
+import { useDispatch } from "react-redux";
+import React, { useEffect } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
   const methods = useForm();
-  const dispatch = useDispatch();
   const router = useRouter();
 
-  const { isError, isSuccess } = useSelector(authSelector);
+  useEffect(() => {
+    if (router.query.error === "CredentialsSignin") {
+      console.log("toast na");
+      toast.error("Username or password is incorrect!");
+    }
+  }, [router.query.error]);
 
   const onSubmit = async (data) => {
     await signIn("credentials", {
@@ -36,46 +39,30 @@ const LoginPage = () => {
     });
   };
 
-  useEffect(() => {
-    return () => {
-      dispatch(clearState());
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(clearState());
-    }
-    if (isSuccess) {
-      dispatch(clearState());
-      // history.replace("/");
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isError, isSuccess]);
-
   return (
-    <Container>
-      <Left>
-        <Powered>
-          <p>POWERED BY:</p>
-          <h1>FANART INC.</h1>
-        </Powered>
-      </Left>
-      <Right>
-        <Image src="/icons/logo.svg" width={100} height={100} alt="logo" />
-        <LoginContainer>
-          <FormProvider {...methods}>
-            <Form onSubmit={methods.handleSubmit(onSubmit)}>
-              <Header>Login</Header>
-              <InputField uname name="username" required />
-              <InputField pwd name="password" type="password" required />
-              <Button type="submit">Log in</Button>
-            </Form>
-          </FormProvider>
-        </LoginContainer>
-      </Right>
-    </Container>
+    <>
+      <Container>
+        <Left>
+          <Powered>
+            <p>POWERED BY:</p>
+            <h1>FANART INC.</h1>
+          </Powered>
+        </Left>
+        <Right>
+          <Image src="/icons/logo.svg" width={100} height={100} alt="logo" />
+          <LoginContainer>
+            <FormProvider {...methods}>
+              <Form onSubmit={methods.handleSubmit(onSubmit)}>
+                <Header>Login</Header>
+                <InputField uname name="username" required />
+                <InputField pwd name="password" type="password" required />
+                <Button type="submit">Log in</Button>
+              </Form>
+            </FormProvider>
+          </LoginContainer>
+        </Right>
+      </Container>
+    </>
   );
 };
 

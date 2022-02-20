@@ -24,7 +24,7 @@ const Payroll = () => {
     dispatch(findAllEmployees());
   }, [dispatch]);
 
-  const columns = React.useMemo(
+  let columns = React.useMemo(
     () => [
       {
         Header: "COMPANY",
@@ -55,6 +55,13 @@ const Payroll = () => {
           return <div>{getTimeDuration(props.value)} years</div>;
         },
       },
+    ],
+    []
+  );
+
+  if (authRole === "AUDITOR") {
+    columns = [
+      ...columns,
       {
         Header: "",
         accessor: "id",
@@ -62,9 +69,8 @@ const Payroll = () => {
           return <Link href={`payroll/${props.value}`}>View</Link>;
         },
       },
-    ],
-    []
-  );
+    ];
+  }
 
   if (isFetching) {
     return <Loader />;

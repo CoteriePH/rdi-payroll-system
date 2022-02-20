@@ -81,9 +81,17 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       },
       time_shift: {
         type: DataTypes.ENUM({
-          values: ["MORNING", "MID_MORNING", "NOON", "AFTERNOON"], //TODO - ADD MORE TYPES
+          values: [
+            "SCHEDULE_A",
+            "SCHEDULE_B",
+            "SCHEDULE_C",
+            "SCHEDULE_D",
+            "SCHEDULE_E",
+            "SCHEDULE_F",
+            "SCHEDULE_G",
+          ], //TODO - ADD MORE TYPES
         }),
-        defaultValue: "MORNING",
+        defaultValue: "SCHEDULE_A",
         allowNull: false,
       },
     },

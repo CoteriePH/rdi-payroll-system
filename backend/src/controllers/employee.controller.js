@@ -67,10 +67,13 @@ exports.findAll = async (req, res) => {
   // const time_shift = req.query.time_shift;
 
   // TODO - REFACTOR TIME SHIFT
-  const MORNING = req.query.MORNING;
-  const MID_MORNING = req.query.MID_MORNING;
-  const NOON = req.query.NOON;
-  const AFTERNOON = req.query.AFTERNOON;
+  const SCHEDULE_A = req.query.SCHEDULE_A;
+  const SCHEDULE_B = req.query.SCHEDULE_B;
+  const SCHEDULE_C = req.query.SCHEDULE_C;
+  const SCHEDULE_D = req.query.SCHEDULE_D;
+  const SCHEDULE_E = req.query.SCHEDULE_E;
+  const SCHEDULE_F = req.query.SCHEDULE_F;
+  const SCHEDULE_G = req.query.SCHEDULE_G;
 
   const search = req.query.search;
 
@@ -85,17 +88,26 @@ exports.findAll = async (req, res) => {
   if (cash_advance_eligibility) andItems.push({ cash_advance_eligibility });
 
   // TODO - REFACTOR
-  if (MORNING === "true") {
-    time_shift.push("MORNING");
+  if (SCHEDULE_A === "true") {
+    time_shift.push("SCHEDULE_A");
   }
-  if (MID_MORNING === "true") {
-    time_shift.push("MID_MORNING");
+  if (SCHEDULE_B === "true") {
+    time_shift.push("SCHEDULE_B");
   }
-  if (NOON === "true") {
-    time_shift.push("NOON");
+  if (SCHEDULE_C === "true") {
+    time_shift.push("SCHEDULE_C");
   }
-  if (AFTERNOON === "true") {
-    time_shift.push("AFTERNOON");
+  if (SCHEDULE_D === "true") {
+    time_shift.push("SCHEDULE_D");
+  }
+  if (SCHEDULE_E === "true") {
+    time_shift.push("SCHEDULE_E");
+  }
+  if (SCHEDULE_F === "true") {
+    time_shift.push("SCHEDULE_F");
+  }
+  if (SCHEDULE_G === "true") {
+    time_shift.push("SCHEDULE_G");
   }
 
   if (time_shift.length > 0) {
@@ -162,7 +174,9 @@ exports.findAll = async (req, res) => {
   return res.status(200).send(employees);
 };
 exports.findOne = async (req, res) => {
-  const employee = await Employee.findByPk(req.params.id);
+  const employee = await Employee.findByPk(req.params.id, {
+    include: ["department", "position", "company"],
+  });
   return res.status(200).send(employee);
 };
 

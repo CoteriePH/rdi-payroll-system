@@ -5,6 +5,7 @@ import { theme } from "@/theme";
 
 export const Container = styled.button`
   cursor: pointer;
+  padding: 1em 1em;
   user-select: none;
   color: ${(props) =>
     props.color ? theme.colors[props.color] : theme.colors.white};

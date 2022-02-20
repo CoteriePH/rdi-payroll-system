@@ -39,6 +39,10 @@ const MainLayout = ({ children }) => {
     headerName = routesMap.get(
       pathname.replace(/cash-advance\/?.*/g, "cash-advance")
     );
+  } else if (pathname.includes("/employee-file")) {
+    headerName = routesMap.get(
+      pathname.replace(/employee-file\/?.*/g, "employee-file")
+    );
   } else if (routesMap.has(pathname)) {
     headerName = routesMap.get(pathname);
   }
@@ -51,7 +55,11 @@ const MainLayout = ({ children }) => {
     const employeeIds = data.map((e) => e.id);
     const path = location.pathname.split("/");
 
-    if (employeeIds.includes(path.at(-1))) {
+    if (
+      (employeeIds.includes(path.at(-1)) ||
+        pathname.includes("monthly-salary")) &&
+      !pathname.includes("/employee-file")
+    ) {
       return null;
     } else {
       return <Header headerName={headerName} />;

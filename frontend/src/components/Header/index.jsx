@@ -12,6 +12,7 @@ import {
   From,
   To,
   FlexRun,
+  InputDates,
 } from "./styles";
 import Button from "@/components/Button";
 import { useRouter } from "next/router";
@@ -20,6 +21,8 @@ import Link from "next/link";
 function Header(props) {
   const { pathname } = useRouter();
   let modPathName = pathname;
+
+  // let prevHref = props.prevhref ? props.prevHref : "/payroll";
 
   const tabsMap = new Map();
   tabsMap.set("/cash-advance", [
@@ -31,6 +34,14 @@ function Header(props) {
     { title: "EMPLOYED", to: "/employee-file" },
     { title: "TERMINATED", to: "/employee-file/terminated" },
   ]);
+  tabsMap.set("/attendance", [
+    { title: "SUMMARY", to: "/attendance" },
+    { title: "BIOMETRICS", to: "/attendance/biometrics" },
+    { title: "QR", to: "/attendance/qr" },
+  ]);
+  if (pathname.includes("attendance")) {
+    modPathName = pathname.replace(/attendance\/?.*/g, "attendance");
+  }
   if (pathname.includes("cash-advance")) {
     modPathName = pathname.replace(/cash-advance\/?.*/g, "cash-advance");
   }
@@ -42,7 +53,7 @@ function Header(props) {
     <>
       <HeaderCan jc={props.jc}>
         <HeaderAudPayroll tempDisplay={props.tempDisplay}>
-          <Link href="/payroll" passHref>
+          <Link href={props.prevHref || "/payroll"} passHref>
             <ChevronForProll>
               <svg mlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <path
@@ -53,10 +64,12 @@ function Header(props) {
             </ChevronForProll>
           </Link>
           <HeaderName>{props.generatePayroll}</HeaderName>
-          <From>From:</From>
-          <input type="date" />
-          <To>To:</To>
-          <input type="date" />
+          <InputDates dates={props.dates}>
+            <From>From:</From>
+            <input type="date" />
+            <To>To:</To>
+            <input type="date" />
+          </InputDates>
           <FlexRun>
             <Button w="5%">RUN</Button>
           </FlexRun>
