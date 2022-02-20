@@ -163,7 +163,7 @@ exports.findAll = async (req, res) => {
 };
 exports.findOne = async (req, res) => {
   const employee = await Employee.findByPk(req.params.id, {
-    include: ["department"],
+    include: ["department", "position", "company"],
   });
   return res.status(200).send(employee);
 };
