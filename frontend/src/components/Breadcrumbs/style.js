@@ -12,6 +12,7 @@ export const Navigation = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  padding-top: 1.5em;
 `;
 
 export const CompanyIcon = styled.div`
