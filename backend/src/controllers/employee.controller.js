@@ -249,7 +249,10 @@ exports.getPayrollComputation = async (req, res) => {
     },
   });
 
-  let no_of_hours = 48;
+  let bp_no_of_hours = 9.574;
+  let r_no_of_hours = 6;
+  let o_no_of_hours = 18;
+  let nd_no_of_hours = 16;
 
   //Basic Pay = Rate x no. of hrs./8
   //TODO - TEMPORARY NO. OF HRS
@@ -258,28 +261,29 @@ exports.getPayrollComputation = async (req, res) => {
     currency: "PHP",
     precision: 4,
   });
-  let basic_pay = dinero_basic_pay.multiply(no_of_hours).divide(8).toUnit();
+  let basic_pay = dinero_basic_pay.multiply(bp_no_of_hours).divide(8);
+
+  let regular_pay = basic_pay.multiply(r_no_of_hours);
 
   //Overtime rate = basic pay/8 + 25%
   let overtime_formula_1 = dinero_basic_pay.divide(8);
   let _25PercentOTFormula1 = overtime_formula_1.multiply(0.25);
-  let overtime_rate = overtime_formula_1.add(_25PercentOTFormula1).toUnit();
-
+  let overtime_rate = overtime_formula_1.add(_25PercentOTFormula1);
+  let ot = overtime_rate.multiply(o_no_of_hours);
   //Night differential = basic pay x no. of hrs. /8 + 10%
 
-  let night_differential_formula_1 = dinero_basic_pay.multiply(no_of_hours);
+  let night_differential_formula_1 = dinero_basic_pay.multiply(nd_no_of_hours);
   let night_differential_formula_2 = night_differential_formula_1.divide(8);
   let _10PercentOfNDFormula2 = night_differential_formula_2.multiply(0.1);
-  let night_differential = night_differential_formula_2
-    .add(_10PercentOfNDFormula2)
-    .toUnit();
-
+  let night_differential = night_differential_formula_2.add(
+    _10PercentOfNDFormula2
+  );
   //Sunday Pay = Basic Pay x no. of hrs. /8 + 30%
 
-  let sunday_pay_formula_1 = dinero_basic_pay.multiply(no_of_hours);
+  let sunday_pay_formula_1 = dinero_basic_pay.multiply(r_no_of_hours);
   let sunday_pay_formula_2 = sunday_pay_formula_1.divide(8);
   let _30PercentOfSPFormula2 = sunday_pay_formula_2.multiply(0.3);
-  let sunday_pay = sunday_pay_formula_2.add(_30PercentOfSPFormula2).toUnit();
+  let sunday_pay = sunday_pay_formula_2.add(_30PercentOfSPFormula2);
 
   /**
    * DEDUCTIONS
@@ -287,13 +291,15 @@ exports.getPayrollComputation = async (req, res) => {
 
   //Cash Advance
   let ca_deduction =
-    cash_advance.salary_deduction > 0 ? cash_advance.salary_deduction : 0;
+    cash_advance?.salary_deduction > 0 ? cash_advance.salary_deduction : 0;
 
   return res.status(200).send({
-    basic_pay: Number(basic_pay).toFixed(2),
-    overtime_rate: Number(overtime_rate).toFixed(2),
-    night_differential: Number(night_differential).toFixed(2),
-    sunday_pay: Number(sunday_pay).toFixed(2),
+    regular_pay: Number(regular_pay.toUnit()).toFixed(2),
+    basic_pay: Number(basic_pay.toUnit()).toFixed(2),
+    overtime_rate: Number(overtime_rate.toUnit()).toFixed(2),
+    night_differential: Number(night_differential.toUnit()).toFixed(2),
+    sunday_pay: Number(sunday_pay.toUnit()).toFixed(2),
     cash_advance: Number(ca_deduction).toFixed(2),
+    ot: Number(ot.toUnit()).toFixed(2),
   });
 };

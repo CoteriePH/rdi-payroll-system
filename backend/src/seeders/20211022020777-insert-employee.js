@@ -50,7 +50,7 @@ module.exports = {
         department_id: departmentRows[0].id,
         position_id: positionRows[1].id,
         schedule_id: scheduleRows[0].id,
-        basic_pay: Math.floor(Math.random() * 300),
+        basic_pay: Math.floor(537),
       },
       {
         id: uuidv4(),
