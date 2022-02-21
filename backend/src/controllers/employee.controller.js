@@ -176,7 +176,7 @@ exports.findAll = async (req, res) => {
 };
 exports.findOne = async (req, res) => {
   const employee = await Employee.findByPk(req.params.id, {
-    include: ["department", "position", "company"],
+    include: ["department", "position", "company", "cash_advances"],
   });
   return res.status(200).send(employee);
 };
