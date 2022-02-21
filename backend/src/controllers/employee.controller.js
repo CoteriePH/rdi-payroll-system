@@ -1,6 +1,7 @@
 const { Op, sequelize, Sequelize } = require("../models");
 const db = require("../models");
 const Employee = db.employee;
+const CashAdvance = db.cash_advance;
 const fs = require("fs");
 const path = require("path");
 const csv = require("fast-csv");
@@ -217,8 +218,35 @@ exports.delete = async (req, res) => {
 };
 
 exports.getPayrollComputation = async (req, res) => {
+  let { start_date, end_date } = req.query;
+
+  if (!start_date || !end_date) {
+    return res.status(400).send("start_date and end_date is required.");
+  }
+  start_date = new Date(start_date);
+  end_date = new Date(end_date);
+
   const employee = await Employee.findByPk(req.params.id, {
     include: ["position", "company"],
+  });
+
+  //TODO - NOT Sure
+  const cash_advance = await CashAdvance.findOne({
+    where: {
+      [Op.and]: {
+        [Op.or]: {
+          date_from: {
+            [Op.between]: [start_date, end_date],
+          },
+          date_to: {
+            [Op.between]: [start_date, end_date],
+          },
+        },
+        ca_status: "INCOMPLETE",
+        status: "PROCESSED",
+        employee_id: employee.id,
+      },
+    },
   });
 
   let no_of_hours = 48;
@@ -253,10 +281,19 @@ exports.getPayrollComputation = async (req, res) => {
   let _30PercentOfSPFormula2 = sunday_pay_formula_2.multiply(0.3);
   let sunday_pay = sunday_pay_formula_2.add(_30PercentOfSPFormula2).toUnit();
 
+  /**
+   * DEDUCTIONS
+   */
+
+  //Cash Advance
+  let ca_deduction =
+    cash_advance.salary_deduction > 0 ? cash_advance.salary_deduction : 0;
+
   return res.status(200).send({
     basic_pay: Number(basic_pay).toFixed(2),
     overtime_rate: Number(overtime_rate).toFixed(2),
     night_differential: Number(night_differential).toFixed(2),
     sunday_pay: Number(sunday_pay).toFixed(2),
+    cash_advance: Number(ca_deduction).toFixed(2),
   });
 };
