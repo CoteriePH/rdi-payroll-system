@@ -214,3 +214,13 @@ exports.delete = async (req, res) => {
     return res.status(400).send(error.message);
   }
 };
+
+exports.getPayrollComputation = async (req, res) => {
+  const employee = await Employee.findByPk(req.params.id, {
+    include: ["position", "company"],
+  });
+
+  //Basic Pay = Rate x no. of hrs./8
+  // const basic_pay =
+  return res.status(200).send(employee);
+};

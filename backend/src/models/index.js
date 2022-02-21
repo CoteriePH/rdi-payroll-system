@@ -53,7 +53,11 @@ db.department = require("./department.model.js")(
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
 db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
-db.additionalEarnings = require("./additional_earnings.model.js")(sequelize, Sequelize, DataTypes);
+db.additionalEarnings = require("./additional_earnings.model.js")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
 db.cash_advance = require("./cash_advance.model")(
   sequelize,
   Sequelize,
@@ -141,26 +145,6 @@ db.employee.hasOne(db.file, {
   foreignKey: "employee_id",
 });
 
-//OneAndOnlyONE (One Employee  ---> one deduction)
-db.deduction.belongsTo(db.employee, {
-  foreignKey: { name: "employee_id", allowNull: false },
-  foreignKeyConstraint: true,
-});
-db.employee.hasOne(db.deduction, {
-  as: "deduction",
-  foreignKey: "employee_id",
-});
-
-//OneAndOnlyONE (One Employee  ---> one earnings)
-db.earning.belongsTo(db.employee, {
-  foreignKey: { name: "employee_id", allowNull: false },
-  foreignKeyConstraint: true,
-});
-db.employee.hasOne(db.earning, {
-  as: "earning",
-  foreignKey: "employee_id",
-});
-
 //OneAndOnlyONE (One earning  ---> one additional earnings)
 
 db.earning.hasOne(db.additionalEarnings, {
@@ -171,8 +155,7 @@ db.earning.hasOne(db.additionalEarnings, {
 db.additionalEarnings.belongsTo(db.earning, {
   foreignKey: { name: "earning_id", allowNull: false },
   foreignKeyConstraint: true,
-}); 
-
+});
 
 //OneAndOnlyONE (One deduction  ---> one additional deduction)
 db.addtnl_deduction.belongsTo(db.deduction, {
