@@ -47,6 +47,10 @@ function Header(props) {
     { title: "BIOMETRICS", to: "/attendance/biometrics" },
     { title: "QR", to: "/attendance/qr" },
   ]);
+  tabsMap.set("/for-approval", [
+    { title: "MEMO", to: "/for-approval" },
+    { title: "REQUESTS", to: "/for-approval/requests" },
+  ]);
   if (pathname.includes("attendance")) {
     modPathName = pathname.replace(/attendance\/?.*/g, "attendance");
   }
@@ -55,6 +59,10 @@ function Header(props) {
   }
   if (pathname.includes("employee-file")) {
     modPathName = pathname.replace(/employee-file\/?.*/g, "employee-file");
+  }
+
+  if (pathname.includes("for-approval")) {
+    modPathName = pathname.replace(/for-approval\/?.*/g, "for-approval");
   }
 
   return (

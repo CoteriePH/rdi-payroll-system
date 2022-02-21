@@ -47,5 +47,8 @@ export const ListTable = styled.div`
   position: relative;
   padding: 0.5em 1em;
   display: grid;
-  grid-template-columns: repeat(10, minmax(0, 1fr));
+  grid-template-columns: ${(props) =>
+    props.gridCols
+      ? `repeat(${props.gridCols}, minmax(0, 1fr))`
+      : `repeat(1, minmax(0, 1fr))`};
 `;

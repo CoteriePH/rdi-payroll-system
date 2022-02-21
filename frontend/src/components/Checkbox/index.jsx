@@ -7,6 +7,7 @@ const Checkbox = ({
   name,
   border = false,
   disabled = false,
+  withLabel = true,
 }) => {
   const { register } = useFormContext();
   return (
@@ -16,7 +17,7 @@ const Checkbox = ({
         <Box border disabled={disabled} />
         <Check />
       </Container>
-      <span>{label}</span>
+      {withLabel ? <span>{label}</span> : null}
     </Wrapper>
   );
 };

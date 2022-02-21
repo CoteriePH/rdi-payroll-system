@@ -23,6 +23,8 @@ export const Text = styled.small`
     props.fontFamily ? theme.fonts[props.fontFamily] : theme.fonts.avenirRoman};
   font-size: ${(props) =>
     props.size ? theme.fontSizes[props.size] : theme.fontSizes.md};
+
+  margin: ${(props) => (props.m ? props.m : "0")};
 `;
 
 export const VStack = styled.div`

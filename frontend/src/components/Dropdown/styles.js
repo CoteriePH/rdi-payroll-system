@@ -16,6 +16,8 @@ export const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   border-radius: 5px;
+  border: ${(props) =>
+    props.withBorder ? `1px solid ${theme.colors.default}` : null};
 `;
 
 export const Label = styled.div`
