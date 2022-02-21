@@ -12,6 +12,8 @@ export const Container = styled.div`
   align-items: center;
   min-width: 15rem;
   width: 100%;
+  border: ${(props) =>
+    props.withBorder ? `1px solid ${theme.colors.default}` : null};
   /* border: 1.5px solid ${(props) =>
     props.disabled ? theme.colors.default : "silver"}; */
   height: ${(props) => (props.menu ? "2.5rem" : "3rem")};
