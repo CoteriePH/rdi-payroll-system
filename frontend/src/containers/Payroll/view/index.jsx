@@ -84,14 +84,23 @@ const View = ({ employee }) => {
   useEffect(() => {
     const subscription = watch(async (value, { name, type }) => {
       if (value.start_date && value.end_date) {
+        console.log(value.start_date, value.end_date);
         const data = {
           start_date: value.start_date,
           end_date: value.end_date,
         };
-        const res = await API.get(`employees/${employee.id}/compute-payroll`, {
-          params: data,
-        });
-        setComputerPayroll(res.data);
+
+        try {
+          const res = await API.get(
+            `employees/${employee.id}/compute-payroll`,
+            {
+              params: data,
+            }
+          );
+          setComputerPayroll(res.data);
+        } catch (error) {
+          console.error(error.message);
+        }
       }
     });
     return () => subscription.unsubscribe();
@@ -233,7 +242,12 @@ const View = ({ employee }) => {
                 </PhiLoans>
                 <CashAdv>
                   <div>Cash Advance:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    disabled
+                    value={computedPayroll?.cash_advance}
+                    type="text"
+                    maxLength="9"
+                  />
                 </CashAdv>
                 <Others>
                   <div>Others:</div>
