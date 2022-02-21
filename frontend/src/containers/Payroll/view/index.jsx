@@ -1,6 +1,8 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import {
   BasicPay,
   BonusPay,
@@ -69,17 +71,26 @@ import {
 
 const View = ({ employee }) => {
   const router = useRouter();
-  const { id } = router.query;
+  const methods = useForm();
+  const { handleSubmit, reset, setValue } = methods;
+
+  const onSubmit = (data) => {
+    console.log("view", data);
+  };
 
   return (
     <Wrapper>
-      <Header
-        tempDisplay="flex"
-        display="none" // Header Date
-        TabContDisp="none"
-        generatePayroll="generate payroll"
-        jc="flex-start"
-      />
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Header
+            tempDisplay="flex"
+            displayDate="none" // Header Date
+            TabContDisp="none"
+            generatePayroll="generate payroll"
+            jc="flex-start"
+          />
+        </form>
+      </FormProvider>
       <Details>
         <PersonalInfo>
           <EmpPicture></EmpPicture>

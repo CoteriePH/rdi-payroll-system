@@ -18,6 +18,8 @@ import Button from "@/components/Button";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import { Controller, useFormContext } from "react-hook-form";
+import InputField from "../InputField";
 
 function Header(props) {
   const { pathname } = useRouter();
@@ -25,6 +27,12 @@ function Header(props) {
 
   const { data: session } = useSession();
   const authRole = session?.user?.role;
+
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = useFormContext();
 
   // let prevHref = props.prevhref ? props.prevHref : "/payroll";
 
@@ -73,9 +81,33 @@ function Header(props) {
           <HeaderName>{props.generatePayroll}</HeaderName>
           <InputDates dates={props.dates}>
             <From>From:</From>
-            <input type="date" />
+            <Controller
+              control={control}
+              name="start_date_picker"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <InputField
+                  onChange={(e) => console.log("changed", e.target.value)}
+                  selected={value}
+                  type="date"
+                  name="start_date"
+                  label=""
+                />
+              )}
+            />
             <To>To:</To>
-            <input type="date" />
+            <Controller
+              control={control}
+              name="end_date_picker"
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <InputField
+                  onChange={(e) => console.log("changed", e.target.value)}
+                  selected={value}
+                  type="date"
+                  name="end_date"
+                  label=""
+                />
+              )}
+            />
           </InputDates>
           <FlexRun>
             <Button w="5%">RUN</Button>
@@ -84,7 +116,7 @@ function Header(props) {
 
         <TitleContainer>
           <HeaderName>{props.headerName}</HeaderName>
-          <HeaderDate display={props.display}>
+          <HeaderDate display={props.displayDate}>
             <CurrDate />
           </HeaderDate>
         </TitleContainer>
