@@ -1,7 +1,8 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import API from "@/utils/API";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import {
   BasicPay,
@@ -72,8 +73,29 @@ import {
 const View = ({ employee }) => {
   const router = useRouter();
   const methods = useForm();
-  const { handleSubmit, reset, setValue } = methods;
+  const { handleSubmit, reset, setValue, watch } = methods;
 
+  let [computedPayroll, setComputerPayroll] = useState({});
+
+  useEffect(() => {
+    console.log(computedPayroll);
+  }, [computedPayroll]);
+
+  useEffect(() => {
+    const subscription = watch(async (value, { name, type }) => {
+      if (value.start_date && value.end_date) {
+        const data = {
+          start_date: value.start_date,
+          end_date: value.end_date,
+        };
+        const res = await API.get(`employees/${employee.id}/compute-payroll`, {
+          params: data,
+        });
+        setComputerPayroll(res.data);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
   const onSubmit = (data) => {
     console.log("view", data);
   };
@@ -83,6 +105,7 @@ const View = ({ employee }) => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Header
+            isPayrollHeader={true}
             tempDisplay="flex"
             displayDate="none" // Header Date
             TabContDisp="none"
@@ -97,7 +120,7 @@ const View = ({ employee }) => {
           <NameOthers>
             <EmpName>
               <First>{employee.first_name}</First>
-              <Middle>{employee.middle_name.charAt(0)}.</Middle>
+              <Middle>{employee.middle_name?.charAt(0)}.</Middle>
               <Last>{employee.last_name}</Last>
             </EmpName>
             <FlexRow>
@@ -117,7 +140,12 @@ const View = ({ employee }) => {
           <EmpSpecs>
             <Rate>
               <Span>Rate:</Span>
-              <InputRate type="text" maxLength="8" />
+              <InputRate
+                type="text"
+                maxLength="8"
+                disabled
+                value={Number(employee.basic_pay).toFixed(2)}
+              />
             </Rate>
             <DaysWorked>
               <Span>Days Worked:</Span>
@@ -139,21 +167,41 @@ const View = ({ employee }) => {
               <SectionOne>
                 <BasicPay>
                   <div>Basic Pay:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.basic_pay}
+                    disabled
+                  />
                 </BasicPay>
                 <OvertimeRate>
                   <div>Overtime Rate:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.overtime_rate}
+                    disabled
+                  />
                 </OvertimeRate>
                 <NightDiff>
                   <div>Night Differential:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.night_differential}
+                    disabled
+                  />
                 </NightDiff>
               </SectionOne>
               <SectionTwo>
                 <SunPay>
                   <div>Sunday Pay:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.sunday_pay}
+                    disabled
+                  />
                 </SunPay>
                 <LegalHoliday>
                   <div>Legal Holiday:</div>
