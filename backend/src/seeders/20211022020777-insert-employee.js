@@ -50,6 +50,7 @@ module.exports = {
         department_id: departmentRows[0].id,
         position_id: positionRows[1].id,
         schedule_id: scheduleRows[0].id,
+        basic_pay: Math.floor(Math.random() * 300),
       },
       {
         id: uuidv4(),
@@ -73,6 +74,7 @@ module.exports = {
         department_id: departmentRows[1].id,
         position_id: positionRows[2].id,
         schedule_id: scheduleRows[0].id,
+        basic_pay: Math.floor(Math.random() * 300),
       },
       {
         id: uuidv4(),
@@ -96,6 +98,7 @@ module.exports = {
         department_id: departmentRows[1].id,
         position_id: positionRows[3].id,
         schedule_id: scheduleRows[0].id,
+        basic_pay: Math.floor(Math.random() * 300),
       },
       {
         id: uuidv4(),
@@ -119,6 +122,7 @@ module.exports = {
         department_id: departmentRows[3].id,
         position_id: positionRows[3].id,
         schedule_id: scheduleRows[0].id,
+        basic_pay: Math.floor(Math.random() * 300),
       },
     ]);
   },
