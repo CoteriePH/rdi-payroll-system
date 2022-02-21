@@ -1,29 +1,42 @@
 import Breadcrumbs from "@/components/Breadcrumbs";
+import ListItem from "@/components/ListItem";
 import Menu from "@/components/Menu";
 import FolderIcon from "@/components/View/FolderIcon";
 import { settingsSelector } from "@/features/settings/settingsSlice";
 import { Flex } from "@/styles";
+import { useState } from "react";
 import { useSelector } from "react-redux";
 import { ListTable, Wrapper } from "./styles";
 
 const AuditorEmployeeFile = () => {
   const { data } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
+  const [view, setView] = useState("list");
 
   return (
     <Wrapper>
       {/* LIST VIEW */}
       <Flex direction="column" flex={15}>
-        <Breadcrumbs withMenu />
-        <ListTable>
+        <Breadcrumbs setView={setView} withMenu />
+        <ListTable gridCols={view === "grid" ? 10 : 1}>
           {data.map((employee) => (
             <>
-              <FolderIcon
-                key={employee.id}
-                id={employee.id}
-                name={`${employee.first_name} ${employee.last_name}`}
-                href={`/employee-file/${employee.id}`}
-              />
+              {view === "grid" ? (
+                <FolderIcon
+                  key={employee.id}
+                  id={employee.id}
+                  name={`${employee.first_name} ${employee.last_name}`}
+                  href={`/employee-file/${employee.id}`}
+                />
+              ) : (
+                <ListItem
+                  key={employee.id}
+                  col1={employee.id}
+                  col2={employee.first_name + " " + employee.last_name}
+                  col3={employee.department.name}
+                  href={`/employee-file/${employee.id}`}
+                />
+              )}
             </>
           ))}
         </ListTable>
