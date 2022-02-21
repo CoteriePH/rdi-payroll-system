@@ -6,6 +6,8 @@ const path = require("path");
 const csv = require("fast-csv");
 const { QueryTypes } = require("sequelize");
 const { resolve } = require("path");
+const Dinero = require("dinero.js");
+const { convertToDineroInteger } = require("../helpers/currency.helper");
 
 exports.exportToCSV = async (req, res) => {
   //TODO - DROP NALANG KUNG ISESELECT * TAS EXCLUDE DROP COLUMN TEMP TABLE
@@ -164,9 +166,8 @@ exports.findAll = async (req, res) => {
     "company",
     "department",
     "position",
-    "deduction",
-    "earning",
     "files",
+    "payrolls",
     "attendances",
     "schedule",
   ];
@@ -220,7 +221,42 @@ exports.getPayrollComputation = async (req, res) => {
     include: ["position", "company"],
   });
 
+  let no_of_hours = 48;
+
   //Basic Pay = Rate x no. of hrs./8
-  // const basic_pay =
-  return res.status(200).send(employee);
+  //TODO - TEMPORARY NO. OF HRS
+  let dinero_basic_pay = Dinero({
+    amount: convertToDineroInteger(employee.basic_pay),
+    currency: "PHP",
+    precision: 4,
+  });
+  let basic_pay = dinero_basic_pay.multiply(no_of_hours).divide(8).toUnit();
+
+  //Overtime rate = basic pay/8 + 25%
+  let overtime_formula_1 = dinero_basic_pay.divide(8);
+  let _25PercentOTFormula1 = overtime_formula_1.multiply(0.25);
+  let overtime_rate = overtime_formula_1.add(_25PercentOTFormula1).toUnit();
+
+  //Night differential = basic pay x no. of hrs. /8 + 10%
+
+  let night_differential_formula_1 = dinero_basic_pay.multiply(no_of_hours);
+  let night_differential_formula_2 = night_differential_formula_1.divide(8);
+  let _10PercentOfNDFormula2 = night_differential_formula_2.multiply(0.1);
+  let night_differential = night_differential_formula_2
+    .add(_10PercentOfNDFormula2)
+    .toUnit();
+
+  //Sunday Pay = Basic Pay x no. of hrs. /8 + 30%
+
+  let sunday_pay_formula_1 = dinero_basic_pay.multiply(no_of_hours);
+  let sunday_pay_formula_2 = sunday_pay_formula_1.divide(8);
+  let _30PercentOfSPFormula2 = sunday_pay_formula_2.multiply(0.3);
+  let sunday_pay = sunday_pay_formula_2.add(_30PercentOfSPFormula2).toUnit();
+
+  return res.status(200).send({
+    basic_pay: Number(basic_pay).toFixed(2),
+    overtime_rate: Number(overtime_rate).toFixed(2),
+    night_differential: Number(night_differential).toFixed(2),
+    sunday_pay: Number(sunday_pay).toFixed(2),
+  });
 };
