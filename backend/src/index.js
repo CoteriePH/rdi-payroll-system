@@ -34,6 +34,7 @@ db.sequelize.sync().then(() => {
   require("./routes/addtnl_deduction.routes")(app);
   require("./routes/cash_advance.routes")(app);
   require("./routes/payroll.routes")(app);
+  require("./routes/entry.routes")(app);
   require("./routes/schedule.routes")(app);
   // set port, listen for requests
   const PORT = config.PORT;
