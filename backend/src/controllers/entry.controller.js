@@ -1,6 +1,10 @@
 const res = require("express/lib/response");
-const { timeConverter } = require("../helpers/attendance.helper");
-const { Op } = require("../models");
+const {
+  timeConverter,
+  getTotalRunningTime,
+  getTotalRunningTime2,
+} = require("../helpers/attendance.helper");
+const { Op, Sequelize, sequelize } = require("../models");
 const db = require("../models");
 const Entry = db.entry;
 const Attendance = db.attendance;
@@ -52,14 +56,15 @@ exports.create = async (req, res) => {
       };
     } else {
       //CHECK IF IN OR OUT
-      const entry_count = await Entry.count({
-        where: {
-          [Op.and]: {
-            employee_id,
-            attendance_id: attendance.id,
+      const { count: entry_count, rows: entry_rows } =
+        await Entry.findAndCountAll({
+          where: {
+            [Op.and]: {
+              employee_id,
+              attendance_id: attendance.id,
+            },
           },
-        },
-      });
+        });
 
       if (entry_count % 2 === 0) {
         entry_details = {
@@ -74,9 +79,19 @@ exports.create = async (req, res) => {
           //TODO - OVERTIME
           status_time_out = "ON TIME";
         }
+
+        let total_running_time = getTotalRunningTime2(
+          new Date(entry_rows[entry_count - 1].created_at),
+          entry_time
+        );
+        console.log(total_running_time);
+
         await Attendance.update(
           {
             status_time_out,
+            total_running_time: sequelize.literal(
+              `total_running_time + ${total_running_time}`
+            ),
           },
           {
             where: {
