@@ -45,7 +45,7 @@ exports.create = async (req, res) => {
 
 exports.findAll = async (req, res) => {
   const attendance = await Attendance.findAll({
-    include: ["employee"],
+    include: ["employee", "entries"],
   });
   return res.status(200).send(attendance);
 };
