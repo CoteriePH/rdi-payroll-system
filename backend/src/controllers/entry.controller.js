@@ -1,4 +1,5 @@
 const res = require("express/lib/response");
+const { timeConverter } = require("../helpers/attendance.helper");
 const { Op } = require("../models");
 const db = require("../models");
 const Entry = db.entry;
@@ -12,7 +13,9 @@ exports.create = async (req, res) => {
     if (!employee_id) {
       return res.status(400).send("Employee Id is required");
     }
-    const employee = await Employee.findByPk(employee_id);
+    const employee = await Employee.findByPk(employee_id, {
+      include: ["schedule"],
+    });
 
     //CHECK IF USER HAS RUNNING ATTENDANCE
     const attendance = await Attendance.findOne({
@@ -27,10 +30,16 @@ exports.create = async (req, res) => {
     let entry_details = {
       employee_id,
     };
+    let entry_time = new Date(Date.now());
+    let scheduleIn = timeConverter(employee.schedule.start_time);
+
     if (!attendance) {
       //TODO GET EMPLOYEE SCHEDULE (TIME_IN<=SCHEDULE=ONTIME)
-      let status_time_in = "LATE IN";
-      if (employee.sex === "MALE") status_time_in = "ON TIME";
+      let status_time_in = "ON TIME";
+
+      if (entry_time.getTime() > scheduleIn.getTime()) {
+        status_time_in = "LATE IN";
+      }
 
       entry_details = {
         ...entry_details,
@@ -59,6 +68,22 @@ exports.create = async (req, res) => {
           type: "IN",
         };
       } else {
+        let status_time_out = "EARLY OUT";
+        let scheduleOut = timeConverter(employee.schedule.end_time);
+        if (entry_time.getTime() > scheduleOut.getTime()) {
+          //TODO - OVERTIME
+          status_time_out = "ON TIME";
+        }
+        await Attendance.update(
+          {
+            status_time_out,
+          },
+          {
+            where: {
+              id: attendance.id,
+            },
+          }
+        );
         entry_details = {
           ...entry_details,
           attendance_id: attendance.id,
