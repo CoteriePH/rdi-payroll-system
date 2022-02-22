@@ -1,4 +1,5 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
+  const db = require("./index");
   const Attendance = sequelize.define(
     "attendance", // Model name
     {

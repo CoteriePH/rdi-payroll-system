@@ -3,6 +3,7 @@ const { Op } = require("../models");
 const db = require("../models");
 const Entry = db.entry;
 const Attendance = db.attendance;
+const Employee = db.employee;
 
 exports.create = async (req, res) => {
   try {
@@ -11,6 +12,7 @@ exports.create = async (req, res) => {
     if (!employee_id) {
       return res.status(400).send("Employee Id is required");
     }
+    const employee = await Employee.findByPk(employee_id);
 
     //CHECK IF USER HAS RUNNING ATTENDANCE
     const attendance = await Attendance.findOne({
@@ -26,12 +28,17 @@ exports.create = async (req, res) => {
       employee_id,
     };
     if (!attendance) {
+      //TODO GET EMPLOYEE SCHEDULE (TIME_IN<=SCHEDULE=ONTIME)
+      let status_time_in = "LATE IN";
+      if (employee.sex === "MALE") status_time_in = "ON TIME";
+
       entry_details = {
         ...entry_details,
         type: "IN",
         attendance: {
           status: "ACTIVE",
           employee_id,
+          status_time_in,
         },
       };
     } else {
