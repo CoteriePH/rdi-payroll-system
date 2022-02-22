@@ -1,5 +1,4 @@
 module.exports = (sequelize, Sequelize, DataTypes) => {
-  const db = require("./index");
   const Attendance = sequelize.define(
     "attendance", // Model name
     {
@@ -11,8 +10,9 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         allowNull: false,
       },
       total_running_time: {
-        type: DataTypes.DECIMAL(4, 2),
-        allowNull: true,
+        type: DataTypes.DECIMAL(19, 2),
+        defaultValue: 0,
+        allowNull: false,
       },
       status: {
         type: DataTypes.ENUM({
