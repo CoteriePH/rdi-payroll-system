@@ -51,59 +51,29 @@ const Attendance = () => {
       },
       {
         Header: "DATE",
-        accessor: "date",
+        accessor: "created_at",
         Cell: (props) => {
           return <div>{dayjs(props.value).format("YYYY-MM-DD")}</div>;
         },
       },
-
       {
         //TODO TIME CONVERTER HELPER
         Header: "TIME IN",
-        accessor: "time_in",
         Cell: (props) => {
-          {
-            if (props.value) {
-              const time = props.value?.split(":");
-              return (
-                <div>
-                  {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
-                    "hh:mm:ss A"
-                  )}
-                </div>
-              );
-            } else {
-              return <div>N/A</div>;
-            }
-          }
+          const entries = props.row.original.entries;
+
+          return <div>{dayjs(entries[0].created_at).format("hh:mm:ss A")}</div>;
         },
       },
       {
         Header: "TIME OUT",
-        accessor: "time_out",
         Cell: (props) => {
-          if (props.value) {
-            const time = props.value?.split(":");
-            return (
-              <div>
-                {dayjs(new Date().setHours(time[0], time[1], time[2])).format(
-                  "hh:mm:ss A"
-                )}
-              </div>
-            );
-          } else {
-            return <div>N/A</div>;
-          }
-        },
-      },
-      {
-        Header: "ACCURACY",
-        accessor: "accuracy",
-        Cell: (props) => {
-          const val = Math.floor(Math.random() * (100 - 0 + 1) + 0);
+          const entries = props.row.original.entries;
           return (
-            <div style={{ color: accuracyColorPicker(val) }}>
-              {props.value ? props.value : val}%
+            <div>
+              {dayjs(entries[entries.length - 1].created_at).format(
+                "hh:mm:ss A"
+              )}
             </div>
           );
         },
@@ -112,14 +82,20 @@ const Attendance = () => {
         Header: "TRT",
         accessor: "total_running_time",
         Cell: (props) => {
-          return <div>{props.value ? props.value : "N/A"}</div>;
+          return (
+            <div>
+              {props.value
+                ? new Date(props.value * 1000).toISOString().substr(11, 8)
+                : "N/A"}
+            </div>
+          );
         },
       },
       {
         Header: "NO. OF ENTRIES",
         accessor: "entries",
         Cell: (props) => {
-          return <div>{props.value ? props.value : "0"}</div>;
+          return <div>{props.value ? props.value.length : "0"}</div>;
         },
       },
     ],
