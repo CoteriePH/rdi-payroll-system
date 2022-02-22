@@ -14,11 +14,12 @@ export const StyledLink = styled.a`
   color: #ffffff;
   text-decoration: none;
   text-transform: uppercase;
-
-  &:hover {
+  background-color: ${(props) => (props.bgColor ? props.bgColor : null)};
+  &:hover { 
     text-decoration: underline;
+    cursor: pointer;
   }
-  &.active {
+  &:active {
     color: #4c00aa;
     background-color: #fff;
     font-family: "Avenir-Black";
