@@ -18,11 +18,13 @@ exports.create = async (req, res) => {
       return res.status(400).send("Employee Id is required");
     }
     const employee = await Employee.findByPk(employee_id, {
+      attributes: ["id"],
       include: ["schedule"],
     });
 
     //CHECK IF USER HAS RUNNING ATTENDANCE
     const attendance = await Attendance.findOne({
+      attributes: ["id"],
       where: {
         [Op.and]: {
           employee_id,
@@ -58,6 +60,7 @@ exports.create = async (req, res) => {
       //CHECK IF IN OR OUT
       const { count: entry_count, rows: entry_rows } =
         await Entry.findAndCountAll({
+          attributes: ["created_at"],
           where: {
             [Op.and]: {
               employee_id,
@@ -84,7 +87,6 @@ exports.create = async (req, res) => {
           new Date(entry_rows[entry_count - 1].created_at),
           entry_time
         );
-        console.log(total_running_time);
 
         await Attendance.update(
           {
