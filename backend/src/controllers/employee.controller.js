@@ -1,6 +1,7 @@
 const { Op, sequelize, Sequelize } = require("../models");
 const db = require("../models");
 const Employee = db.employee;
+const Attendance = db.attendance;
 const CashAdvance = db.cash_advance;
 const fs = require("fs");
 const path = require("path");
@@ -225,81 +226,115 @@ exports.getPayrollComputation = async (req, res) => {
   }
   start_date = new Date(start_date);
   end_date = new Date(end_date);
+  end_date.setHours(23, 59, 0);
 
-  const employee = await Employee.findByPk(req.params.id, {
-    include: ["position", "company"],
-  });
+  try {
+    const employee = await Employee.findByPk(req.params.id, {
+      include: ["position", "company"],
+    });
 
-  //TODO - NOT Sure
-  const cash_advance = await CashAdvance.findOne({
-    where: {
-      [Op.and]: {
-        [Op.or]: {
-          date_from: {
-            [Op.between]: [start_date, end_date],
+    const attendances = await Attendance.findAndCountAll({
+      where: {
+        [Op.and]: {
+          [Op.or]: {
+            created_at: {
+              [Op.between]: [start_date, end_date],
+            },
           },
-          date_to: {
-            [Op.between]: [start_date, end_date],
-          },
+          employee_id: employee.id,
         },
-        ca_status: "INCOMPLETE",
-        status: "PROCESSED",
-        employee_id: employee.id,
       },
-    },
-  });
+      attributes: [
+        [
+          sequelize.fn("sum", sequelize.col("total_running_time")),
+          "no_of_hours",
+        ],
+      ],
+      raw: true,
+    });
+    let no_of_hours = 0;
+    if (attendances?.rows[0]?.no_of_hours > 0) {
+      no_of_hours = Number(attendances?.rows[0]?.no_of_hours) / 3600;
+    }
+    let days_worked = attendances.count || 0;
 
-  let bp_no_of_hours = 9.574;
-  let r_no_of_hours = 6;
-  let o_no_of_hours = 18;
-  let nd_no_of_hours = 16;
+    //TODO - NOT Sure
+    const cash_advance = await CashAdvance.findOne({
+      where: {
+        [Op.and]: {
+          [Op.or]: {
+            date_from: {
+              [Op.between]: [start_date, end_date],
+            },
+            date_to: {
+              [Op.between]: [start_date, end_date],
+            },
+          },
+          ca_status: "INCOMPLETE",
+          status: "PROCESSED",
+          employee_id: employee.id,
+        },
+      },
+    });
 
-  //Basic Pay = Rate x no. of hrs./8
-  //TODO - TEMPORARY NO. OF HRS
-  let dinero_basic_pay = Dinero({
-    amount: convertToDineroInteger(employee.basic_pay),
-    currency: "PHP",
-    precision: 4,
-  });
-  let basic_pay = dinero_basic_pay.multiply(bp_no_of_hours).divide(8);
+    //TEMPORARY VARIABLES
+    let bp_no_of_hours = 9.574;
+    let r_no_of_hours = 6;
+    let o_no_of_hours = 18;
+    let nd_no_of_hours = 16;
 
-  let regular_pay = basic_pay.multiply(r_no_of_hours);
+    //Basic Pay = Rate x no. of hrs./8
+    //TODO - TEMPORARY NO. OF HRS
+    let dinero_basic_pay = Dinero({
+      amount: convertToDineroInteger(employee.basic_pay),
+      currency: "PHP",
+      precision: 4,
+    });
+    let basic_pay = dinero_basic_pay.multiply(bp_no_of_hours).divide(8);
 
-  //Overtime rate = basic pay/8 + 25%
-  let overtime_formula_1 = dinero_basic_pay.divide(8);
-  let _25PercentOTFormula1 = overtime_formula_1.multiply(0.25);
-  let overtime_rate = overtime_formula_1.add(_25PercentOTFormula1);
-  let ot = overtime_rate.multiply(o_no_of_hours);
-  //Night differential = basic pay x no. of hrs. /8 + 10%
+    let regular_pay = basic_pay.multiply(r_no_of_hours);
 
-  let night_differential_formula_1 = dinero_basic_pay.multiply(nd_no_of_hours);
-  let night_differential_formula_2 = night_differential_formula_1.divide(8);
-  let _10PercentOfNDFormula2 = night_differential_formula_2.multiply(0.1);
-  let night_differential = night_differential_formula_2.add(
-    _10PercentOfNDFormula2
-  );
-  //Sunday Pay = Basic Pay x no. of hrs. /8 + 30%
+    //Overtime rate = basic pay/8 + 25%
+    let overtime_formula_1 = dinero_basic_pay.divide(8);
+    let _25PercentOTFormula1 = overtime_formula_1.multiply(0.25);
+    let overtime_rate = overtime_formula_1.add(_25PercentOTFormula1);
+    let ot = overtime_rate.multiply(o_no_of_hours);
+    //Night differential = basic pay x no. of hrs. /8 + 10%
 
-  let sunday_pay_formula_1 = dinero_basic_pay.multiply(r_no_of_hours);
-  let sunday_pay_formula_2 = sunday_pay_formula_1.divide(8);
-  let _30PercentOfSPFormula2 = sunday_pay_formula_2.multiply(0.3);
-  let sunday_pay = sunday_pay_formula_2.add(_30PercentOfSPFormula2);
+    let night_differential_formula_1 =
+      dinero_basic_pay.multiply(nd_no_of_hours);
+    let night_differential_formula_2 = night_differential_formula_1.divide(8);
+    let _10PercentOfNDFormula2 = night_differential_formula_2.multiply(0.1);
+    let night_differential = night_differential_formula_2.add(
+      _10PercentOfNDFormula2
+    );
+    //Sunday Pay = Basic Pay x no. of hrs. /8 + 30%
 
-  /**
-   * DEDUCTIONS
-   */
+    let sunday_pay_formula_1 = dinero_basic_pay.multiply(r_no_of_hours);
+    let sunday_pay_formula_2 = sunday_pay_formula_1.divide(8);
+    let _30PercentOfSPFormula2 = sunday_pay_formula_2.multiply(0.3);
+    let sunday_pay = sunday_pay_formula_2.add(_30PercentOfSPFormula2);
 
-  //Cash Advance
-  let ca_deduction =
-    cash_advance?.salary_deduction > 0 ? cash_advance.salary_deduction : 0;
+    /**
+     * DEDUCTIONS
+     */
 
-  return res.status(200).send({
-    regular_pay: Number(regular_pay.toUnit()).toFixed(2),
-    basic_pay: Number(basic_pay.toUnit()).toFixed(2),
-    overtime_rate: Number(overtime_rate.toUnit()).toFixed(2),
-    night_differential: Number(night_differential.toUnit()).toFixed(2),
-    sunday_pay: Number(sunday_pay.toUnit()).toFixed(2),
-    cash_advance: Number(ca_deduction).toFixed(2),
-    ot: Number(ot.toUnit()).toFixed(2),
-  });
+    //Cash Advance
+    let ca_deduction =
+      cash_advance?.salary_deduction > 0 ? cash_advance.salary_deduction : 0;
+
+    return res.status(200).send({
+      regular_pay: Number(regular_pay.toUnit()).toFixed(2),
+      basic_pay: Number(basic_pay.toUnit()).toFixed(2),
+      overtime_rate: Number(overtime_rate.toUnit()).toFixed(2),
+      night_differential: Number(night_differential.toUnit()).toFixed(2),
+      sunday_pay: Number(sunday_pay.toUnit()).toFixed(2),
+      cash_advance: Number(ca_deduction).toFixed(2),
+      ot: Number(ot.toUnit()).toFixed(2),
+      no_of_hours: Number(no_of_hours).toFixed(),
+      days_worked: days_worked,
+    });
+  } catch (error) {
+    return res.status(400).send(error.message);
+  }
 };
