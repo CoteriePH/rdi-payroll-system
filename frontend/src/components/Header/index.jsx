@@ -81,15 +81,19 @@ function Header(props) {
               </ChevronForProll>
             </Link>
             <HeaderName>{props.generatePayroll}</HeaderName>
-            <InputDates dates={props.dates}>
-              <From>From:</From>
-              <InputField type="date" name="start_date" label="" />
-              <To>To:</To>
-              <InputField type="date" name="end_date" label="" />
-            </InputDates>
-            <FlexRun>
-              <Button w="5%">RUN</Button>
-            </FlexRun>
+            {props.showInputDates ? (
+              <>
+                <InputDates dates={props.dates}>
+                  <From>From:</From>
+                  <InputField type="date" name="start_date" label="" />
+                  <To>To:</To>
+                  <InputField type="date" name="end_date" label="" />
+                </InputDates>
+                <FlexRun>
+                  <Button w="5%">RUN</Button>
+                </FlexRun>
+              </>
+            ) : null}
           </HeaderAudPayroll>
         ) : (
           <>

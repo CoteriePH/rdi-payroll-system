@@ -141,6 +141,7 @@ const View = ({ employee }) => {
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <Header
+            showInputDates
             isPayrollHeader={true}
             tempDisplay="flex"
             displayDate="none" // Header Date
