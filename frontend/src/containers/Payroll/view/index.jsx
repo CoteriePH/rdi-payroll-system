@@ -158,11 +158,21 @@ const View = ({ employee }) => {
             </Rate>
             <DaysWorked>
               <Span>Days Worked:</Span>
-              <InputSpecs type="text" maxLength="6" />
+              <InputSpecs
+                value={computedPayroll?.days_worked}
+                disabled
+                type="text"
+                maxLength="6"
+              />
             </DaysWorked>
             <NumOfHours>
               <Span>No. of Hours:</Span>
-              <InputSpecs type="text" maxLength="8" />
+              <InputSpecs
+                value={computedPayroll?.no_of_hours}
+                disabled
+                type="text"
+                maxLength="8"
+              />
             </NumOfHours>
             <SundayPay>
               <input type="checkbox" />
