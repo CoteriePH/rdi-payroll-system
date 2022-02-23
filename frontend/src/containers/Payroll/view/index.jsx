@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
 import API from "@/utils/API";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
@@ -71,32 +72,58 @@ import {
 } from "./styles";
 
 const View = ({ employee }) => {
+  const employeeId = employee.id;
   const router = useRouter();
-  const methods = useForm();
-  const { handleSubmit, reset, setValue, watch } = methods;
+  const from_date = new Date();
+  from_date.setDate(1);
+  const to_date = new Date(from_date);
+  to_date.setMonth(to_date.getMonth() + 1);
+
+  const methods = useForm({
+    defaultValues: {
+      start_date: dayjs(from_date).format("YYYY-MM-DD"),
+      end_date: dayjs(to_date).format("YYYY-MM-DD"),
+    },
+  });
+  const { handleSubmit, getValues, watch } = methods;
 
   let [computedPayroll, setComputerPayroll] = useState({});
 
   useEffect(() => {
-    console.log(computedPayroll);
-  }, [computedPayroll]);
+    const start_date = getValues("start_date");
+    const end_date = getValues("end_date");
+
+    const getEmployeeInitialPayroll = async () => {
+      if (start_date && end_date) {
+        const data = {
+          start_date,
+          end_date,
+        };
+        try {
+          const res = await API.get(`employees/${employeeId}/compute-payroll`, {
+            params: data,
+          });
+          setComputerPayroll(res.data);
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+    };
+
+    getEmployeeInitialPayroll();
+  }, []);
 
   useEffect(() => {
     const subscription = watch(async (value, { name, type }) => {
       if (value.start_date && value.end_date) {
-        console.log(value.start_date, value.end_date);
         const data = {
           start_date: value.start_date,
           end_date: value.end_date,
         };
-
         try {
-          const res = await API.get(
-            `employees/${employee.id}/compute-payroll`,
-            {
-              params: data,
-            }
-          );
+          const res = await API.get(`employees/${employeeId}/compute-payroll`, {
+            params: data,
+          });
           setComputerPayroll(res.data);
         } catch (error) {
           console.error(error.message);
@@ -104,7 +131,7 @@ const View = ({ employee }) => {
       }
     });
     return () => subscription.unsubscribe();
-  }, [watch]);
+  }, [watch, employeeId]);
   const onSubmit = (data) => {
     console.log("view", data);
   };
