@@ -27,7 +27,7 @@ function Link({ children, href, ...rest }) {
         <Container>   
           <StyledLink 
             
-            className={active ? "hotdog" : "hotdog-inactive"} {...rest}>{children}</StyledLink>                               
+            className={active ? "link" : "link-inactive"} {...rest}>{children}</StyledLink>                               
         </Container>
       </NextLink>
     </>
