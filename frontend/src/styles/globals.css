@@ -58,6 +58,42 @@ code {
   text-decoration: none;
   text-transform: uppercase;
 }
+.hotdog-inactive
+{
+  color: #fff;
+}
+.hotdog
+{
+  color: #4c00aa;
+  background-color: #fff;
+  font-family: "Avenir-Black";
+    
+}
+.hotdog::after
+{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  right: 0;
+  border: #4c00aa 0.3em solid;
+  background-color: #4c00aa;
+  border-bottom-right-radius: 1em;
+  transform: translate(1px, -32px);
+}
+
+.hotdog::before
+{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  right: 0;
+  border: #4c00aa 0.3em solid;
+  background-color: #4c00aa;
+  border-top-right-radius: 1em;
+  transform: translate(1px, 36px);
+}
 
 .link:hover {
   text-decoration: underline;

@@ -1,19 +1,33 @@
 import NextLink from "next/link";
 import { Container, StyledLink } from "./styles";
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 
-function Link({ children, href, ...rest }) {
-  const [active, setActive] = useState() 
-  // "#4C00AA"
-  const changeStyle = () => {    
-    setActive("#fff")   
+function Link({ children, href, ...rest }) {  
+  // const [bg, setBg] = useState(bgColor)
+  const [active, setActive] = useState(false)
 
-  }
+  useEffect(()=>{
+    var PathName = window.location.pathname; 
+    if (PathName == href)
+    {
+      setActive(true)     
+    }
+
+    else
+    {
+      // default style here
+      setActive(false)
+    }
+
+  },[window.location.pathname]);
+
   return (
     <>
       <NextLink href={href} passHref>
         <Container>   
-          <StyledLink bgColor = {active} onClick={changeStyle} {...rest}>{children}</StyledLink>                               
+          <StyledLink 
+            
+            className={active ? "hotdog" : "hotdog-inactive"} {...rest}>{children}</StyledLink>                               
         </Container>
       </NextLink>
     </>
