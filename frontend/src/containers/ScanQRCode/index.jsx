@@ -1,18 +1,32 @@
-import { signIn } from "next-auth/react";
+import { addEntry } from "@/features/entry/entrySlice.js";
+import { Text } from "@/styles/index.js";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import Webcam from "react-webcam";
-import { Container, Header, ScannerBox } from "./styles.js";
+import { useEffect, useState } from "react";
+import { QrReader } from "react-qr-reader";
+import { useDispatch } from "react-redux";
+import { Container, Header, ScannerBox, Section } from "./styles.js";
 
 const ScanQRCode = () => {
-  const videoConstraints = {
-    width: { min: 800 },
-    height: { min: 400 },
-    aspectRatio: 0.6666666667,
-  };
+  const [employeeId, setEmployeeId] = useState(null);
+  const dispatch = useDispatch();
+  const [entry, setEntry] = useState(null);
+
+  useEffect(() => {
+    const createEntry = async () => {
+      const { payload } = await dispatch(addEntry({ employee_id: employeeId }));
+      setEntry(payload);
+    };
+    if (employeeId) {
+      createEntry();
+    }
+  }, [employeeId, dispatch]);
+
+  useEffect(() => {
+    return () => {
+      setEmployeeId(null);
+      setEntry(null);
+    };
+  }, []);
 
   return (
     <>
@@ -20,11 +34,32 @@ const ScanQRCode = () => {
         <Image src="/icons/logo.svg" width={100} height={100} alt="logo" />
         <ScannerBox>
           <Header>QR Code Scanner</Header>
-          <Webcam
-            videoConstraints={videoConstraints}
-            width={800}
-            height={400}
-          />
+          <Section>
+            <QrReader
+              onResult={async (result, error) => {
+                if (!!result) {
+                  setEmployeeId(result?.text);
+                }
+              }}
+              scanDelay={300}
+              constraints={{
+                facingMode: "user",
+              }}
+              style={{
+                width: "100%",
+              }}
+              videoStyle={{
+                objectFit: "cover",
+              }}
+            />
+          </Section>
+
+          <p>
+            {entry?.type ? `TIME ${entry.type} ` : "Please show your QR Code."}
+          </p>
+          <Text size="xs" color="darkGray">
+            {entry?.employee_id ? `${entry.employee_id}` : null}
+          </Text>
         </ScannerBox>
       </Container>
     </>

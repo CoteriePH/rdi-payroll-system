@@ -20,6 +20,7 @@ import storage from "redux-persist/lib/storage";
 import attendanceSlice from "@/features/attendance/attendanceSlice";
 import cashAdvanceSlice from "./features/cash_advance/cashAdvanceSlice";
 import scheduleSlice from "./features/schedule/scheduleSlice";
+import entrySlice from "./features/entry/entrySlice";
 
 const persistConfig = {
   key: "root",
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   attendances: attendanceSlice,
   cash_advance: cashAdvanceSlice,
   schedules: scheduleSlice,
+  entries: entrySlice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
