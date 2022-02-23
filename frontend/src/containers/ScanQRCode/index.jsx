@@ -40,6 +40,9 @@ const ScanQRCode = () => {
                 if (!!result) {
                   setEmployeeId(result?.text);
                 }
+                if (!!error) {
+                  console.info(error);
+                }
               }}
               scanDelay={300}
               constraints={{
