@@ -45,7 +45,7 @@ const SpecificEmployeeFile = ({ employee }) => {
               </HeaderText>
               <Text>TYPE: {employee.employee_type}</Text>
               <Text fontWeight="bold" color="lightViolet">
-                {employee.department.name}
+                {employee.department?.name}
               </Text>
             </Flex>
             <Flex direction="column" gap="1" mt="2em" justify="flex-end">

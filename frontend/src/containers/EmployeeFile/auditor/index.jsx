@@ -2,16 +2,22 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import ListItem from "@/components/ListItem";
 import Menu from "@/components/Menu";
 import FolderIcon from "@/components/View/FolderIcon";
+import { findAllEmployees } from "@/features/employee/employeeSlice";
 import { settingsSelector } from "@/features/settings/settingsSlice";
 import { Flex } from "@/styles";
-import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ListTable, Wrapper } from "./styles";
 
 const AuditorEmployeeFile = () => {
   const { data } = useSelector((state) => state.employees);
   const { isOpen } = useSelector(settingsSelector);
   const [view, setView] = useState("list");
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(findAllEmployees());
+  }, [dispatch]);
 
   return (
     <Wrapper>
