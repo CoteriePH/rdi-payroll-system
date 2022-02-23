@@ -25,26 +25,24 @@ const AuditorEmployeeFile = () => {
       <Flex direction="column" flex={15}>
         <Breadcrumbs setView={setView} withMenu />
         <ListTable gridCols={view === "grid" ? 10 : 1}>
-          {data.map((employee) => (
-            <>
-              {view === "grid" ? (
-                <FolderIcon
-                  key={employee.id}
-                  id={employee.id}
-                  name={`${employee.first_name} ${employee.last_name}`}
-                  href={`/employee-file/${employee.id}`}
-                />
-              ) : (
-                <ListItem
-                  key={employee.id}
-                  col1={employee.id}
-                  col2={employee.first_name + " " + employee.last_name}
-                  col3={employee.department.name}
-                  href={`/employee-file/${employee.id}`}
-                />
-              )}
-            </>
-          ))}
+          {data.map((employee) =>
+            view === "grid" ? (
+              <FolderIcon
+                key={employee.id}
+                id={employee.id}
+                name={`${employee.first_name} ${employee.last_name}`}
+                href={`/employee-file/${employee.id}`}
+              />
+            ) : (
+              <ListItem
+                key={employee.id}
+                col1={employee.id}
+                col2={employee.first_name + " " + employee.last_name}
+                col3={employee.department.name}
+                href={`/employee-file/${employee.id}`}
+              />
+            )
+          )}
         </ListTable>
       </Flex>
       <Flex bg="gray" flex={1}>
