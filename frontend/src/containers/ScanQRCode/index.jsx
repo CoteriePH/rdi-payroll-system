@@ -1,3 +1,4 @@
+import ViewFinder from "@/components/Modals/GeneratedQRCode/viewfinder.jsx";
 import { addEntry } from "@/features/entry/entrySlice.js";
 import { Text } from "@/styles/index.js";
 import Image from "next/image";
@@ -54,6 +55,7 @@ const ScanQRCode = () => {
               videoStyle={{
                 objectFit: "cover",
               }}
+              ViewFinder={ViewFinder}
             />
           </Section>
 
