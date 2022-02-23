@@ -22,6 +22,10 @@ exports.create = async (req, res) => {
       include: ["schedule"],
     });
 
+    if (!employee) {
+      return res.status(404).send("Employee is not registered.");
+    }
+
     //CHECK IF USER HAS RUNNING ATTENDANCE
     const attendance = await Attendance.findOne({
       attributes: ["id"],
