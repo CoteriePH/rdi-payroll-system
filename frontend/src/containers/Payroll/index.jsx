@@ -92,7 +92,7 @@ const Payroll = () => {
               "Wow, such empty"
             )}
           </TableContainer>
-          <Toolbar leftChildren={<></>}></Toolbar>
+          <Toolbar showGenerateButton leftChildren={<></>}></Toolbar>
         </Flex>
         <Flex bg="gray" flex={1}>
           {isOpen && (

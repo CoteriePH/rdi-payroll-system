@@ -140,20 +140,7 @@ const Attendance = () => {
                 </Button>
               ) : null
             }
-          >
-            {/* <Button
-              h="2rem"
-              minW="10rem"
-              onClick={onModalOpen}
-              fontWeight="bold"
-              borderColor="darkViolet"
-              border="2px"
-              bg="white"
-              color="darkViolet"
-            >
-              Add Record
-            </Button> */}
-          </Toolbar>
+          ></Toolbar>
         </Flex>
         <Flex bg="gray">{isOpen && <Menu />}</Flex>
       </Container>
