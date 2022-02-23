@@ -20,6 +20,12 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         }),
         allowNull: true,
       },
+      type: {
+        type: DataTypes.ENUM({
+          values: ["QR", "BIOMETRICS"],
+        }),
+        allowNull: true,
+      },
       status_time_in: {
         type: DataTypes.ENUM({
           values: ["ON TIME", "LATE IN"],
