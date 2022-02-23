@@ -121,8 +121,8 @@ module.exports = {
         company_id: companyRows[2].id,
         department_id: departmentRows[3].id,
         position_id: positionRows[3].id,
-        schedule_id: scheduleRows[0].id,
         basic_pay: Math.floor(Math.random() * 300),
+        schedule_id: scheduleRows[1].id,
       },
     ]);
   },

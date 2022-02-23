@@ -44,8 +44,14 @@ exports.create = async (req, res) => {
 };
 
 exports.findAll = async (req, res) => {
+  let filters = {};
+  if (req.query.type) {
+    filters = { ...filters, type: req.query.type };
+  }
+
   const attendance = await Attendance.findAll({
-    include: ["employee"],
+    where: filters,
+    include: ["employee", "entries"],
   });
   return res.status(200).send(attendance);
 };

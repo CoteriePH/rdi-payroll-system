@@ -63,6 +63,7 @@ db.cash_advance = require("./cash_advance.model")(
   Sequelize,
   DataTypes
 );
+db.entry = require("./entry.model.js")(sequelize, Sequelize, DataTypes);
 
 /**
  * Relationships
@@ -123,6 +124,24 @@ db.attendance.belongsTo(db.employee, {
 db.employee.hasMany(db.attendance, {
   as: "attendances",
   foreignKey: "employee_id",
+});
+
+//OneToMany - (One Employee ----> MANY entries)
+db.entry.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+});
+db.employee.hasMany(db.entry, {
+  as: "entries",
+  foreignKey: "employee_id",
+});
+
+//OneToMany - (One Attendance ----> MANY entries)
+db.entry.belongsTo(db.attendance, {
+  foreignKey: { name: "attendance_id", allowNull: false },
+});
+db.attendance.hasMany(db.entry, {
+  as: "entries",
+  foreignKey: "attendance_id",
 });
 
 //OneToMany - (One schedule ----> Many employee)

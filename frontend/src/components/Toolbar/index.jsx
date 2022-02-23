@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Box, Wrapper } from "./styles";
 
-const Toolbar = ({ children, leftChildren }) => {
+const Toolbar = ({ children, leftChildren, showGenerateButton = false }) => {
   const dispatch = useDispatch();
   const { data: session } = useSession();
 
@@ -16,7 +16,7 @@ const Toolbar = ({ children, leftChildren }) => {
   return (
     <Wrapper>
       <Box>
-        {authRole === "AUDITOR" ? (
+        {authRole === "AUDITOR" && showGenerateButton ? (
           <Button
             minW="10rem"
             h="2rem"
