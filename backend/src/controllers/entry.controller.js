@@ -72,6 +72,15 @@ exports.create = async (req, res) => {
                 attendance_id: attendance.id,
               },
             },
+            include: [
+              {
+                model: Attendance,
+                attributes: ["id", "type"],
+                where: {
+                  type: "QR",
+                },
+              },
+            ],
           });
 
         if (entry_count % 2 === 0) {
