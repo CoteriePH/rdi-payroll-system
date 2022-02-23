@@ -10,15 +10,16 @@ export const Container = styled.li`
 export const StyledLink = styled.a`
   display: block;
   padding: 1.7em 1.5em;
-  /* color: #4c00aa; */
-  color: #ffffff;
+  
   text-decoration: none;
-  text-transform: uppercase;
-
-  &:hover {
+  text-transform: uppercase; 
+ 
+  &:hover { 
     text-decoration: underline;
+    cursor: pointer;
   }
-  &.active {
+  /* }
+  &:active {
     color: #4c00aa;
     background-color: #fff;
     font-family: "Avenir-Black";
@@ -46,6 +47,6 @@ export const StyledLink = styled.a`
     }
     &:hover {
       text-decoration: none;
-    }
-  }
+    } 
+  }*/
 `;

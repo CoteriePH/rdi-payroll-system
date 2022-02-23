@@ -50,27 +50,19 @@ code {
   position: relative;
 }
 
-.link {
-  display: block;
-  padding: 1.7em 1.5em;
-  /* color: #4c00aa; */
-  color: #ffffff;
-  text-decoration: none;
-  text-transform: uppercase;
+.link-inactive
+{
+  color: #fff;
 }
-
-.link:hover {
-  text-decoration: underline;
-}
-
-.link-active {
+.link
+{
   color: #4c00aa;
   background-color: #fff;
   font-family: "Avenir-Black";
+    
 }
-
-.link-active::after,
-.link-active::before {
+.link::after
+{
   content: "";
   position: absolute;
   width: 100%;
@@ -78,18 +70,19 @@ code {
   right: 0;
   border: #4c00aa 0.3em solid;
   background-color: #4c00aa;
-}
-
-.link-active::after {
   border-bottom-right-radius: 1em;
   transform: translate(1px, -32px);
 }
 
-.link-active::before {
+.link::before
+{
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  right: 0;
+  border: #4c00aa 0.3em solid;
+  background-color: #4c00aa;
   border-top-right-radius: 1em;
   transform: translate(1px, 36px);
-}
-
-.link-active:hover {
-  text-decoration: none;
 }
