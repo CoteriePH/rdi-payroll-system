@@ -14,7 +14,9 @@ const ScanQRCode = () => {
 
   useEffect(() => {
     const createEntry = async () => {
-      const { payload } = await dispatch(addEntry({ employee_id: employeeId }));
+      const { payload } = await dispatch(
+        addEntry({ employee_id: employeeId, type: "QR" })
+      );
       setEntry(payload);
     };
     if (employeeId) {

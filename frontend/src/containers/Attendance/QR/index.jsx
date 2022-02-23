@@ -31,7 +31,7 @@ const AttendanceQR = () => {
   };
 
   useEffect(() => {
-    dispatch(findAllAttendance());
+    dispatch(findAllAttendance({ type: "QR" }));
   }, []);
 
   const columns = React.useMemo(
@@ -91,7 +91,7 @@ const AttendanceQR = () => {
                   {status_time_in.toLowerCase()}
                 </Text>
               ) : (
-                "Not available"
+                " / Not available"
               )}
               {status_time_out ? (
                 <Text
@@ -102,7 +102,7 @@ const AttendanceQR = () => {
                   / {status_time_out.toLowerCase()}
                 </Text>
               ) : (
-                "Not available"
+                " / Not available"
               )}
             </>
           );

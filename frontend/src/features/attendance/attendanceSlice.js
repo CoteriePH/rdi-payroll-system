@@ -11,9 +11,11 @@ const initialState = {
 
 export const findAllAttendance = createAsyncThunk(
   "/attendances/all",
-  async (_, { rejectWithValue }) => {
+  async (data, { rejectWithValue }) => {
     try {
-      const res = await API.get(`attendances`);
+      const res = await API.get(`attendances`, {
+        params: data,
+      });
       if (res.status === 200) {
         return res.data;
       } else {

@@ -31,7 +31,7 @@ const Biometrics = () => {
   };
 
   useEffect(() => {
-    dispatch(findAllAttendance());
+    dispatch(findAllAttendance({ type: "BIOMETRICS" }));
   }, []);
 
   const columns = React.useMemo(
@@ -91,7 +91,7 @@ const Biometrics = () => {
                   {status_time_in.toLowerCase()}
                 </Text>
               ) : (
-                "Not available"
+                " / Not available"
               )}
               {status_time_out ? (
                 <Text
@@ -102,7 +102,7 @@ const Biometrics = () => {
                   / {status_time_out.toLowerCase()}
                 </Text>
               ) : (
-                "Not available"
+                " / Not available"
               )}
             </>
           );
