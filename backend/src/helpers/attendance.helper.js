@@ -55,6 +55,16 @@ const getTotalRunningTime = (time_in, time_out) => {
   }
 };
 
+const getTotalRunningTime2 = (time_in, time_out) => {
+  //total running time
+  if (time_in != null && time_out !== null) {
+    const diffInMs = Math.abs(time_out - time_in);
+    return diffInMs / 1000;
+  } else {
+    return null;
+  }
+};
+
 const getAbsentStatus = (time_in) => {
   if (time_in == null || time_in == "") {
     return "ABSENT";
@@ -70,4 +80,5 @@ module.exports = {
   getTimeInStatus,
   getAbsentStatus,
   getTotalRunningTime,
+  getTotalRunningTime2,
 };

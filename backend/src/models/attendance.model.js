@@ -9,33 +9,16 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         primaryKey: true,
         allowNull: false,
       },
-      time_in: {
-        type: DataTypes.TIME,
-        allowNull: true,
-      },
-      time_out: {
-        type: DataTypes.TIME,
-        allowNull: true,
-      },
-      accuracy: {
-        type: DataTypes.DECIMAL(5, 2),
-        allowNull: true,
-      },
       total_running_time: {
-        type: DataTypes.DECIMAL(4, 2),
-        allowNull: true,
-      },
-      entries: {
-        type: DataTypes.INTEGER,
-        allowNull: true,
-      },
-      tardiness: {
-        type: DataTypes.BOOLEAN,
+        type: DataTypes.DECIMAL(19, 2),
+        defaultValue: 0,
         allowNull: false,
       },
-      date: {
-        type: DataTypes.DATE,
-        allowNull: false,
+      status: {
+        type: DataTypes.ENUM({
+          values: ["ACTIVE", "ENDED"],
+        }),
+        allowNull: true,
       },
       status_time_in: {
         type: DataTypes.ENUM({
@@ -46,12 +29,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
       status_time_out: {
         type: DataTypes.ENUM({
           values: ["ON TIME", "EARLY OUT"],
-        }),
-        allowNull: true,
-      },
-      absent: {
-        type: DataTypes.ENUM({
-          values: ["EMERGENCY", "LEAVE", "ABSENT"],
         }),
         allowNull: true,
       },

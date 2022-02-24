@@ -53,12 +53,17 @@ db.department = require("./department.model.js")(
 );
 db.position = require("./position.model.js")(sequelize, Sequelize, DataTypes);
 db.request = require("./request.model.js")(sequelize, Sequelize, DataTypes);
-db.additionalEarnings = require("./additional_earnings.model.js")(sequelize, Sequelize, DataTypes);
+db.additionalEarnings = require("./additional_earnings.model.js")(
+  sequelize,
+  Sequelize,
+  DataTypes
+);
 db.cash_advance = require("./cash_advance.model")(
   sequelize,
   Sequelize,
   DataTypes
 );
+db.entry = require("./entry.model.js")(sequelize, Sequelize, DataTypes);
 
 /**
  * Relationships
@@ -121,6 +126,24 @@ db.employee.hasMany(db.attendance, {
   foreignKey: "employee_id",
 });
 
+//OneToMany - (One Employee ----> MANY entries)
+db.entry.belongsTo(db.employee, {
+  foreignKey: { name: "employee_id", allowNull: false },
+});
+db.employee.hasMany(db.entry, {
+  as: "entries",
+  foreignKey: "employee_id",
+});
+
+//OneToMany - (One Attendance ----> MANY entries)
+db.entry.belongsTo(db.attendance, {
+  foreignKey: { name: "attendance_id", allowNull: false },
+});
+db.attendance.hasMany(db.entry, {
+  as: "entries",
+  foreignKey: "attendance_id",
+});
+
 //OneToMany - (One schedule ----> Many employee)
 db.employee.belongsTo(db.schedule, {
   foreignKey: { name: "schedule_id", allowNull: false },
@@ -171,8 +194,7 @@ db.earning.hasOne(db.additionalEarnings, {
 db.additionalEarnings.belongsTo(db.earning, {
   foreignKey: { name: "earning_id", allowNull: false },
   foreignKeyConstraint: true,
-}); 
-
+});
 
 //OneAndOnlyONE (One deduction  ---> one additional deduction)
 db.addtnl_deduction.belongsTo(db.deduction, {
