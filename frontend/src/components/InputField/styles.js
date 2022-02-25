@@ -29,7 +29,7 @@ export const Container = styled.div`
 export const Input = styled.input`
   width: 100%;
   padding: 0 1em;
-  height: 2rem;
+  height: ${(props) => props.h || "2rem"};
   border: none;
   outline: none;
   border-radius: 5px;
