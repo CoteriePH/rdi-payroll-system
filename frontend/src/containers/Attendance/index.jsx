@@ -112,7 +112,7 @@ const Attendance = () => {
     <Wrapper>
       <Container>
         {/* NOTE: Gayahin nalang tong flex sa ibang components */}
-        <Flex justify="space-between" direction="column">
+        <Flex basis="94%" justify="space-between" direction="column">
           <TableContainer>
             {/* TODO - Component kung alang laman data */}
             {/* NOTE: To use Settings Component set parent div to position relative*/}
