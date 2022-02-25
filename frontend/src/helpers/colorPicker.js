@@ -19,3 +19,29 @@ export const caStatusColorPicker = (val) => {
       break;
   }
 };
+
+export const attendanceStatusColorPicker = (val, auto = true) => {
+  if (auto) {
+    switch (val) {
+      case "ON TIME":
+        return "green";
+      case "LATE IN":
+        return "orange";
+      case "EARLY OUT":
+        return "red";
+      default:
+        break;
+    }
+  } else {
+    switch (val) {
+      case "ON TIME":
+        return theme.colors.green;
+      case "LATE IN":
+        return "orange";
+      case "EARLY OUT":
+        return theme.colors.red;
+      default:
+        break;
+    }
+  }
+};

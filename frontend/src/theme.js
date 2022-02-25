@@ -12,6 +12,7 @@ export const theme = {
     default: "#4c00aa",
     secondary: "#ffffff",
     darkGray: "rgb(10, 10, 10, 0.7)",
+    orange: "orange",
   },
   fonts: {
     avenirBlack: "Avenir-Black",

@@ -23,7 +23,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps }, router }) {
               />
             </Head>
             <ToastContainer />
-            {router.pathname.includes("/auth") ? (
+            {router.pathname.includes("/auth") ||
+            router.pathname.includes("/scan-qr-code") ? (
               <Component {...pageProps} />
             ) : (
               <MainLayout>

@@ -13,7 +13,7 @@ const Employee = db.employee;
 exports.create = async (req, res) => {
   try {
     // INIT
-    let { employee_id } = req.body;
+    let { employee_id, type } = req.body;
     if (!employee_id) {
       return res.status(400).send("Employee Id is required");
     }
@@ -22,102 +22,117 @@ exports.create = async (req, res) => {
       include: ["schedule"],
     });
 
-    //CHECK IF USER HAS RUNNING ATTENDANCE
-    const attendance = await Attendance.findOne({
-      attributes: ["id"],
-      where: {
-        [Op.and]: {
-          employee_id,
-          status: "ACTIVE",
-        },
-      },
-    });
-
-    let entry_details = {
-      employee_id,
-    };
-    let entry_time = new Date(Date.now());
-    let scheduleIn = timeConverter(employee.schedule.start_time);
-
-    if (!attendance) {
-      //TODO GET EMPLOYEE SCHEDULE (TIME_IN<=SCHEDULE=ONTIME)
-      let status_time_in = "ON TIME";
-
-      if (entry_time.getTime() > scheduleIn.getTime()) {
-        status_time_in = "LATE IN";
-      }
-
-      entry_details = {
-        ...entry_details,
-        type: "IN",
-        attendance: {
-          status: "ACTIVE",
-          employee_id,
-          status_time_in,
-        },
-      };
-    } else {
-      //CHECK IF IN OR OUT
-      const { count: entry_count, rows: entry_rows } =
-        await Entry.findAndCountAll({
-          attributes: ["created_at"],
-          where: {
-            [Op.and]: {
-              employee_id,
-              attendance_id: attendance.id,
-            },
-          },
-        });
-
-      if (entry_count % 2 === 0) {
-        entry_details = {
-          ...entry_details,
-          attendance_id: attendance.id,
-          type: "IN",
-        };
-      } else {
-        let status_time_out = "EARLY OUT";
-        let scheduleOut = timeConverter(employee.schedule.end_time);
-        if (entry_time.getTime() > scheduleOut.getTime()) {
-          //TODO - OVERTIME
-          status_time_out = "ON TIME";
-        }
-
-        let total_running_time = getTotalRunningTime2(
-          new Date(entry_rows[entry_count - 1].created_at),
-          entry_time
-        );
-
-        await Attendance.update(
-          {
-            status_time_out,
-            total_running_time: sequelize.literal(
-              `total_running_time + ${total_running_time}`
-            ),
-          },
-          {
-            where: {
-              id: attendance.id,
-            },
-          }
-        );
-        entry_details = {
-          ...entry_details,
-          attendance_id: attendance.id,
-          type: "OUT",
-        };
-      }
+    if (!employee) {
+      return res.status(404).send("Employee is not registered.");
     }
 
-    const new_entry = await Entry.create(entry_details, {
-      include: {
-        model: Attendance,
-        as: "attendance",
-      },
-    });
+    if (type === "QR") {
+      const attendance = await Attendance.findOne({
+        attributes: ["id"],
+        where: {
+          [Op.and]: {
+            employee_id,
+            status: "ACTIVE",
+            type: "QR",
+          },
+        },
+      });
+      let entry_details = {
+        employee_id,
+      };
+      let entry_time = new Date(Date.now());
+      let scheduleIn = timeConverter(employee.schedule.start_time);
 
-    //SAVE
-    return res.status(200).send(new_entry);
+      if (!attendance) {
+        //TODO GET EMPLOYEE SCHEDULE (TIME_IN<=SCHEDULE=ONTIME)
+        let status_time_in = "ON TIME";
+
+        if (entry_time.getTime() > scheduleIn.getTime()) {
+          status_time_in = "LATE IN";
+        }
+
+        entry_details = {
+          ...entry_details,
+          type: "IN",
+          attendance: {
+            status: "ACTIVE",
+            employee_id,
+            status_time_in,
+            type: "QR",
+          },
+        };
+      } else {
+        //CHECK IF IN OR OUT
+        const { count: entry_count, rows: entry_rows } =
+          await Entry.findAndCountAll({
+            attributes: ["created_at"],
+            where: {
+              [Op.and]: {
+                employee_id,
+                attendance_id: attendance.id,
+              },
+            },
+            include: [
+              {
+                model: Attendance,
+                attributes: ["id", "type"],
+                where: {
+                  type: "QR",
+                },
+              },
+            ],
+          });
+
+        if (entry_count % 2 === 0) {
+          entry_details = {
+            ...entry_details,
+            attendance_id: attendance.id,
+            type: "IN",
+          };
+        } else {
+          let status_time_out = "EARLY OUT";
+          let scheduleOut = timeConverter(employee.schedule.end_time);
+          if (entry_time.getTime() > scheduleOut.getTime()) {
+            //TODO - OVERTIME
+            status_time_out = "ON TIME";
+          }
+
+          let total_running_time = getTotalRunningTime2(
+            new Date(entry_rows[entry_count - 1].created_at),
+            entry_time
+          );
+
+          await Attendance.update(
+            {
+              status_time_out,
+              total_running_time: sequelize.literal(
+                `total_running_time + ${total_running_time}`
+              ),
+            },
+            {
+              where: {
+                id: attendance.id,
+              },
+            }
+          );
+          entry_details = {
+            ...entry_details,
+            attendance_id: attendance.id,
+            type: "OUT",
+          };
+        }
+      }
+      const new_entry = await Entry.create(entry_details, {
+        include: {
+          model: Attendance,
+          as: "attendance",
+        },
+      });
+      return res.status(200).send(new_entry);
+    } else if (type === "BIOMETRICS") {
+    } else {
+      return res.status(400).send("Attendance Type is needed");
+    }
   } catch (error) {
     return res.status(400).send(error.message);
   }
