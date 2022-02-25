@@ -1,7 +1,13 @@
-import React from "react";
+import React from 'react'
+import {
+  Wrapper
+} from "./styles"
+const Report = () =>{
+  return(
+    <Wrapper>
+      
+    </Wrapper>
+  );
+}
 
-const Reports = () => {
-  return <div>Reports</div>;
-};
-
-export default Reports;
+export default Report
