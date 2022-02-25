@@ -8,7 +8,7 @@ function Link({ children, href, ...rest }) {
 
   useEffect(() => {
     var PathName = window.location.pathname;
-    if (PathName.includes(href)) {
+    if (PathName.startsWith(href)) {
       setActive(true);
     } else {
       // default style here
