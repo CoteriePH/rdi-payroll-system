@@ -27,6 +27,7 @@ function MonthlySalary({ employee }) {
   return (
     <Wrapper>
       <Header
+        isPayrollHeader={true}
         tempDisplay="flex"
         display="none" // Header Date
         dates="none" // From and To Input Vanish

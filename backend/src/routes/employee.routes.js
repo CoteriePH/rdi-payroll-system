@@ -13,6 +13,7 @@ module.exports = function (app) {
   app.get("/employees", controller.findAll);
   app.get("/employees/export-to-csv", controller.exportToCSV);
   app.get("/employees/:id", controller.findOne);
+  app.get("/employees/:id/compute-payroll", controller.getPayrollComputation);
   app.post("/employees", controller.create);
   app.patch("/employees/:id", controller.update);
   app.delete("/employees/:id", controller.delete);

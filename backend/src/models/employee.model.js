@@ -79,6 +79,10 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
       },
+      basic_pay: {
+        type: DataTypes.DECIMAL(19, 4),
+        allowNull: false,
+      },
       time_shift: {
         type: DataTypes.ENUM({
           values: [

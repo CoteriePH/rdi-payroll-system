@@ -1,6 +1,10 @@
 import Button from "@/components/Button";
 import Header from "@/components/Header";
+import API from "@/utils/API";
+import dayjs from "dayjs";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
 import {
   BasicPay,
   BonusPay,
@@ -68,25 +72,92 @@ import {
 } from "./styles";
 
 const View = ({ employee }) => {
+  const employeeId = employee.id;
   const router = useRouter();
-  const { id } = router.query;
+  const from_date = new Date();
+  from_date.setDate(1);
+  const to_date = new Date(from_date);
+  to_date.setMonth(to_date.getMonth() + 1);
+
+  const methods = useForm({
+    defaultValues: {
+      start_date: dayjs(from_date).format("YYYY-MM-DD"),
+      end_date: dayjs(to_date).format("YYYY-MM-DD"),
+    },
+  });
+  const { handleSubmit, getValues, watch } = methods;
+
+  let [computedPayroll, setComputerPayroll] = useState({});
+
+  useEffect(() => {
+    const start_date = getValues("start_date");
+    const end_date = getValues("end_date");
+
+    const getEmployeeInitialPayroll = async () => {
+      if (start_date && end_date) {
+        const data = {
+          start_date,
+          end_date,
+        };
+        try {
+          const res = await API.get(`employees/${employeeId}/compute-payroll`, {
+            params: data,
+          });
+          setComputerPayroll(res.data);
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+    };
+
+    getEmployeeInitialPayroll();
+  }, []);
+
+  useEffect(() => {
+    const subscription = watch(async (value, { name, type }) => {
+      if (value.start_date && value.end_date) {
+        const data = {
+          start_date: value.start_date,
+          end_date: value.end_date,
+        };
+        try {
+          const res = await API.get(`employees/${employeeId}/compute-payroll`, {
+            params: data,
+          });
+          setComputerPayroll(res.data);
+        } catch (error) {
+          console.error(error.message);
+        }
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch, employeeId]);
+  const onSubmit = (data) => {
+    console.log("view", data);
+  };
 
   return (
     <Wrapper>
-      <Header
-        tempDisplay="flex"
-        display="none" // Header Date
-        TabContDisp="none"
-        generatePayroll="generate payroll"
-        jc="flex-start"
-      />
+      <FormProvider {...methods}>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Header
+            showInputDates
+            isPayrollHeader={true}
+            tempDisplay="flex"
+            displayDate="none" // Header Date
+            TabContDisp="none"
+            generatePayroll="generate payroll"
+            jc="flex-start"
+          />
+        </form>
+      </FormProvider>
       <Details>
         <PersonalInfo>
           <EmpPicture></EmpPicture>
           <NameOthers>
             <EmpName>
               <First>{employee.first_name}</First>
-              <Middle>{employee.middle_name.charAt(0)}.</Middle>
+              <Middle>{employee.middle_name?.charAt(0)}.</Middle>
               <Last>{employee.last_name}</Last>
             </EmpName>
             <FlexRow>
@@ -106,15 +177,30 @@ const View = ({ employee }) => {
           <EmpSpecs>
             <Rate>
               <Span>Rate:</Span>
-              <InputRate type="text" maxLength="8" />
+              <InputRate
+                type="text"
+                maxLength="8"
+                disabled
+                value={Number(employee.basic_pay).toFixed(2)}
+              />
             </Rate>
             <DaysWorked>
               <Span>Days Worked:</Span>
-              <InputSpecs type="text" maxLength="6" />
+              <InputSpecs
+                value={computedPayroll?.days_worked}
+                disabled
+                type="text"
+                maxLength="6"
+              />
             </DaysWorked>
             <NumOfHours>
               <Span>No. of Hours:</Span>
-              <InputSpecs type="text" maxLength="8" />
+              <InputSpecs
+                value={computedPayroll?.no_of_hours}
+                disabled
+                type="text"
+                maxLength="8"
+              />
             </NumOfHours>
             <SundayPay>
               <input type="checkbox" />
@@ -128,21 +214,41 @@ const View = ({ employee }) => {
               <SectionOne>
                 <BasicPay>
                   <div>Basic Pay:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.basic_pay}
+                    disabled
+                  />
                 </BasicPay>
                 <OvertimeRate>
                   <div>Overtime Rate:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.overtime_rate}
+                    disabled
+                  />
                 </OvertimeRate>
                 <NightDiff>
                   <div>Night Differential:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.night_differential}
+                    disabled
+                  />
                 </NightDiff>
               </SectionOne>
               <SectionTwo>
                 <SunPay>
                   <div>Sunday Pay:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    type="text"
+                    maxLength="9"
+                    value={computedPayroll?.sunday_pay}
+                    disabled
+                  />
                 </SunPay>
                 <LegalHoliday>
                   <div>Legal Holiday:</div>
@@ -174,7 +280,12 @@ const View = ({ employee }) => {
                 </PhiLoans>
                 <CashAdv>
                   <div>Cash Advance:</div>
-                  <Input type="text" maxLength="9" />
+                  <Input
+                    disabled
+                    value={computedPayroll?.cash_advance}
+                    type="text"
+                    maxLength="9"
+                  />
                 </CashAdv>
                 <Others>
                   <div>Others:</div>

@@ -84,7 +84,7 @@ db.employee.belongsTo(db.department, {
 });
 db.department.hasMany(db.employee, {
   as: "employees",
-  foreignKey: "company_id",
+  foreignKey: "department_id",
 });
 
 //OneToMany Relationship (One Position -> Many Employees)
@@ -149,7 +149,7 @@ db.employee.belongsTo(db.schedule, {
   foreignKey: { name: "schedule_id", allowNull: false },
 });
 db.schedule.hasMany(db.employee, {
-  as: "schedules",
+  as: "employees",
   foreignKey: "schedule_id",
 });
 
@@ -164,36 +164,15 @@ db.employee.hasOne(db.file, {
   foreignKey: "employee_id",
 });
 
-//OneAndOnlyONE (One Employee  ---> one deduction)
-db.deduction.belongsTo(db.employee, {
-  foreignKey: { name: "employee_id", allowNull: false },
-  foreignKeyConstraint: true,
-});
-db.employee.hasOne(db.deduction, {
-  as: "deduction",
-  foreignKey: "employee_id",
-});
-
-//OneAndOnlyONE (One Employee  ---> one earnings)
-db.earning.belongsTo(db.employee, {
-  foreignKey: { name: "employee_id", allowNull: false },
-  foreignKeyConstraint: true,
-});
-db.employee.hasOne(db.earning, {
-  as: "earning",
-  foreignKey: "employee_id",
-});
-
 //OneAndOnlyONE (One earning  ---> one additional earnings)
+db.additionalEarnings.belongsTo(db.earning, {
+  foreignKey: { name: "earning_id", allowNull: false },
+  foreignKeyConstraint: true,
+});
 
 db.earning.hasOne(db.additionalEarnings, {
   as: "additional_earnings",
   foreignKey: "earning_id",
-});
-
-db.additionalEarnings.belongsTo(db.earning, {
-  foreignKey: { name: "earning_id", allowNull: false },
-  foreignKeyConstraint: true,
 });
 
 //OneAndOnlyONE (One deduction  ---> one additional deduction)
@@ -230,20 +209,20 @@ module.exports = db;
 
 //OneAndOnlyONE (One earnings  ---> one payroll)
 db.earning.belongsTo(db.payroll, {
-  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKey: { name: "payroll_id", allowNull: false },
   foreignKeyConstraint: true,
 });
 db.payroll.hasOne(db.earning, {
   as: "earning",
-  foreignKey: "employee_id",
+  foreignKey: "payroll_id",
 });
 
 //OneAndOnlyONE (One deductions  ---> one payroll)
 db.deduction.belongsTo(db.payroll, {
-  foreignKey: { name: "employee_id", allowNull: false },
+  foreignKey: { name: "payroll_id", allowNull: false },
   foreignKeyConstraint: true,
 });
 db.payroll.hasOne(db.deduction, {
   as: "deduction",
-  foreignKey: "employee_id",
+  foreignKey: "payroll_id",
 });
