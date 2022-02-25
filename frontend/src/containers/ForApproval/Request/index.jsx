@@ -64,8 +64,6 @@ const ForApprovalRequest = () => {
   useEffect(() => {
     if (unprocessedCashAdvanceData.length > 0)
       setCaToShow(unprocessedCashAdvanceData[0]);
-
-    console.log(unprocessedCashAdvanceData[0]);
   }, [unprocessedCashAdvanceData]);
 
   const onSubmit = async (data) => {
@@ -73,7 +71,6 @@ const ForApprovalRequest = () => {
       selectedCA.forEach((ca) => {
         dispatch(editCashAdvance({ id: ca, status: "PROCESSED" }));
       });
-
       router.reload();
     }
   };
