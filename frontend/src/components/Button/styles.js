@@ -37,7 +37,8 @@ export const Container = styled.button`
     transition: 0.1s ease-in-out;
   }
   &:hover {
-    background-color: #440099;
+    background-color: ${(props) =>
+      props.bgHover ? theme.colors[props.bgHover] : "#440099"};
     color: ${theme.colors.white};
     transition: 0.3s ease-in-out;
   }

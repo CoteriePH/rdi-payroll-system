@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
 export const Container = styled.div`
   background-color: ${(props) =>
     props.bg ? theme.colors[props.bg] : theme.colors.white};
+  background-color: ${(props) =>
+    props.bg ? theme.colors[props.bg] : theme.colors.white};
   padding: 0.75rem;
   display: flex;
   justify-content: space-between;
@@ -29,8 +31,8 @@ export const Label = styled.div`
 export const Options = styled.div`
   position: absolute;
   width: inherit;
-
-  background: ${theme.colors.white};
+  background-color: ${(props) =>
+    props.bg ? theme.colors[props.bg] : theme.colors.white};
   max-height: 12rem;
   overflow-x: hidden;
   overflow-y: auto;

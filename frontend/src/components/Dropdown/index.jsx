@@ -33,7 +33,7 @@ const Dropdown = ({
         />
       </Container>
       {isComponentVisible && (
-        <Options>
+        <Options bg={bg}>
           {options.map((item) => (
             <List
               key={item.id}

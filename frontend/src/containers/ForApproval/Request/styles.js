@@ -3,25 +3,63 @@ import { theme } from "@/theme";
 
 export const Wrapper = styled.div`
   display: flex;
-  height: 100vh;
-`;
-
-export const HeaderLink = styled.h2`
-  transform: rotate(-90deg);
-  text-transform: uppercase;
+  height: 100%;
+  overflow: hidden;
 `;
 
 export const LinkBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3em;
-  padding-top: 6em;
+  padding-left: 2.5em;
+  padding-top: 2em;
+  margin-right: 3em;
+`;
+
+export const HeaderLink = styled.h2`
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: scale(-1, -1);
+  color: ${theme.colors.default};
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 `;
 
 export const MiddleBox = styled.div`
   display: flex;
   flex-direction: column;
-  flex-basis: 50%;
+  flex-basis: 65%;
+  overflow-y: scroll;
+`;
+
+export const RightContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-basis: 35%;
+  flex-wrap: wrap;
+  padding: 2em 0em;
+  gap: 1.5em;
+  padding: 1em;
+`;
+
+export const InfoBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${theme.colors.gray};
+  border-radius: 1em;
+  padding: 2em;
+  width: 80%;
+  flex-basis: 0;
+  flex-grow: 1;
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 1em;
 `;
 
 export const MiddleTitle = styled.h4`
@@ -35,6 +73,8 @@ export const MiddleTitle = styled.h4`
 export const Tools = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 1em;
+  align-items: center;
 `;
 
 export const Content = styled.div`
