@@ -4,18 +4,25 @@ import { theme } from "@/theme";
 export const Wrapper = styled.div`
   display: flex;
   height: 100vh;
-`;
-
-export const HeaderLink = styled.h2`
-  transform: rotate(-90deg);
-  text-transform: uppercase;
+  gap: 3em;
 `;
 
 export const LinkBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3em;
-  padding-top: 6em;
+  padding-left: 2.5em;
+  padding-top: 2em;
+`;
+
+export const HeaderLink = styled.h2`
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: scale(-1, -1);
+  color: ${theme.colors.default};
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
 `;
 
 export const MiddleBox = styled.div`
