@@ -8,6 +8,14 @@ export const TextLink = styled.a`
   font-family: ${(props) => props.theme.fonts.avenirRoman};
 `;
 
+export const SubWrapper = styled.div`
+  display: flex;
+  gap: 1em;
+  padding: 0em 1em;
+  margin-right: auto;
+
+`;
+
 export const Wrapper = styled.div`
   height: inherit;
 `;

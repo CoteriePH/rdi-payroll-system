@@ -3,6 +3,10 @@ import { theme } from "@/theme";
 
 export const Wrapper = styled.div``;
 
+export const SubWrapper = styled.div`
+  display: flex;
+`;
+
 export const Details = styled.div`
   padding: 1.5em 2em;
   display: flex;

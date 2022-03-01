@@ -12,7 +12,7 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Container, Flex, TableContainer, Wrapper } from "./styles";
+import { Container, Flex, TableContainer, Wrapper, SubWrapper } from "./styles";
 
 const Payroll = () => {
   const dispatch = useDispatch();
@@ -92,6 +92,17 @@ const Payroll = () => {
               "Wow, such empty"
             )}
           </TableContainer>
+          <SubWrapper>
+            <Button
+                w="10rem">
+                Record Earnings
+            </Button>
+            <Button
+                w="11rem">
+                Record Deductions
+                
+            </Button>
+          </SubWrapper>
           <Toolbar showGenerateButton leftChildren={<></>}></Toolbar>
         </Flex>
         <Flex bg="gray" flex={1}>
