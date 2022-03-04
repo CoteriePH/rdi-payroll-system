@@ -1,6 +1,21 @@
 import { Flex, HeaderText } from "@/styles";
 import ReactModal from "react-modal";
-import { Header, ModalStyle, OverlayStyle } from "./styles";
+import 
+{ Header, 
+  ModalStyle, 
+  OverlayStyle,
+  LeftContainer,
+  RightContainer,  
+  Wrapper,
+  Left,
+  Right,
+  PicInfoCont,
+  Picture,
+  Info,
+  EmpNumber,
+  EmpName,
+  EmpPos
+   } from "./styles";
 ReactModal.setAppElement("#__next");
 
 const RecordModal = ({ isOpen, onClose, value = "", name }) => {
@@ -22,11 +37,30 @@ const RecordModal = ({ isOpen, onClose, value = "", name }) => {
       <Header>
         <HeaderText>{name}</HeaderText>
       </Header>
-      <Flex p="2em 1em" align="center" gap="3" direction="column">
-        {/* BODY */}
-        {/* Pwede mo baguhin tong Flex tsaka yung styles.js ikaw lang bahala */}
-        <p>Hello</p>
-      </Flex>
+        <Wrapper>
+          <Left>           
+          
+          </Left>
+          <Right>
+            <PicInfoCont>
+              <Picture>
+                
+              </Picture>
+              <Info>
+                <EmpNumber>
+                  0000-0021
+                </EmpNumber>
+                <EmpName>
+                  john joe
+                </EmpName>
+                <EmpPos>
+                  product manager
+                </EmpPos>
+              </Info>
+            </PicInfoCont>
+            
+          </Right>
+        </Wrapper>
     </ReactModal>
   );
 };

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { theme } from "@/theme";
 
+
 export const ModalStyle = styled.div`
   z-index: 1010;
   position: absolute;
@@ -8,8 +9,8 @@ export const ModalStyle = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: white;
-  width: 30rem;
-  height: 35rem;
+  width: 65rem;
+  height: 38rem;
   border-radius: 0.5rem;
   display: flex;
   flex-direction: column;
@@ -98,4 +99,63 @@ export const FilesContainer = styled.div`
 export const RadioGroup = styled.div`
   display: flex;
   gap: 1rem;
+`;
+
+// Modal Content Styling
+export const Wrapper = styled.div`
+  display: flex;
+  padding: 1em;
+  overflow-y: auto;
+`;
+
+export const Left = styled.div`
+  border: solid black 1px;
+  padding: 0em 1em;
+  flex-basis: 50%;
+  overflow-y: scroll;
+`;
+
+export const Right = styled.div`
+  border: 1px solid ${theme.colors.darkViolet};
+  border-radius: 1rem;
+  padding: 2em 1em;
+  flex-basis: 50%;
+`;
+
+export const PicInfoCont = styled.div`
+  display: flex;
+  
+`;
+
+export const Picture = styled.div`
+  flex-basis: 30%;
+  width: 100%;
+  height: 150px; // Di ko sure kung anong sizing ng picture
+  
+  box-shadow: 0pt 0pt 0pt 1pt rgb(180,180,180, 0.8);
+  border-radius: .5em;
+  
+`;
+
+export const Info = styled.div`
+  flex-basis: 69%;
+  width: 100%;
+  margin-top: auto;
+  padding-left: .5em;
+`;
+
+export const EmpNumber = styled.div`
+  font-family: ${theme.fonts.avenirRoman};
+  color: ${theme.colors.darkViolet};
+
+`;
+
+export const EmpName = styled.h2`
+  margin: .3em 0em;
+  text-transform: uppercase;
+`;
+
+export const EmpPos = styled.div`
+  font-family: ${theme.fonts.avenirBook};
+  text-transform: capitalize;
 `;

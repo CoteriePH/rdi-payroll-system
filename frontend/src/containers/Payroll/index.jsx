@@ -97,16 +97,20 @@ const Payroll = () => {
                 "Wow, such empty"
               )}
             </TableContainer>
+            
             <SubWrapper>
-              <Button onClick={() => setIsRecordEarningsOpen(true)} w="10rem">
+              <Button onClick={() => setIsRecordEarningsOpen(true)} padding = "1em" >
                 Record Earnings
               </Button>
-              <Button onClick={() => setIsRecordDeductionsOpen(true)} w="11rem">
+              <Button onClick={() => setIsRecordDeductionsOpen(true)} >
                 Record Deductions
               </Button>
             </SubWrapper>
-            <Toolbar showGenerateButton leftChildren={<></>}></Toolbar>
+            
+            <Toolbar showGenerateButton leftChildren={<></>}></Toolbar>                                                
+
           </Flex>
+
           <Flex bg="gray" flex={1}>
             {isOpen && (
               <Menu>
@@ -140,8 +144,8 @@ const Payroll = () => {
                 ) : null}
               </Menu>
             )}
-          </Flex>
-        </Container>
+          </Flex>   
+        </Container>                        
       </Wrapper>
       <RecordModal
         name="Record Earnings"
