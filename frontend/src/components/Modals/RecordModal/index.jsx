@@ -1,5 +1,7 @@
 import { Flex, HeaderText } from "@/styles";
 import ReactModal from "react-modal";
+import Button from "@/components/Button";
+import InputField from "@/components/Input";
 import 
 { Header, 
   ModalStyle, 
@@ -14,8 +16,13 @@ import
   Info,
   EmpNumber,
   EmpName,
-  EmpPos
+  EmpPos,
+  Label,
+  Inputs,
+  OtherInfo,
+  BreakButtons
    } from "./styles";
+
 ReactModal.setAppElement("#__next");
 
 const RecordModal = ({ isOpen, onClose, value = "", name }) => {
@@ -56,9 +63,48 @@ const RecordModal = ({ isOpen, onClose, value = "", name }) => {
                 <EmpPos>
                   product manager
                 </EmpPos>
-              </Info>
+              </Info>       
             </PicInfoCont>
-            
+
+            <OtherInfo>
+                <Label>
+                  <div>Date:</div>
+                  <div>
+                    <input type="checkbox"></input>
+                    Withholding Tax:
+                  </div>                  
+                  <div>
+                    <input type="checkbox"></input>
+                    Others:
+                  </div>
+                </Label>
+
+                <Inputs>
+                  <div>
+                    <input type="date" />                    
+                  </div>
+                  <div>
+                    <input type="text" />                    
+                  </div>
+                  <div>
+                    <input type="text" />                    
+                  </div>
+                  <div>
+                    <input type="text" />                    
+                  </div>
+                </Inputs>
+
+            </OtherInfo>
+            <BreakButtons>
+              <Button
+              bg="green">
+                ADD RECORD
+              </Button>
+              <Button
+              bg="red">
+                CLEAR
+              </Button>
+            </BreakButtons>
           </Right>
         </Wrapper>
     </ReactModal>

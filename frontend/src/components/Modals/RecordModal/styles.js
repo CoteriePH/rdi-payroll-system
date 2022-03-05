@@ -159,3 +159,32 @@ export const EmpPos = styled.div`
   font-family: ${theme.fonts.avenirBook};
   text-transform: capitalize;
 `;
+
+export const Label = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  padding-top: 2em;
+  padding-left: 2em;
+`;
+
+export const Inputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  padding-top: 2em;
+  padding-right: 2em;
+  margin-left: auto;
+  
+`;
+
+export const OtherInfo = styled.div`
+  display: flex;
+`;
+
+export const BreakButtons = styled.div`
+  display: flex;
+  margin-top: 4em;
+  gap: 1em;
+`;
+
