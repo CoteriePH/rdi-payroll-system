@@ -20,8 +20,15 @@ import
   Label,
   Inputs,
   OtherInfo,
-  BreakButtons
-   } from "./styles";
+  BreakButtons,
+  TableCont,
+  Table,
+  Tr,
+  Th,
+  Th2,
+  Th3,
+  Td
+  } from "./styles";
 
 ReactModal.setAppElement("#__next");
 
@@ -45,8 +52,20 @@ const RecordModal = ({ isOpen, onClose, value = "", name }) => {
         <HeaderText>{name}</HeaderText>
       </Header>
         <Wrapper>
-          <Left>           
-          
+          <Left>
+            <TableCont>
+              <Table>
+                <Tr>
+                  <Th>EMPLOYEE NO.</Th>
+                  <Th2>NAME</Th2>
+                  <Th3>POSITION</Th3>
+                </Tr>
+                <Tr>
+
+                </Tr>
+              </Table>
+            </TableCont>  
+            
           </Left>
           <Right>
             <PicInfoCont>
@@ -97,11 +116,13 @@ const RecordModal = ({ isOpen, onClose, value = "", name }) => {
             </OtherInfo>
             <BreakButtons>
               <Button
-              bg="green">
+              bg="green"
+              bgHover="green">
                 ADD RECORD
               </Button>
               <Button
-              bg="red">
+              bg="red"
+              bgHover="red">
                 CLEAR
               </Button>
             </BreakButtons>

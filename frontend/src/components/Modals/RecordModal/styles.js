@@ -109,16 +109,16 @@ export const Wrapper = styled.div`
 `;
 
 export const Left = styled.div`
-  border: solid black 1px;
-  padding: 0em 1em;
+  
+  padding-left: 1em;
   flex-basis: 50%;
-  overflow-y: scroll;
+  overflow-y: scroll;  
 `;
 
 export const Right = styled.div`
   border: 1px solid ${theme.colors.darkViolet};
   border-radius: 1rem;
-  padding: 2em 1em;
+  padding: 2em 2.1em;
   flex-basis: 50%;
 `;
 
@@ -130,8 +130,7 @@ export const PicInfoCont = styled.div`
 export const Picture = styled.div`
   flex-basis: 30%;
   width: 100%;
-  height: 150px; // Di ko sure kung anong sizing ng picture
-  
+  height: 150px; // Di ko sure kung anong sizing ng picture  
   box-shadow: 0pt 0pt 0pt 1pt rgb(180,180,180, 0.8);
   border-radius: .5em;
   
@@ -186,5 +185,54 @@ export const BreakButtons = styled.div`
   display: flex;
   margin-top: 4em;
   gap: 1em;
+`;
+export const TableCont = styled.div`
+
+  
+`;
+
+export const Table = styled.table`
+  width: 100%;  
+`;
+
+export const Tr = styled.tr`
+  
+`;
+
+export const Th = styled.th`
+  background-color: #9F53FF;
+  color: ${theme.colors.white};
+  width: 10em;
+  padding: .8em;
+  border-top-left-radius: .5em;
+  border-bottom-left-radius: .5em;
+  text-align:center;
+  text-transform: uppercase;
+  
+`;
+export const Th2 = styled.th`
+  background-color: #9F53FF;
+  color: ${theme.colors.white};
+  width: 10em;
+  padding: .8em;
+  text-align:center;
+  text-transform: uppercase;  
+
+`;
+
+export const Th3 = styled.th`
+  background-color: #9F53FF;
+  color: ${theme.colors.white};
+  width: 10em;
+  padding: .8em;
+  border-top-right-radius: .5em;
+  border-bottom-right-radius: .5em;
+  text-align:center;
+  text-transform: uppercase;
+  
+`;
+
+export const Td = styled.td`
+
 `;
 
