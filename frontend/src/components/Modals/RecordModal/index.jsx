@@ -24,6 +24,7 @@ import
   TableCont,
   Table,
   Tr,
+  Tr2,
   Th,
   Th2,
   Th3,
@@ -60,9 +61,27 @@ const RecordModal = ({ isOpen, onClose, value = "", name }) => {
                   <Th2>NAME</Th2>
                   <Th3>POSITION</Th3>
                 </Tr>
-                <Tr>
 
-                </Tr>
+                <Tr2> {/* Tr2 para sa mga Td   */}
+                  <Td>001-021</Td>
+                  <Td>John Z. Doe</Td>
+                  <Td>Product Manager</Td>
+                </Tr2>                
+                <Tr2> {/* Tr2 para sa mga Td   */}
+                  <Td>001-021</Td>
+                  <Td>John Z. Doe</Td>
+                  <Td>Product Manager</Td>
+                </Tr2>                
+                <Tr2> {/* Tr2 para sa mga Td   */}
+                  <Td>001-021</Td>
+                  <Td>John Z. Doe</Td>
+                  <Td>Product Manager</Td>
+                </Tr2>                
+                <Tr2> {/* Tr2 para sa mga Td   */}
+                  <Td>001-021</Td>
+                  <Td>John Z. Doe</Td>
+                  <Td>Product Manager</Td>
+                </Tr2>                
               </Table>
             </TableCont>  
             

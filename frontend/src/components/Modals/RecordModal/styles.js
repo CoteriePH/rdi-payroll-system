@@ -198,6 +198,11 @@ export const Table = styled.table`
 export const Tr = styled.tr`
   
 `;
+export const Tr2 = styled.tr`
+  box-shadow: 0pt 4pt 1pt -4pt ${theme.colors.default};
+  
+  
+`;
 
 export const Th = styled.th`
   background-color: #9F53FF;
@@ -208,7 +213,7 @@ export const Th = styled.th`
   border-bottom-left-radius: .5em;
   text-align:center;
   text-transform: uppercase;
-  
+  font-size: ${theme.fontSizes.sm};
 `;
 export const Th2 = styled.th`
   background-color: #9F53FF;
@@ -217,7 +222,7 @@ export const Th2 = styled.th`
   padding: .8em;
   text-align:center;
   text-transform: uppercase;  
-
+  font-size: ${theme.fontSizes.sm};
 `;
 
 export const Th3 = styled.th`
@@ -229,10 +234,13 @@ export const Th3 = styled.th`
   border-bottom-right-radius: .5em;
   text-align:center;
   text-transform: uppercase;
-  
+  font-size: ${theme.fontSizes.sm};
 `;
 
 export const Td = styled.td`
-
+  text-transform: capitalize;
+  font-size: ${theme.fontSizes.sm};
+  text-align: center;  
+  padding: .5em 0em;
 `;
 
